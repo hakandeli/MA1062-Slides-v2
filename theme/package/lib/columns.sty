@@ -1,0 +1,16 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% columns environment
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment<>{cols}{%
+	\begin{actionenv}#1%
+		\par%
+		\bgroup\ignorespaces
+		\def\ikr@colclose{}\ignorespaces}%
+		{\end{minipage}\end{actionenv}\egroup\vspace{\ikr@parskip}\end{actionenv}}%
+
+\newcommand<>\col[1]{%
+	\ikr@colclose%
+	\def\ikr@colclose{\end{minipage}\end{actionenv}\hfill\ignorespaces}%
+	\begin{actionenv}#2%
+	\begin{minipage}[t]{#1}%
+	\raggedright\ignorespaces}

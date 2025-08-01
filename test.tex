@@ -1,0 +1,694 @@
+\documentclass[english,notes]{beamer}
+\usetheme[markdown]{IKRv2}
+
+\title{Start of double line title\\Start of single line title}
+\subtitle{Subtitle}
+\date{Date of presentation}
+\author{Name author1, name author2}
+\email{Email addresses of authors}
+\subject{<Subject Variable>}
+
+\usepackage{lipsum}
+
+\begin{document}
+
+\newcommand{\testsize}[1]{#1 \string#1}
+\begin{frame}{Font Size}
+    \testsize{\tiny} (same as footnotesize)\par
+    \testsize{\scriptsize} (same as footnotesize)\par
+    \testsize{\footnotesize}\par
+    \testsize{\small}\par
+    \testsize{\normalsize}\par
+    \testsize{\large}\par
+    \testsize{\Large}\par
+    \testsize{\LARGE}\par
+    \testsize{\huge}\par
+    \testsize{\Huge}
+\end{frame}
+
+\renewcommand{\testsize}[1]{#1 \string#1 \lipsum[66]}
+\begin{frame}{Font Size}
+    \testsize{\tiny}\par
+    \testsize{\scriptsize}\par
+    \testsize{\footnotesize}\par
+    \testsize{\small}\par
+    \testsize{\normalsize}\par
+    \testsize{\large}
+\end{frame}
+
+\begin{frame}{Font Size}
+    \testsize{\Large}
+\end{frame}
+
+\renewcommand{\testsize}[1]{#1 \string#1 \lipsum[66]\par #1 \string#1 \lipsum[66]}
+\begin{frame}{Font Size}
+    \testsize{\tiny}\par
+    \testsize{\scriptsize}\par
+    \testsize{\footnotesize}\par
+    \testsize{\small}
+\end{frame}
+
+\renewcommand{\testsize}[1]{#1 \string#1 Nunc sed pede. Praesent vitae lectus. Praesent neque justo, vehicula eget, interdum id, facilisis et, nibh.
+Phasellus at purus et libero lacinia dictum.\par #1 \string#1 Nunc sed pede. Praesent vitae lectus. Praesent neque justo, vehicula eget, interdum id, facilisis et, nibh.
+Phasellus at purus et libero lacinia dictum.}
+\begin{frame}{Font Size}
+    \testsize{\normalsize}\par
+    \testsize{\large}
+\end{frame}
+
+\begin{frame}{Font Size}
+    \testsize{\Large}
+\end{frame}
+
+\begin{frame}{Font Size}
+    \testsize{\LARGE}
+\end{frame}
+
+\makeatletter
+\ikr@gridtrue
+\makeatother
+
+\begin{frame}{Presentation \& Printout}
+\heading{Do}
+\begin{itemize}
+\item Always create PDFs using FrameMaker with page size A4 and scale setting 133\%.
+\item Activate the \textbf{"Generate Acrobat Data"} button for proper full screen layout.
+\item Activate the \textbf{"Convert CMYK Colors to RGB"} option in the PDF Setup menu in order
+to create a PDF with correct color settings.
+\item For presentations, use this PDF in acroread in full screen mode.
+\item For printing, use this PDF and \textbf{print with kpdf/kprinter}.
+\end{itemize}
+
+\heading{Don't}
+\begin{itemize}
+\item Do not create PS files and postprocess them with psnup, mpage, etc.
+    \begin{itemize}
+    \item FM will mess up the Bounding Box settings and you might get clipped slides
+    \item Postprocessing tools will use other algorithms than FM to convert colors into RGB \&
+    CMYK. This can result in bad colors in your presentation and printout.
+    \item Some tools (ps2ps) replace fonts with bitmaps. You get large files which do not scale well.
+    \end{itemize}
+\item Do not print your PDF with acroread. There currently is a printing problem of acroread
+(only Linux) in combination with printer c1 in our infrastructure.
+\item You can print directly from FM, but the resulting colors are not as in the PDF.
+\end{itemize}
+\end{frame}
+
+\note{Everything you want}
+
+\makeatletter
+\ikr@gridfalse
+\makeatother
+
+\begin{frame}{Paragraph Formats}
+\begin{itemize}
+    \item I1L-indent 1 listing\\
+    second line
+    \item I1L-indent 1 listing\par
+    second paragraph
+    \item I1L-indent 1 listing
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Paragraph Formats}
+I1L-indent 1 listing\\
+second line
+
+I1L-indent 1 listing\par
+second paragraph
+
+I1L-indent 1 listing
+\end{frame}
+
+\begin{frame}{Paragraph Formats}{Indent Formats}
+\vspace{1ex}
+\begin{itemize}
+    \item I10-indent 1\\
+    next line
+    \begin{itemize}
+        \item I20-indent 2\\
+        next line
+        \begin{itemize}
+            \item I30-indent 3\\
+            next line
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+\vspace{4ex}
+\begin{itemize}
+    \item I1L-indent 1 listing
+    \begin{itemize}
+        \item I2L-indent 2 listing
+        \begin{itemize}
+            \item I3L-indent 3 listing
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+\vspace{2.2ex}
+\begin{enumerate}
+    \item I1N-indent 1 num
+    \begin{enumerate}
+        \item I2N-indent 2 num
+        \begin{enumerate}
+            \item I3N-indent 3 num
+            \item I3N-indent 3 num
+        \end{enumerate}
+    \end{enumerate}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Arrows}
+\begin{arrowlist}
+    \item A
+    \item B
+    \begin{arrowlist}
+        \item A
+        \begin{arrowlist}
+            \item A
+        \end{arrowlist}
+    \end{arrowlist}
+\end{arrowlist}
+\end{frame}
+
+\begin{frame}{Arrows}
+\conclusionarrow{} A
+
+\conclusionarrow{} B
+\end{frame}
+
+\begin{frame}{Arrows}
+A
+
+B
+\end{frame}
+
+\begin{frame}{Arrows}
+\begin{arrowlist}
+    \item A
+\end{arrowlist}
+\begin{itemize}
+    \item B
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Evaluation}{Compliance Ratio}
+    \heading{Heading}
+    This is normal text
+    \heading{Heading}
+    This is normal text
+
+    $\int_0^{1^{\sum^{\sum^{\sum^{\sum}}}}}$\\
+    a
+\end{frame}
+
+\begin{frame}{Title $\int_{0_{0_0}}^{1^{\sum^\sum}}$}
+    \heading{Heading $\int_{0_{0_0}}^{1^{\sum^\sum}}$}
+    This is normal text
+    \heading{Heading}
+    This is normal text
+
+    $\int_0^{1^{\sum^\sum}}$\\
+    a
+\end{frame}
+
+\begin{frame}{Title}
+    \heading{Heading $\int_{0_{0_0}}^{1^{\sum^\sum}}$}
+    This is normal text
+    \heading{Heading}
+    This is normal text
+
+    $\int_0^{1^{\sum^\sum}}$\\
+    a
+\end{frame}
+
+\begin{frame}{Title}
+    \heading{Heading}
+    This is normal text
+    \heading{Heading}
+    This is normal text
+
+    $\int_0^{1^{\sum^\sum}}$\\
+    a
+\end{frame}
+
+\begin{frame}{Title $\int_0^{1^{\sum^\sum}}$}
+    \heading{Heading}
+    This is normal text
+
+    a\\
+    a
+\end{frame}
+
+\begin{frame}{Title $\int_0^{1^{\sum^\sum}}$}{Subtitle $\int_0^{1^{\sum^\sum}}$}
+    \heading{Heading}
+    This is normal text
+\end{frame}
+
+\begin{frame}{Title}{Subtitle $\int_0^{1^{\sum^\sum}}$}
+    \heading{Heading}
+    This is normal text
+\end{frame}
+
+\begin{frame}{Title}{Subtitle}
+    \heading{Heading}
+    This is normal text
+\end{frame}
+
+\begin{frame}{Title}{Subtitle}
+    This is normal text
+\end{frame}
+
+\begin{frame}{Title}
+    \heading{Heading}
+    This is normal text
+\end{frame}
+
+\begin{frame}{Title}
+    This is normal text
+\end{frame}
+
+\begin{frame}{Title}{Subtitle}
+Text
+
+\heading{Heading}
+This is normal text
+
+\begin{itemize}
+    \item bullet
+    \item list
+\end{itemize}
+
+\begin{arrowlist}
+    \item arrow
+    \item list
+\end{arrowlist}
+
+\heading{Heading}
+\end{frame}
+
+\makeatletter
+\ikr@gridtrue
+\makeatother
+
+\begin{frame}{Title}{Subtitle}
+Text
+
+\heading{Heading}
+This is normal text
+
+bullet
+
+list
+
+arrow
+
+list
+
+\heading{Heading}
+\end{frame}
+
+\newcommand{\testbox}[2]{%
+    \begin{textblock}{#1}(#2)
+        |\{#1\}(#2)\hfill |
+    \end{textblock}
+}
+
+\begin{frame}{Positioning Objects}
+\testbox{2}{0,1}
+\testbox{3}{1,4}
+\testbox{4}{2,5}
+\testbox{5}{8,6}
+\testbox{5}{8,8}
+\end{frame}
+
+\makeatletter
+\ikr@gridfalse
+\makeatother
+
+\begin{frame}{Columns n}
+A
+
+B
+\end{frame}
+
+\begin{frame}{Columns}
+    \begin{cols}
+        \col{0.5\textwidth}
+            A
+
+            B
+        \col{0.5\textwidth}
+            B
+    \end{cols}
+\end{frame}
+
+\begin{frame}{Columns n}
+\heading{A}
+
+B\\
+C
+
+D
+\heading{E}
+F
+\end{frame}
+
+\begin{frame}{Columns 4}
+    \begin{cols}
+        \col{0.5\textwidth}
+            \heading{A}
+
+            B\\
+            C
+
+            D
+            \heading{E}
+            F
+    \end{cols}
+\end{frame}
+
+\begin{frame}{Columns}
+    \begin{cols}
+        \col{0.5\textwidth}
+            \heading{A}
+
+            B\\
+            C
+
+            D
+            \heading{E}
+            F
+        \col{0.5\textwidth}
+            B
+
+            C
+    \end{cols}
+\end{frame}
+
+\begin{frame}{Columns}
+    \begin{cols}
+        \col{0.5\textwidth}
+            \heading{A}
+
+            B\\
+            C
+
+            D
+            \heading{E}
+            F
+        \col{0.5\textwidth}
+            B
+
+            C
+    \end{cols}
+    \begin{cols}
+        \col{0.5\textwidth}
+            F
+        \col{0.5\textwidth}
+            B
+
+            C
+    \end{cols}
+\end{frame}
+
+\begin{frame}{Columns n}
+    \heading{A}
+
+    B\\
+    C
+
+    D
+    \heading{E}
+    F
+
+    F
+\end{frame}
+
+\begin{frame}{Columns}
+    \begin{cols}
+        \col{0.5\textwidth}
+            \heading{A}
+
+            B\\
+            C
+
+            D
+            \heading{E}
+            F
+        \col{0.5\textwidth}
+            %\vspace{0pt}
+            \Huge B
+
+            C
+    \end{cols}
+\end{frame}
+
+\begin{frame}{Columns}
+    \begin{cols}
+        \col{0.5\textwidth}
+            \heading{A}
+
+            B\\
+            C
+
+            D
+            \heading{E}
+            F
+        \col{0.5\textwidth}
+            B
+
+            C
+    \end{cols}
+\end{frame}
+
+\begin{frame}{Columns}
+    \begin{cols}
+        \col{0.5\textwidth}
+            \heading{A}
+
+            B\\
+            C
+
+            D
+            \heading{E}
+            F
+        \col{0.5\textwidth}
+            B
+
+            C
+    \end{cols}
+\end{frame}
+
+\begin{frame}{Columns}
+    \begin{cols}
+        \col<2->{0.5\textwidth}
+            \heading{A}
+
+            B\\
+            C
+
+            D
+            \heading{E}
+            F
+        \col{0.5\textwidth}
+            B
+
+            C
+    \end{cols}
+\end{frame}
+
+\begin{frame}{Columns}
+    \begin{cols}
+        \col{0.5\textwidth}
+            \heading{A}
+
+            B\\
+            C
+
+            D
+            \heading{E}
+            F
+        \col{0.5\textwidth}
+            \vspace{-\topskip}
+            \Huge B
+
+            C
+    \end{cols}
+\end{frame}
+
+\begin{frame}{Columns}
+    Th
+    \begin{cols}
+        \col{0.5\textwidth}
+            \heading{A}
+
+            B\\
+            C
+
+            D
+            \heading{E}
+            F
+    \end{cols}
+\end{frame}
+
+\begin{frame}{Columns}
+    Tp
+    \begin{cols}
+        \col{0.5\textwidth}
+            \heading{A}
+
+            B\\
+            C
+
+            D
+            \heading{E}
+            F
+    \end{cols}
+\end{frame}
+
+\begin{frame}{Tabs}
+a \tab b
+
+a \tabs 2 b
+
+a \tabs 3 b
+\end{frame}
+
+\begin{frame}{Chars}
+    > <
+    
+    $> <$
+\end{frame}
+
+\begin{frame}{Textblock top}
+\begin{textblock}{5}(7,7)
+    Text
+\end{textblock}
+
+A
+\end{frame}
+
+\begin{frame}{Textblock bottom}
+A
+\begin{textblock}{5}(7,7)
+    Text
+\end{textblock}
+\end{frame}
+
+\begin{frame}{Textblock top}
+    
+\begin{textblock}{5}(7,7)
+    Text
+\end{textblock}
+
+# A
+\end{frame}
+
+\begin{frame}{Textblock bottom}
+# A
+\begin{textblock}{5}(7,7)
+    Text
+\end{textblock}
+\end{frame}
+
+\begin{frame}{Tables}
+\begin{tblr}{lll}
+    Ag & Bg & Cgp \\
+    a & b & c \\
+    d & e & f
+\end{tblr}
+
+\begin{tblr}{width=0.8\linewidth,colspec={X[5ex,l]X[3,l]X[-1,r]X[r]}}
+    Ag & Bg $\sum_1^2$ & Cgp & D \\
+    a & b & c & d \\
+    d & e & f & e
+\end{tblr}
+
+\begin{tblr}{lll}
+    A & B & C \\
+    a & b & c \\
+    d & e & f
+\end{tblr}
+\end{frame}
+
+\begin{frame}{Markdown (Ref)}
+\heading{Test}
+\begin{itemize}
+    \item A
+    \begin{itemize}
+        \item a
+        \item b
+    \end{itemize}
+    \item B
+\end{itemize}
+\begin{arrowlist}
+    \item A
+    \item B
+\end{arrowlist}
+\end{frame}
+
+\begin{frame}{Markdown}
+# Test % comment
+* A
+ * a
+ * b
+* B
+
+-> A
+-> B
+
+Result => Good
+
+\end{frame}
+
+\disablemarkdown
+\begin{frame}{Markdown}
+* A
+* B
+
+\end{frame}
+\enablemarkdown
+
+\begin{frame}{Overlay Pic}
+\begin{cols}
+    \col{0.45\textwidth}
+        \heading{Column 1}
+        This is text in the first column
+    \col{0.25\textwidth}
+        \pic<2->[width=\textwidth]{example-image}[caption=Test,captionpos=b]
+    \end{cols}
+\end{frame}
+
+\begin{frame}{Centered Pic}
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+\pic[width=2cm]{example-image}[pos=c]
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+\begin{center}
+    Pic
+\end{center}
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+\end{frame}
+
+\begin{frame}{Title}
+
+% empty line required to distinguish from subtitle
+{\centering A \par}
+\end{frame}
+
+\begin{frame}{Title}
+\begin{cols}
+    \col{0.25\textwidth}
+    Test
+    \col{0.25\textwidth}
+    \pic[width=\textwidth]{example-image}[caption=Test]
+    \col{0.25\textwidth}
+    \pic[width=\textwidth]{example-image}[caption=Test,captionpos=b]
+\end{cols}
+\end{frame}
+
+\begin{frame}{~}
+\end{frame}
+
+\end{document}

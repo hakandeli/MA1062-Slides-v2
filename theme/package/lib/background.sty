@@ -1,0 +1,150 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% frame title, bar and dynamic grid
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newif\ifikr@grid
+\ikr@gridfalse
+
+\newlength\ikr@gridstrength
+\setlength{\ikr@gridstrength}{0.4pt}
+
+% 1) Calculate how many 1 cm cells fit
+\pgfmathsetmacro{\Nx}{floor(\paperwidth/1cm)}
+\pgfmathsetmacro{\Ny}{floor(\paperheight/1cm)}
+
+% 2) Calculate total grid size
+\newlength{\IKRgridW}
+\newlength{\IKRgridH}
+\pgfmathsetlength{\IKRgridW}{\Nx cm}
+\pgfmathsetlength{\IKRgridH}{\Ny cm}
+
+% 3) Calculate leftover margins
+\newlength{\IKRmarginX}
+\newlength{\IKRmarginY}
+\pgfmathsetlength{\IKRmarginX}{(\paperwidth-\IKRgridW)/2}
+\pgfmathsetlength{\IKRmarginY}{(\paperheight-\IKRgridH)/2}
+
+% Convert to integers for TPGrid
+\pgfmathtruncatemacro{\NxInt}{\Nx}
+\pgfmathtruncatemacro{\NyInt}{\Ny}
+
+% Use the calculated values
+\TPGrid[\the\IKRmarginX,\the\IKRmarginY]{\NxInt}{\NyInt}
+
+\pgfmathtruncatemacro{\NxTen}{10*\NxInt}
+\pgfmathtruncatemacro{\NyTen}{10*\NyInt}
+
+\pgfmathsetmacro{\marginXglob}{\IKRmarginX}
+\pgfmathsetmacro{\marginYglob}{\IKRmarginY}
+
+\pgfmathsetmacro{\widthWglob}{\IKRgridW}
+\pgfmathsetmacro{\widthHglob}{\IKRgridH}
+% \setlength{\TPHorizModule}{1cm}
+% \setlength{\TPVertModule}{1cm}
+
+% \setlength{\TPVertMargin}{\IKRmarginY}   % Shifts origin 1cm down
+% \setlength{\TPHorizMargin}{\IKRmarginX}  % Shifts origin 2cm to the right
+% \TPShowGrid{\Nx}{\Ny}
+% \setlength{\TPVertMargin}{\IKRmarginY}   % Shifts origin 1cm down
+% \setlength{\TPHorizMargin}{1cm}  % Shifts origin 2cm to the right
+
+  % \ifikr@grid
+  % \TPoptions{showboxes=true}
+  % \fi
+%— your regular top-bar on non-plain frames —%
+\DeclareOption{grid}{\ikr@gridtrue} % show grid lines
+\setbeamertemplate{background}{%
+
+  \ifbeamer@plainframe\else%
+  \begin{minipage}[b][\paperheight][t]{\paperwidth}
+    \rule{0pt}{1.151cm}%
+    % \rule{0pt}{1.036cm}%
+    \textcolor{MyGrey1}{\rule{9.082cm}{1.829pt}}%
+  \end{minipage}%
+  \fi%
+
+  \begin{minipage}[b][\paperheight][t]{\paperwidth}
+    \rule{0pt}{1.151cm}%
+    \textcolor{MyGrey1}{\rule{9.082cm}{1.829pt}}%
+  \end{minipage}%
+  \ifikr@grid
+
+  % \TPGrid[\the\IKRmarginX,\the\IKRmarginY]{\NxTen}{\NyTen}
+  % \TPShowGrid{\NxTen}{\NyTen}
+  %
+  % \TPGrid[\the\IKRmarginX,\the\IKRmarginY]{\NxInt}{\NyInt}
+  % \TPShowGrid*{\floor\number\NxInt}{\floor\number\NyInt}
+
+  \begin{tikzpicture}[overlay,remember picture]
+    % 1) how many 1 cm cells fit?
+    % \pgfmathsetmacro{\Nx}{floor(\paperwidth/1cm)}%
+    % \pgfmathsetmacro{\Ny}{floor(\paperheight/1cm)}%
+    %
+    % % 2) total grid size (=Nx×1cm, Ny×1cm)
+    % \pgfmathsetlength{\IKRgridW}{\Nx*1cm}%
+    % \pgfmathsetlength{\IKRgridH}{\Ny*1cm}%
+    %
+    % % 3) leftover margins, split in half for centering
+    % \pgfmathsetlength{\IKRmarginX}{(\paperwidth-\IKRgridW)/2}%
+    % \pgfmathsetlength{\IKRmarginY}{(\paperheight-\IKRgridH)/2}%
+
+    % 4) origin at top-left of the centered grid
+    % % 6) MAJOR lines (every 1 cm, solid) with labels
+
+    \coordinate (O) at
+    ($(current page.north west)+(\IKRmarginX,-\IKRmarginY)$);
+    \coordinate (E) at
+    ($(O)+(\IKRgridW,-\IKRgridH)$);
+    \draw[
+      red!50,
+      line width=0.28pt,
+      % line cap=round,
+      % dotted
+    ] (O) grid[step=1mm] (E);
+
+    \foreach \i in {0,...,\NxInt}{%
+      % draw the vertical line
+      \draw[black,line width=0.4pt]
+      ($(O)+(\i cm,0)$) -- ++(0,-\IKRgridH);%
+      % label it at the top, just above the grid
+      \node[anchor=north, font=\tiny]
+      at ($(O)+(\i cm,0)$) {\i};
+    }%
+    \foreach \j in {0,...,\NyInt}{%
+      % draw the horizontal line
+      \draw[black,line width=0.4pt]
+      ($(O)+(0,-\j cm)$) -- ++(\IKRgridW,0);%
+      % label it at the left, just left of the grid
+      \node[anchor=west, font=\tiny]
+      at ($(O)+(0,-\j cm)$) {\j};
+    }%
+    % \typeout{IKRmarginX: \the\IKRmarginX, IKRmarginY: \the\IKRmarginY}
+    % \typeout{IKRgridW: \the\IKRgridW, IKRgridH: \the\IKRgridH}
+
+    \coordinate (E) at
+    ($(current page.south east)+(-\IKRmarginX,+\IKRmarginY)$);
+    % \coordinate (O) at ($(current page.north
+    % east)+(\IKRmarginX,-\IKRmarginY)$);
+    % \coordinate (E) at ($(O)+(\pgfpoint{\IKRgridW}{-\IKRgridH})$);
+
+    % \typeout{E: $(E)$}
+    % \draw[
+    %   black,
+    %   line width=0.28pt
+    % ] (O) grid[step=10mm] (E);
+    % MINOR lines (every 0.1 cm, dotted):
+    % 7) place the scale labels in the top‐right cell
+    %    compute center of that cell: (Nx-0.5, -0.5) cm
+    \pgfmathsetmacro{\labx}{\Nx - 0.5}%
+    % label 1 cm
+    \node[anchor=center] at
+    ($(O)+(\labx cm,-0.5cm)$)
+    {\underline{\makebox[1cm]{1\,cm}}};
+    % label 20 pt, just below it
+    \node[anchor=center] at
+    ($(O)+(\labx cm,-1.5cm)$)
+    {\underline{\makebox[28.45pt]{\small{28.45\,pt}}}};
+  \end{tikzpicture}%
+
+  \fi
+
+}

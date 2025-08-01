@@ -1,0 +1,36 @@
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % foot line
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \setbeamercolor{footline}{fg=MyGrey1}
+% \setbeamertemplate{footline}{%
+%   \fontsize{6.095pt}{12pt}\selectfont%
+%   \hspace*{\ikr@left}\copyright{} \ikr@copyrightnote%
+%   \hfill\ikr@subject%
+%   \hfill{\usebeamercolor[fg]{structure}\textbf{\makebox[3em][r]{\insertframenumber}}}%
+%   \hspace*{0.305cm}%
+%   \vspace*{\ikr@bottom}%
+% }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% foot line (with navigation symbols)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamercolor{footline}{fg=MyGrey1}
+\setbeamertemplate{footline}{%
+  \fontsize{6.095pt}{12pt}\selectfont%
+  \hspace*{\ikr@left}%
+    © \ikr@copyrightnote%
+  \hfill%
+    \ikr@subject%
+  \hfill%
+    {\usebeamerfont{footline}%
+      %--- navigation symbols here: slide & frame
+      % \insertslidenavigationsymbol\hspace{1ex}%
+      \insertframenavigationsymbol%
+      \hspace{1em}%
+      %--- then the frame number
+  \hfill{\usebeamercolor[fg]{structure}\textbf{\makebox[3em][r]{\insertframenumber}}}%
+    }%
+  \hspace*{0.305cm}%
+  \vspace*{\ikr@bottom}%
+}

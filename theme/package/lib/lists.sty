@@ -1,0 +1,59 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% lists
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamerfont{itemize/enumerate body}{size*={8.533pt}{10.362pt}}
+\setbeamerfont{itemize/enumerate subbody}{size*={7.924pt}{9.752pt}}
+\setbeamerfont{itemize/enumerate subsubbody}{size*={7.314pt}{8.533pt}}
+\setbeamercolor{item}{parent=normal text}
+
+% see https://tex.stackexchange.com/a/300512
+\newcommand{\ikr@listsettings}[6]{%
+  \setbeamertemplate{itemize item}{#1}%
+  \setbeamertemplate{itemize subitem}{#3}%
+  \setbeamertemplate{itemize subsubitem}{#5}%
+  \def\@listi{%
+    \partopsep0pt
+    \topsep0pt
+    \parsep\ikr@parskip
+    \itemsep0pt
+    \parskip\ikr@parskip
+    \labelsep#2
+  \leftmargin10.25pt}%
+  \def\@listii{%
+    \partopsep0pt
+    \topsep0pt
+    \parsep0.6\ikr@parskip
+    \itemsep0pt
+    \parskip\ikr@parskip
+    \labelsep#4
+  \leftmargin10.25pt}%
+  \def\@listiii{%
+    \partopsep0pt
+    \topsep0pt
+    \parsep0.6\ikr@parskip
+    \itemsep0pt
+    \parskip0.6\ikr@parskip
+    \labelsep#6
+  \leftmargin10.25pt}%
+}
+\newcommand*{\ikr@listinternals}[6]{%
+  \par% make sure that items are finished by \par in nested lists
+  \ikr@listsettings{#1}{#2}{#3}{#4}{#5}{#6}%
+}
+
+\AtBeginEnvironment{itemize}{\ikr@listinternals{\textbullet}{7.314pt}{--}{6.095pt}{\textbullet}{7.924pt}}
+
+\setbeamertemplate{enumerate subitem}{\insertsubenumlabel.} % 1. instead of 1.1
+\setbeamertemplate{enumerate subsubitem}{\insertsubsubenumlabel.} %
+% 1. instead of 1.1.1
+\AtBeginEnvironment{enumerate}{\ikr@listinternals{}{3.352pt}{}{3.535pt}{}{3.84pt}}
+
+\let\ikr@olditemize\itemize%
+\let\ikr@oldenditemize\enditemize%
+\newcommand*{\ikr@newlist}[7]{%
+  \newenvironment{#1}{%
+    \ikr@listinternals{#2}{#3}{#4}{#5}{#6}{#7}%
+  \ikr@olditemize}{\ikr@oldenditemize}%
+}
+\ikr@newlist{arrowlist}{\conclusionarrow}{2.4pt}{\conclusionarrow}{2.59pt}{\conclusionarrow}{2.682pt}
+

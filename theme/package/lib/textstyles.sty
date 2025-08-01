@@ -1,0 +1,19 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% heading
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\heading}[1]{%
+  \par%
+  \phantom{.}\\[\dimexpr -\baselineskip+3.5pt]%
+\textbf{\usebeamercolor[fg]{structure}#1}\par}
+
+
+\newcommand*{\email}[1]{\gdef\ikr@email{#1}}
+\newcommand*{\ikr@email}{}
+\renewcommand*{\subject}[1]{\gdef\ikr@subject{#1}}
+\newcommand*{\ikr@subject}{}
+\newcommand*{\copyrightyear}[1]{\gdef\ikr@copyrightyear{#1}}
+\newcommand*{\ikr@copyrightyear}{\the\year}
+\newcommand*{\copyrightnote}[1]{\gdef\ikr@copyrightnote{#1}}
+\newcommand*{\ikr@copyrightnote}{\ikr@copyrightyear{} Universität
+  Stuttgart\hspace{0.4ex}%
+\raisebox{-0.8ex}{\scalebox{2.65}{$\cdot$}}\hspace{0.3ex}IKR}

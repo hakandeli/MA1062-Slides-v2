@@ -1,0 +1,66 @@
+\renewcommand{\tiny}{\fontsize{4.876pt}{6.705pt}\selectfont}
+\let\scriptsize\tiny
+\let\footnotesize\tiny
+\renewcommand{\small}{\fontsize{6.705pt}{8.957pt}\selectfont}
+\renewcommand{\normalsize}{\fontsize{8.533pt}{10.362pt}\selectfont}
+\renewcommand{\large}{\fontsize{10.971pt}{13.41pt}\selectfont}
+
+\let\oldcite=\cite                                                              
+\renewcommand{\cite}[1]{\scriptsize\textcolor{cyan}{\oldcite{#1}  }}
+% normal \vfill does not work with beamer
+\newcommand{\beamervfill}{\vskip0pt plus 1filll}
+
+\newcommand{\conclusionarrow}{\raisebox{0.15ex}{\ikr@arrowfont\textrightarrow}}
+\ExplSyntaxOn
+\newcommand{\ikr@repeat}[2]{\int_step_inline:nn{#1}{#2}}
+\ExplSyntaxOff
+
+% TODO: don't know what this does
+\newcommand{\ikr@conditionalline}[1]{% if non-empty: print and add
+  % new line, otherwise: do nothing
+  \begingroup%
+  \sbox0{#1}%
+  \ifdim\wd0=\z@\else%
+  #1\newline%
+\fi\endgroup}
+
+\newcommand{\beginbackup}{
+  \newcounter{framenumbervorappendix}
+  \setcounter{framenumbervorappendix}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+  \addtocounter{framenumbervorappendix}{-\value{framenumber}}
+  \addtocounter{framenumber}{\value{framenumbervorappendix}}
+}
+\newlength{\breadcrumbheadlineheight}
+\setlength{\breadcrumbheadlineheight}{4mm} % or adjust as needed
+
+% Breadcrumbs OFF: reserves identical space as ON, but stays blank/transparent
+\newcommand{\breadcrumbsoff}{
+  \setbeamertemplate{headline}{
+    % This reserves space just like the ON version's navigation bar
+    %   banana
+    % \vspace*{0pt}
+    % \rule{0pt}{\breadcrumbheadlineheight}
+  }
+}
+% Breadcrumbs ON: draws gray bar and shows navigation
+\newcommand{\breadcrumbson}{
+
+
+  \setbeamertemplate{headline}{
+    \begin{tikzpicture}[remember picture,overlay]
+      \fill[MyGrey1!30] (current page.north west) rectangle
+      ++(\paperwidth,-\breadcrumbheadlineheight);
+      \node[anchor=north west, inner sep=0pt, outer sep=0pt] at
+      (current page.north west)
+      {
+
+        \hbadness=10000% Suppress underfull warnings
+        \hfuzz=1000pt
+      \insertnavigation{0.01\paperwidth}};
+    \end{tikzpicture}
+  }
+
+  % \hbadness=\originalhbadness% Restore
+}

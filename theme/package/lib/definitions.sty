@@ -1,0 +1,96 @@
+\def\ikr@left{0.61cm}
+\def\ikr@right{0.457cm}
+\def\ikr@bottom{0.232cm}
+
+% \usetheme{uniS}
+% \usecolortheme[named=unicolor]{structure}
+%    \include{./figTemplate/corporateColours.tex}
+
+% \useinnertheme{circles}
+\setbeamersize{text margin left=\ikr@left,text margin right=\ikr@right}
+
+% \frenchspacing
+
+\setbeamerfont{normal text}{size*={8.533pt}{10.362pt}}
+\setbeamercolor{section in head/foot}{fg=black}
+\setbeamercolor{normal text}{fg=black}
+% Has no effect
+% \setbeamercolor{section in head/foot on behalf of current section}{fg=IKRBlue}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% color definition
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{IKRBlue}{RGB}{20.91,99.96,174.93}
+\definecolor{IKRMidiBlue}{RGB}{127.5,174.93,218.025}
+\definecolor{MyGrey1}{gray}{0.3}
+\definecolor{applegreen}{RGB}{207, 230, 174}
+\setbeamercolor{structure}{fg=IKRBlue}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% headline
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newif\iftinyBreadcrumbs
+\tinyBreadcrumbsfalse
+% \tinyBreadcrumbstrue
+\setbeamertemplate{section in toc}[sections numbered]
+%%deactivate breadcrumbs
+
+%   \begin{beamercolorbox}[wd=\paperwidth,ht=1.7cm]{headline}
+%     \vspace*{0mm}
+%     \hspace*{1.3cm}
+%     % \makebox[\paperwidth]{\includegraphics[width=1.23\paperwidth]{figTemplate/headFolie.pdf}}
+%     \begin{beamercolorbox}[leftskip=-0.5em,sep=2em,ignorebg,ht=1.25ex,dp=-1.75ex]{section
+%       in head/foot, bg=}
+%       \usebeamerfont{section in head/foot}
+%       \iftinyBreadcrumbs
+%
+%       %\setbeamertemplate{mini frame}[scaled circle]{.75}
+%       %\setbeamertemplate{mini frame in current section}[scaled circle]{.75}
+%       %\setbeamertemplate{mini frame in current
+%       % subsection}[scaled circle]{.75}
+%       \fontsize{4}{4}{
+%         }}
+%       }
+%       \else
+%       \begin{tiny}
+%         {\textcolor{white}{\hspace{-0.5cm}\vspace{.34cm}\insertnavigation{0.5\paperwidth}\vfill
+%         }}
+%       \end{tiny}
+%       \fi
+%
+%     \end{beamercolorbox}
+%     \vspace*{3.7mm}
+%     \textcolor{white}{\usebeamerfont{frametitle}}
+%   \end{beamercolorbox}
+% }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Frametitle fonts sizes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamerfont*{frametitle}{size*={13.41pt}{14.019pt}}
+\setbeamerfont*{framesubtitle}{size*={10.971pt}{10.971pt}}
+\setbeamercolor{framesubtitle}{fg=MyGrey1}
+
+\setbeamercolor{frametitle}{fg=IKRBlue}
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \lineskiplimit=-\maxdimen% fixed line height
+  % \vspace{0.285cm}%
+  \vspace{0.615cm}%
+  \textbf{\insertframetitle}\\[0pt]\null%
+  \ifx\insertframesubtitle\@empty%
+  \vskip-6pt%
+  \else%
+  \par\vspace{-0.118cm}%
+  \usebeamercolor[fg]{framesubtitle}\usebeamerfont{framesubtitle}\textit{\insertframesubtitle}\\[0pt]\null%
+  \vskip-13pt%
+  \fi%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% set skips for normal text and some environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\lineskiplimit}{-3pt}
+\newlength\ikr@parskip
+\setlength{\ikr@parskip}{3.048pt}
+\setlength{\parskip}{\ikr@parskip}
+\newcommand{\@minipagerestore}{\setlength{\parskip}{\ikr@parskip}} %
+% important for cols environment

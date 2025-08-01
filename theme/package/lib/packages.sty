@@ -1,0 +1,86 @@
+
+\usepackage{babel}
+\usefonttheme{professionalfonts}
+\RequirePackage{unicode-math}
+\setsansfont{TeX Gyre Heros}
+\setmainfont{TeX Gyre Termes}
+\setmathfont{FiraMath-Regular-0.3.4.otf}
+\newfontfamily\ikr@arrowfont{TeX Gyre Pagella}
+
+% \usepackage[T1]{fontenc}
+% \usepackage[latin9]{inputenc}
+% see https://github.com/wspr/unicode-math/blob/master/unicode-math-table.tex
+% for accepted values for range
+\setmathfont[range=\mathit/{greek,Greek,latin,Latin}]{TeX Gyre Heros Italic}
+\setmathfont[range=\mathup/{num,greek,Greek,latin,Latin}]{TeX Gyre Heros}
+\setmathfont[range={\mathcomma,\mathperiod}]{TeX Gyre Heros}
+\setmathfontface\ikr@operatorfont{TeX Gyre Heros}
+\setoperatorfont\ikr@operatorfont
+
+% \RequirePackage{tabularray}
+% \SetTblrInner{
+% 	row{1}={IKRMidiBlue,font=\bfseries},
+% 	rows={belowsep=0pt},
+% 	hlines,
+% 	vlines,
+% }
+
+% \RequirePackage[absolute,overlay,showboxes]{textpos}
+\RequirePackage[absolute,overlay]{textpos}
+% \usepackage[colorgrid]{eso-pic}[2002/11/16]
+\usepackage{calc}
+% \setlength{\TPHorizModule}{1cm\paperwidth}
+% \setlength{\TPVertModule}{1cm\paperheight}
+
+
+
+\RequirePackage{tabto}
+\NumTabs{16}
+\newcommand{\tabs}[1]{\ikr@repeat{#1-1}{\tab\phantom{.}}\tab\ignorespaces}
+
+\RequirePackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes}
+\usetikzlibrary{snakes}
+\usetikzlibrary{chains}
+\usetikzlibrary{positioning}
+\usetikzlibrary{patterns}
+\usetikzlibrary{calc}
+\usetikzlibrary{fit}
+
+\usepackage{tcolorbox}
+\usepackage{epstopdf}
+\usepackage{epsfig}
+\usepackage{multicol}
+\usepackage{ifthen}
+
+\usepackage{multido}
+\usepackage[final]{pdfpages}
+\usepackage[autostyle=true,german=quotes]{csquotes}
+% \usepackage{etex}
+\usepackage{hhline}
+%\usepackage{psfrag}
+\usepackage[outputdir="auxfiles"]{minted}
+
+\usepackage{color}
+% \usepackage{beamertexpower}
+%\usepackage{subfigure}
+\usepackage{subfig}                     % for subfigures
+%\usepackage{pstricks,pst-plot,pst-node} % for all kinds of diagrams
+%\usepackage{multido}
+\usepackage{pifont}
+% \usepackage{amsmath}
+\usepackage{units}% Fuer Einheiten, Beispiel: \unit[5]{km}
+% This made the foot line bold
+% \usepackage{beamerthemesplit}
+\usepackage{graphicx}
+\usepackage{url}
+%\usepackage{paralist}
+% \usepackage{rotating}
+% \usepackage{transparent}
+% \usepackage{enumitem}
+%\usepackage{enumerate}
+% \usepackage{wasysym}

@@ -1,0 +1,35 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% IKR Beamer Theme v3
+%%% --------------------------------------
+%%% Version   3.0.0
+%%% Date      2025-05-08
+%%% Author    Tobias Enderle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\ikr@packagename{IKR Beamer Theme}
+
+\beamer@centeredfalse % enforce 't' option in beamer documentclass
+
+\input{lib/packages.sty}
+\input{lib/definitions.sty}
+\input{lib/newcommands.sty}
+\input{lib/background.sty}
+\input{lib/beameroptions.sty}
+\input{lib/columns.sty}
+\input{lib/lists.sty}
+\input{lib/textstyles.sty}
+\input{lib/titlepage.sty}
+\input{lib/presentationmode.sty}
+\input{lib/footline.sty}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% theme options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareOption{noautotitlepage}{\ikr@autotitlepagefalse} % disable
+% automatic title page
+% \DeclareOption{markdown}{\g@addto@macro\beamer@lastminutepatches{\enablemarkdown}}
+% enable markdown parsing
+\ProcessOptions

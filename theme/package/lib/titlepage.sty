@@ -1,0 +1,41 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% title page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newif\ifikr@autotitlepage
+\ikr@autotitlepagetrue
+
+\setbeamertemplate{title page}{%
+  \begin{minipage}[t][3.19cm][b]{\textwidth}
+    \raggedright\fontsize{17.067pt}{20.724pt}\selectfont\textbf{\usebeamercolor[fg]{structure}\strut\inserttitle\strut}
+  \end{minipage}\par
+  \vspace{0.14cm}
+  \begin{minipage}[t][0.45cm][t]{\textwidth}
+    \raggedright\large\textbf{\color{MyGrey1}\strut\insertsubtitle\strut}
+  \end{minipage}\par
+  \vspace{0.715cm}
+  \fontsize{8.533pt}{11.581pt}\selectfont
+  \ikr@conditionalline{\insertauthor}
+  \ikr@conditionalline{\ikr@email}
+  \insertdate\par
+  \beamervfill
+  Universität Stuttgart\newline
+  Institute of Communication Networks\newline
+  and Computer Engineering (IKR)\newline
+  Prof. Dr.-Ing. Andreas Kirstädter\par
+  \vspace{0.49cm}
+}
+\renewcommand{\maketitle}{%
+	{%
+\setbeamertemplate{navigation symbols}{}
+			\setbeamertemplate{background}{%
+				\begin{minipage}[t][\paperheight]{\paperwidth}
+					\rule{0pt}{3.624cm}%
+					\textcolor{black}{\rule{9.161cm}{1.829pt}}
+					\vfill\hfill\includegraphics[width=4.125cm]{beamerthemeIKRv2_logo.pdf}%
+				\end{minipage}%
+			}%
+			\frame[plain]{\titlepage}%
+		}%
+}
+
+\g@addto@macro\beamer@lastminutepatches{\ifikr@autotitlepage \maketitle \fi}
