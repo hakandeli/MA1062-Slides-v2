@@ -50,15 +50,15 @@
 
   \setbeamertemplate{headline}{
     \begin{tikzpicture}[remember picture,overlay]
-      \fill[MyGrey1!30] (current page.north west) rectangle
+      \fill[IKRBlue!10] (current page.north west) rectangle
       ++(\paperwidth,-\breadcrumbheadlineheight);
       \node[anchor=north west, inner sep=0pt, outer sep=0pt] at
       (current page.north west)
       {
 
-        \hbadness=10000% Suppress underfull warnings
-        \hfuzz=1000pt
-      \insertnavigation{0.01\paperwidth}};
+        %\hbadness=10000% Suppress underfull warnings
+        %\hfuzz=1000pt
+      \insertnavigation{0.8\paperwidth}};
     \end{tikzpicture}
   }
 

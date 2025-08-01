@@ -2,11 +2,172 @@
 
 \usetheme[]{IKRv3}
 
+\usepackage{etoolbox}
+\usepackage{parskip}
+
 \title{Designing Autoencoder Neural Networks for Efficient IP-Optical Networking}
 \subtitle{Master's Thesis}
 \date{August 25, 2025} % defaults to \today
 \author{Hakan Deli}
 
+% \setbeamertemplate{section in toc} {
+%     \hspace{0.5cm}%
+%     \tikz[baseline]{
+%         %\node[rectangle, fill=white, minimum width = 1mm, minimum height = 1mm] (r1) at (0,0.5) {};%
+%         \node[circle, fill = IKRBlue, inner sep = 0.2mm, anchor = center] (n1) at (0,0.11) {\textcolor{white}{\inserttocsectionnumber}};}%
+%         \hspace{2mm} \inserttocsection
+% }
+
+% \setbeamertemplate{subsection in toc}{\hspace{1.5cm}\inserttocsubsection\\}
+
+\makeatletter
+\patchcmd{\beamer@sectionintoc}
+  {\vfill}
+  {\vskip\itemsep}
+  {}
+  {}
+\makeatother
+
+\makeatletter
+\patchcmd{\beamer@subsectionintoc}
+  {\vfill}
+  {\vspace{-10cm}}
+  {}
+  {}
+\makeatother
+
+
+\setbeamertemplate{section in toc} {
+    \hspace{0.5cm} % Adjust this for consistent indentation across all levels
+    \tikz[baseline]{
+        \node[circle, fill = IKRBlue, inner sep = 0.2mm, anchor = center] (n1) at (0,0.11) {\textcolor{white}{\inserttocsectionnumber}};
+    }%
+    \hspace{2mm} \inserttocsection
+}
+
+
+\setbeamertemplate{subsection in toc} {
+    \hspace{1.5cm} % Ensure the same amount of indentation as sections
+    \tab \inserttocsubsection \\
+}
+
+
+
+% \setcounter{tocdepth}{2}
+
 \begin{document}
+
+\begin{frame}[plain]{Outline}
+    \vspace{0.4cm}
+    \begin{minipage}[t][1cm][t]{\linewidth}
+        \setlength{\itemsep}{0cm}
+        \setlength{\parskip}{3pt} 
+        \tableofcontents[sectionstyle=show,subsectionstyle=show,subsubsectionstyle=hide]
+    \end{minipage}
+\end{frame}
+
+\breadcrumbson
+
+\section{Introduction}
+
+\begin{frame}{Introduction}{}
+   
+\end{frame}
+
+
+\begin{frame}{Introduction}{Motivation: Deep Learning}
+    
+\end{frame}
+
+
+\begin{frame}{Introduction}{Motivation: Autoencoders}
+    
+\end{frame}
+
+
+\section{Theoretical Background}
+
+
+\subsection{Optical Networks and the RSA Problem}
+
+\begin{frame}{Optical Networks and the RSA Problem}{Network Topology}
+    
+\end{frame}
+
+\begin{frame}{Optical Networks and the RSA Problem}{Wavelength-Division Multiplexing and Elastic Optical Networks (EONs)}
+	
+\end{frame}
+
+\begin{frame}{Optical Networks and the RSA Problem}{RSA Problem}
+	
+\end{frame}
+
+\begin{frame}{Optical Networks and the RSA Problem}{Approaches}
+	
+\end{frame}
+
+
+\subsection{Deep Learning}
+
+\begin{frame}{Deep Learning}{}
+	
+\end{frame}
+
+
+\begin{frame}{Deep Learning}{Deep Neural Networks (DNNs)}
+            
+\end{frame}
+
+
+\subsection{Autoencoders}
+
+\begin{frame}{Autoencoders}{}
+	
+\end{frame}
+
+
+\section{Environment Setup}
+
+
+\subsection{Network State}
+
+\begin{frame}{Environment Setup}{}
+	
+\end{frame}
+
+
+\subsection{The RSA Episode}
+
+
+
+\section{DL Policy for RSA Problem}
+
+\subsection{Basic Policy}
+
+\begin{frame}{Basic DNNs for RSA Problem}{Processing Pipeline}
+	
+\end{frame}
+
+
+\subsection{Policymix Approach}
+
+\begin{frame}{Policymix for RSA Problem}{}
+	
+\end{frame}
+
+
+\subsection{Autoencoder Policy}
+
+\begin{frame}{Autoencoder for RSA Problem}{}
+	 
+\end{frame}
+
+
+
+\section{Conclusion and Outlook}
+
+\begin{frame}{Conclusion and Outlook}{}
+	 
+\end{frame}
 
 \end{document}
