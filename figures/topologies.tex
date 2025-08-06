@@ -1,0 +1,58 @@
+\tikzstyle{netnode} = [circle, 
+					   minimum width = 0.75cm, 
+					   minimum height = 0.75cm, 
+					   text = black!100, 
+					   align=center, 
+					   line width = 1, 
+					   inner sep = 1mm, 
+					   shading=radial, 
+					   inner color = sapphiremacchiato!50, 
+					   outer color = sapphiremacchiato!100]
+
+\tikzstyle{edge}=[> = stealth, line width = 0.5pt, shorten <= 0mm, shorten >= 0mm]
+\tikzstyle{arrow}=[> = stealth, line width = 0.5pt]
+
+
+\begin{tikzpicture}[x=2cm, y = 2cm]
+	
+	%Layer42
+	\node[netnode, visible on = <2->] (nA) at (-0.53, 1.29) {A};
+	\node[netnode, visible on = <2->] (nB) at (-0.35, 0.21) {B};
+	\node[netnode, visible on = <4->] (nC) at (-1.39, -0.16) {C};
+	\node[netnode, visible on = <4->] (nD) at (0.26, -0.68) {D};
+	\node[netnode, visible on = <4->] (nE) at (1.29, -0.76) {E};
+	\node[netnode, visible on = <4->] (nF) at (0.72, 0.1) {F};
+	
+	\draw[edge, <->, visible on = <3->] (nA) -- (nB); 
+	\draw[edge, <->, visible on = <4->] (nB) -- (nC);
+	\draw[edge, <->, visible on = <4->] (nB) -- (nF);
+	\draw[edge, <->, visible on = <4->] (nB) -- (nD);
+	\draw[edge, <->, visible on = <4->] (nD) -- (nF);
+	\draw[edge, <->, visible on = <4->] (nD) -- (nE);
+	\draw[edge, <->, visible on = <4->] (nE) -- (nF);   
+	
+	\node[align = center, visible on = <2->] (ntext) at (-1.5, 1.1) {node};
+	\node[align = center, visible on = <3->] (nlink) at (0.6, 0.85) {optical \\ link};
+	
+	
+	\draw[->, arrow, shorten <= 0.5mm, shorten >= 0.5mm, dashed, red, visible on = <2->] ($ (ntext.east) + (0, 0.03)$) -- ($ (nA.west) + (0, -0.04)$);
+	\draw[->, arrow, shorten <= 5mm, shorten >= 1mm, dashed, red, visible on = <3->] ($ (nlink.center) + (0, 0)$) -- (-0.4, 0.7); 
+	
+	\node[align=center, baseline, visible on = <4->] (t1) at (0, -1.3) {\textbf{Layer42}};
+	
+	%Mren
+	\node[netnode, visible on = <5->] (nAM) at (3.5, 0.29 + 1) {A};
+	\node[netnode, visible on = <5->] (nBM) at (4, 0.3) {B};
+	\node[netnode, visible on = <5->] (nCM) at (4-1, -0.2) {C};
+	\node[netnode, visible on = <5->] (nDM) at (4+1, 0.8) {D};
+	\node[netnode, visible on = <5->] (nEM) at (4.5, 0.3 - 1) {E};
+	
+	\draw[edge, <->, visible on = <5->] (nAM) -- (nBM); 
+	\draw[edge, <->, visible on = <5->] (nBM) -- (nCM);
+	\draw[edge, <->, visible on = <5->] (nBM) -- (nDM);
+	\draw[edge, <->, visible on = <5->] (nBM) -- (nEM);
+	
+	\node[align=center, baseline, visible on = <5->] (t1) at (4, -1.3) {\textbf{Mren}};
+	     
+	 
+\end{tikzpicture}

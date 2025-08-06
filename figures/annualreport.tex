@@ -1,0 +1,38 @@
+
+
+\begin{tikzpicture}
+  \begin{axis}[
+    ybar,
+    bar width=12pt,
+    ymin=3.4,
+    ymax=5.6,
+    ylabel={},
+    xlabel={},
+    xtick=data, 
+    ymajorgrids,
+    grid style={dotted,gray},
+    y axis line style = {draw = none},
+    tick style = {draw=none},
+    xticklabel pos = bottom,
+    xtick pos = bottom,
+    ytick pos = left,
+    yticklabels=\empty,
+    bar width = 15pt,
+    xticklabels={2018,2019,2020,2021,2022,2023},
+    nodes near coords,
+    nodes near coords align={vertical},
+    enlarge x limits=0.2,
+    width=8cm, height=6cm
+  ]
+
+    \addplot[fill=sapphiremacchiato, draw=none] coordinates {
+      (2018,3.9)
+      (2019,4.2)
+      (2020,4.5)
+      (2021,4.7)
+      (2022,5.0)
+      (2023,5.3)
+    };
+  \end{axis}
+\end{tikzpicture}
+

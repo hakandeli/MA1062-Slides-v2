@@ -1,9 +1,80 @@
-\documentclass[english,american,german,aspectratio=169]{beamer}
+\documentclass[english,aspectratio=169,dvipsnames]{beamer}
 
 \usetheme[]{IKRv3}
 
 \usepackage{etoolbox}
 \usepackage{parskip}
+\usepackage{marvosym}
+\usepackage{changepage}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{pgfplots}
+\usepackage{xcolor}
+
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{fit}
+\usetikzlibrary{intersections}
+\usetikzlibrary{decorations}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{patterns}
+\usetikzlibrary{overlay-beamer-styles}
+
+\selectcolormodel{rgb}
+
+%catpuccin macchiatto colors
+\definecolor{rosewatermacchiato}{HTML}{f4dbd6}
+\definecolor{flamingomacchiato}{HTML}{f0c6c6}
+\definecolor{pinkmacchiato}{HTML}{f5bde6}
+\definecolor{mauvemacchiato}{HTML}{c6a0f6}
+\definecolor{redmacchiato}{HTML}{ed8796}
+\definecolor{maroonmacchiato}{HTML}{ee99a0}
+\definecolor{peachmacchiato}{HTML}{f5a97f}
+\definecolor{yellowmacchiato}{HTML}{eed49f}
+\definecolor{greenmacchiato}{HTML}{a6da95}
+\definecolor{tealmacchiato}{HTML}{8bd5ca}
+\definecolor{skymacchiato}{HTML}{91d7e3}
+\definecolor{sapphiremacchiato}{HTML}{7dc4e4}
+\definecolor{bluemacchiato}{HTML}{8aadf4}
+\definecolor{lavendermacchiato}{HTML}{b7bdf8}
+
+% \definecolor{text}{HTML}{cad3f5}
+% \definecolor{subtext1}{HTML}{b8c0e0}
+% \definecolor{subtext0}{HTML}{a5adcb}
+% \definecolor{overlay2}{HTML}{939ab7}
+% \definecolor{overlay1}{HTML}{8087a2}
+% \definecolor{overlay0}{HTML}{6e738d}
+% \definecolor{surface2}{HTML}{5b6078}
+% \definecolor{surface1}{HTML}{494d64}
+% \definecolor{surface0}{HTML}{363a4f}
+% \definecolor{base}{HTML}{24273a}
+% \definecolor{mantle}{HTML}{1e2030}
+% \definecolor{crust}{HTML}{181926}
+
+%catpuccin latte colors
+\definecolor{rosewaterlatte}{HTML}{dc8a78}
+\definecolor{flamingolattele}{HTML}{dd7878}
+\definecolor{pinklatte}{HTML}{ea76cb}
+\definecolor{mauvelatte}{HTML}{8839ef}
+\definecolor{redlatte}{HTML}{d20f39}
+\definecolor{maroonlatte}{HTML}{e64553}
+\definecolor{peachlatte}{HTML}{fe640b}
+\definecolor{yellowlatte}{HTML}{df8e1d}
+\definecolor{greenlatte}{HTML}{40a02b}
+\definecolor{teallatte}{HTML}{179299}
+\definecolor{sapphirelatte}{HTML}{209fb5}
+\definecolor{bluelatte}{HTML}{1e66f5}
+\definecolor{skylatte}{HTML}{04a5e5}
+\definecolor{lavenderlatte}{HTML}{7287fd}
+
+\setbeamercolor*{block title example}{fg=black,
+bg=greenmacchiato}
+\setbeamercolor*{block body example}{fg= black,
+bg= IKRBlue!15}
+
 
 \title{Designing Autoencoder Neural Networks for Efficient IP-Optical Networking}
 \subtitle{Master's Thesis}
@@ -51,123 +122,199 @@
     \tab \inserttocsubsection \\
 }
 
-
+\setlist[itemize]{label=\textcolor{IKRBlue}{\textbullet}}
 
 % \setcounter{tocdepth}{2}
 
 \begin{document}
 
-\begin{frame}[plain]{Outline}
-    \vspace{0.4cm}
-    \begin{minipage}[t][1cm][t]{\linewidth}
-        \setlength{\itemsep}{0cm}
-        \setlength{\parskip}{3pt} 
-        \tableofcontents[sectionstyle=show,subsectionstyle=show,subsubsectionstyle=hide]
-    \end{minipage}
-\end{frame}
+% \begin{frame}[plain]{Outline}
+%     \vspace{0.4cm}
+%     \begin{minipage}[t][1cm][t]{\linewidth}
+%         \setlength{\itemsep}{0cm}
+%         \setlength{\parskip}{3pt} 
+%         \tableofcontents[sectionstyle=show,subsectionstyle=show,subsubsectionstyle=hide]
+%     \end{minipage}
+% \end{frame}
 
 \breadcrumbson
 
-\section{Introduction}
+% \section{Introduction}
 
-\begin{frame}{Introduction}{}
-   
+% \begin{frame}{Introduction}{}
+%     \vspace{0cm}
+%     \begin{columns}
+%         \column{0.4\textwidth}
+%             \begin{adjustwidth}{3mm}{0cm}
+%                 \begin{itemize}
+%                     \setlength\itemsep{1.5em}
+%                     \visible<2->{\item growing volume of Internet traffic worldwide}
+%                     \visible<3->{\item optical communication networks carry the traffic over long distances}
+%                     \visible<4->{\item must efficiently utilize available resources}
+%                     \visible<5->{\item network operators must decide on how to route traffic efficiently}
+%                     \visible<6->{\item decisions highly impact performance}
+%                 \end{itemize}
+%             \end{adjustwidth}
+%         \column{0.5\textwidth}
+%         \only<2-> {
+%             \begin{figure}[ht]
+%     	       \begin{adjustwidth}{0cm}{0cm}
+%         		\centering
+%         		\input{figures/annualreport.tex}
+%         		\vspace{0.2cm}
+%         		\caption{Cisco annual Internet report showing billions of Internet users}
+%     	       \end{adjustwidth}
+%             \end{figure}
+%         }
+%     \end{columns}
+% \end{frame}
+
+
+% \begin{frame}{Introduction}{Motivation: Deep Learning}
+%     \vspace{0.5cm}
+%     \begin{adjustwidth}{6mm}{2cm}
+%                 \begin{itemize}
+%                     \setlength\itemsep{1em}
+%                     \visible<2->{\item usually standard heuristic methods used for decision finding}
+%                     \visible<3->{\item advances in machine learning (ML) enable new possibilities}
+%                     \visible<4->{\item current research only applies reinforcement learning (RL), little to no research on application of deep learning (DL)}
+%                     \visible<5->{\item DL has the potential to incorporate optimal decisions that can be found previously by an ILP but then be applied in real time by a DNN}
+%                 \end{itemize}
+%     \end{adjustwidth}
+
+%     \begin{center}
+%     \visible<6-> {
+%           \begin{minipage}{0.9\linewidth}
+%               \begin{exampleblock}{First thesis goal}
+%                 derive a DL based decision finding algorithm for network routing
+%               \end{exampleblock}
+%           \end{minipage}
+%     }
+%    \end{center}
+
+% \end{frame}
+
+
+% \begin{frame}{Introduction}{Motivation: Autoencoders}
+%     \vspace{0.5cm}
+%     \begin{adjustwidth}{6mm}{2cm}
+%                 \begin{itemize}
+%                     \setlength\itemsep{1em}
+%                     \visible<2->{\item are a subfield of DL}
+%                     \visible<3->{\item can reduce the complexity of neural networks}
+%                     \visible<4->{\item can act as a unifier for input data of different dimensions}
+%                     \visible<5->{\item potential to increase performance in decision finding}
+%                 \end{itemize}
+%     \end{adjustwidth}
+
+%     \begin{center}
+%     \visible<6-> {
+%           \begin{minipage}{0.9\linewidth}
+%               \begin{exampleblock}{Second thesis goal}
+%                 examine the use of autoencoders and their effect on performance
+%               \end{exampleblock}
+%           \end{minipage}
+%     }
+%    \end{center}
+% \end{frame}
+
+
+% \section{Theoretical Background}
+
+
+% \subsection{Optical Networks and the RSA Problem}
+
+% \begin{frame}{Optical Networks and the RSA Problem}{Optical Network Topology}
+%     \vspace{0.5cm}
+% 	\begin{adjustwidth}{0cm}{0cm}
+% 		\centering
+% 		\input{figures/topologies.tex}
+% 	\end{adjustwidth}
+% \end{frame}
+
+% \begin{frame}{Optical Networks and the RSA Problem}{Wavelength-Division Multiplexing and Elastic Optical Networks (EONs)}
+% 	  \vspace{0.0cm}
+% 	\begin{adjustwidth}{0cm}{0cm}
+% 		\centering
+% 		\input{figures/eons.tex}
+% 	\end{adjustwidth}
+% \end{frame}
+
+\begin{frame}{Optical Networks and the RSA Problem}{}
+	\begin{textblock}{5}(1, 1.4)
+        \input{figures/rsa.tex}
+    \end{textblock}
 \end{frame}
 
 
-\begin{frame}{Introduction}{Motivation: Deep Learning}
-    
+\begin{frame}{Optical Networks and the RSA Problem}{Heuristic Two-Step Approaches}
+	\begin{textblock}{5}(0.6, 1.9)
+        \input{figures/heuristics.tex}
+    \end{textblock}
 \end{frame}
 
 
-\begin{frame}{Introduction}{Motivation: Autoencoders}
-    
-\end{frame}
+% \subsection{Deep Learning}
 
-
-\section{Theoretical Background}
-
-
-\subsection{Optical Networks and the RSA Problem}
-
-\begin{frame}{Optical Networks and the RSA Problem}{Network Topology}
-    
-\end{frame}
-
-\begin{frame}{Optical Networks and the RSA Problem}{Wavelength-Division Multiplexing and Elastic Optical Networks (EONs)}
+% \begin{frame}{Deep Learning}{}
 	
-\end{frame}
-
-\begin{frame}{Optical Networks and the RSA Problem}{RSA Problem}
-	
-\end{frame}
-
-\begin{frame}{Optical Networks and the RSA Problem}{Approaches}
-	
-\end{frame}
+% \end{frame}
 
 
-\subsection{Deep Learning}
-
-\begin{frame}{Deep Learning}{}
-	
-\end{frame}
-
-
-\begin{frame}{Deep Learning}{Deep Neural Networks (DNNs)}
+% \begin{frame}{Deep Learning}{Deep Neural Networks (DNNs)}
             
-\end{frame}
+% \end{frame}
 
 
-\subsection{Autoencoders}
+% \subsection{Autoencoders}
 
-\begin{frame}{Autoencoders}{}
+% \begin{frame}{Autoencoders}{}
 	
-\end{frame}
+% \end{frame}
 
 
-\section{Environment Setup}
+% \section{Environment Setup}
 
 
-\subsection{Network State}
+% \subsection{Network State}
 
-\begin{frame}{Environment Setup}{}
+% \begin{frame}{Environment Setup}{}
 	
-\end{frame}
+% \end{frame}
 
 
-\subsection{The RSA Episode}
+% \subsection{The RSA Episode}
 
 
 
-\section{DL Policy for RSA Problem}
+% \section{DL Policy for RSA Problem}
 
-\subsection{Basic Policy}
+% \subsection{Basic Policy}
 
-\begin{frame}{Basic DNNs for RSA Problem}{Processing Pipeline}
+% \begin{frame}{Basic DNNs for RSA Problem}{Processing Pipeline}
 	
-\end{frame}
+% \end{frame}
 
 
-\subsection{Policymix Approach}
+% \subsection{Policymix Approach}
 
-\begin{frame}{Policymix for RSA Problem}{}
+% \begin{frame}{Policymix for RSA Problem}{}
 	
-\end{frame}
+% \end{frame}
 
 
-\subsection{Autoencoder Policy}
+% \subsection{Autoencoder Policy}
 
-\begin{frame}{Autoencoder for RSA Problem}{}
+% \begin{frame}{Autoencoder for RSA Problem}{}
 	 
-\end{frame}
+% \end{frame}
 
 
 
-\section{Conclusion and Outlook}
+% \section{Conclusion and Outlook}
 
-\begin{frame}{Conclusion and Outlook}{}
+% \begin{frame}{Conclusion and Outlook}{}
 	 
-\end{frame}
+% \end{frame}
 
 \end{document}

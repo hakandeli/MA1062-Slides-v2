@@ -1,0 +1,164 @@
+\newcommand{\slotheight}{2cm}
+\newcommand{\slotwidth}{2mm}
+\newcommand{\numchannels}{10}
+\newcommand{\fsperchannel}{5}
+\newcommand{\lw}{1pt}
+
+\tikzstyle{slot} = [draw = black,
+					minimum width = \slotwidth, 
+				    minimum height = \slotheight, 
+					text = black!100, 
+					anchor = west, 
+					line width = \lw,
+					inner sep = 0mm]
+					
+\tikzstyle{legendtext} = [text = black,
+						  anchor = north, 
+						  align = center, 
+						  inner sep = 0mm,
+						  font = \scriptsize]
+
+\tikzstyle{arrow}=[> = stealth, line width = 0.5pt, dashed, red]
+
+%{coordinate}{amount of fs}{color}{height}
+\newcommand{\spectrum}[4]{%
+	\path (#1) coordinate (start);
+	\fill[fill opacity=0.5, fill=#3]
+	($(start) + (0, \lw)$)
+	-- ($ (start) + (#2*0.5*\slotwidth-0.5*\lw,\lw) $)
+	arc[start angle=0, end angle=180, x radius=#2*0.5*\slotwidth-0.5*\lw, y radius=#4-\lw]
+	-- cycle;
+}
+
+\newcommand{\oneslot}[2]{
+	\spectrum{#1}{1}{blue}{#2}
+}
+
+\newcommand{\twoslot}[2]{
+	\spectrum{#1}{2}{blue}{#2}
+}
+
+\newcommand{\threeslot}[2]{
+	\spectrum{#1}{3}{violet}{#2}
+}
+
+\newcommand{\fourslot}[2]{
+	\spectrum{#1}{4}{ForestGreen}{#2}
+}
+
+\newcommand{\fiveslot}[2]{
+	\spectrum{#1}{5}{red}{#2}
+}
+
+\newcommand{\twelveslot}[2]{
+	\spectrum{#1}{12}{orange}{#2}
+}
+
+
+
+%\tikzstyle{edge}=[> = stealth, line width = 0.5pt, shorten <= 0mm, shorten >= 0mm]
+%\tikzstyle{arrow}=[> = stealth, line width = 0.5pt]
+
+\begin{tikzpicture}[x=1cm, y=1cm]
+	
+	
+	%WDM
+
+    \node[draw = black, 
+          minimum width = 10*\slotwidth*\fsperchannel, 
+		   minimum height = \slotheight, 
+		   text = black!100, 
+		   anchor = west, 
+		   line width = \lw,
+		   inner sep = 0mm, visible on = <2>] (startbox) at (0, -0.4) {};
+    
+	\foreach \i in {1,...,\numchannels}{
+		\pgfmathtruncatemacro{\j}{\i-1}
+		\node[slot, minimum width = \slotwidth*\fsperchannel, visible on = <3->] (wdm\i) at (\j*\slotwidth*\fsperchannel, -0.4) {};
+	}
+	
+	\node[text = black, left = 0.5cm of wdm1.west, anchor = east, visible on = <3->] (wdmtext) {WDM};
+	
+	%WDM spectras
+	\visible<5->{\threeslot{wdm1.south}{0.98*\slotheight}}
+	\visible<5->{\fiveslot{wdm2.south}{0.98*\slotheight}}
+	\visible<5->{\twoslot{wdm3.south}{0.98*\slotheight}}
+	\visible<5->{\fourslot{wdm7.south}{0.98*\slotheight}}
+	\visible<5->{\fourslot{wdm8.south}{0.98*\slotheight}}
+	\visible<5->{\twoslot{wdm9.south}{0.98*\slotheight}}
+	
+	%cut the top off
+%	\draw[-, draw=white, line width=1mm, align=center] (wdm1.north west) -- (wdm\numchannels.north east);	
+	
+	%EON
+    
+	\pgfmathtruncatemacro{\amount}{\numchannels*\fsperchannel}
+	\foreach \i in {1,...,\amount}{
+		\pgfmathtruncatemacro{\j}{\i-1}
+		\node[slot, minimum width = \slotwidth, draw = black!20, line width = 0.5*\lw, visible on = <7->] (fs\i) at (\j*\slotwidth+0.125*\lw, -3.4) {};
+	}
+	
+	\node[text = black, left = 0.5cm+0.5*\lw of fs1.west, anchor = east, visible on = <7->] (eontext) {EON};
+	
+	%draw eon channels by hand	
+	\foreach \ns/\nend in  {fs1/fs3,
+						    fs4/fs8,
+	                        fs9/fs10,
+	                        fs11/fs22,
+	                        fs23/fs30,
+	                        fs31/fs34,
+	                        fs35/fs38,
+	                        fs39/fs40,
+	                        fs41/fs50}{
+
+	\draw[-, draw=black, line width=\lw, align=center, visible on = <9->] (\ns.north west)++(0.25*\lw,0) -- ($(\ns.south west)+(0.25*\lw, 0.5*\lw)$) -- ($(\nend.south east) + (-0.25*\lw, 0.5*\lw)$) -- ($(\nend.north east)+(-0.25*\lw,0)$);
+	                        
+	}
+
+	%eon spectra
+	\visible<9->{\threeslot{fs2.south}{0.98*\slotheight}}
+	\visible<9->{\fiveslot{fs6.south}{0.98*\slotheight}}
+	\visible<9->{\twoslot{fs9.south east}{0.98*\slotheight}}
+	\visible<9->{\twelveslot{fs16.south east}{0.98*\slotheight}}
+	\visible<9->{\fourslot{fs32.south east}{0.98*\slotheight}}
+	\visible<9->{\fourslot{fs36.south east}{0.98*\slotheight}}
+	\visible<9->{\twoslot{fs39.south east}{0.98*\slotheight}}
+	
+	%legend
+	\foreach \y in {1,2,...,5}{
+		\node[inner sep = 0mm, anchor = center, visible on = <5->] (l\y) at (12,-1.3*\y+1.8) {};
+	}
+	
+	\node[legendtext, below = 1pt of l1.south, visible on = <5->] {25 GHz};
+	\node[legendtext, below = 1pt of l2.south, visible on = <5->] {37.5 GHz};
+	\node[legendtext, below = 1pt of l3.south, visible on = <5->] {50 GHz};
+	\node[legendtext, below = 1pt of l4.south, visible on = <5->] {62.5 GHz};
+	\node[legendtext, below = 1pt of l5.south, visible on = <5->] {150 GHz};
+	
+	\visible<5->{\twoslot{l1.center}{0.2*\slotheight}}
+	\visible<5->{\threeslot{l2.center}{0.2*\slotheight}}
+	\visible<5->{\fourslot{l3.center}{0.2*\slotheight}}
+	\visible<5->{\fiveslot{l4.center}{0.2*\slotheight}}
+	\visible<5->{\twelveslot{l5.center}{0.2*\slotheight}}
+
+    \node[draw = black, 
+          minimum width = 10*\slotwidth*\fsperchannel, 
+		   minimum height = \slotheight, 
+		   text = black!100, 
+		   anchor = west, 
+		   line width = \lw,
+		   inner sep = 0mm, visible on = <6->] (startboxeon) at (-0.005, -3.4) {};
+    
+	%highlight one frequency slot and one optical channel
+	\node[slot, minimum width = \slotwidth, draw = red, line width = 1.25*\lw, left = 0cm of fs44.west, anchor = west, pattern = north east lines, pattern color = red, visible on = <8->] (fsred) {};
+	\node[slot, minimum width = \slotwidth*\fsperchannel, draw = red, line width = 1.25*\lw, left = 0cm of wdm5.west, anchor = west, pattern = north east lines, pattern color = red, visible on = <4->] (wdmred) {};
+	
+	%add arrows and explanatory text
+	\node[legendtext, font = \normalsize, visible on = <4->] (wdmarrowtext) at (4.5,-1.55) {\small one WDM channel};
+	\node[legendtext, font = \normalsize, align = center, visible on = <8->] (eonarrowtext) at (8.71,-4.7) {\small one FS \\ \small (12.5 GHz)};
+	
+	\draw[->, draw = gray, > = stealth, line width = 0.5pt, visible on = <2->] (-0.1,-1.9) -- (10.2,-1.9) node[right] {\textcolor{gray}{$\lambda$}};
+    
+	
+	
+\end{tikzpicture}
