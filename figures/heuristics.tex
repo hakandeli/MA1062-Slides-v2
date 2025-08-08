@@ -41,14 +41,20 @@
 \begin{tikzpicture}
 
     %background rectangles
-    \node[rectangle, fill = gray!40, minimum width = 14.7cm, minimum height = 6.5cm, rounded corners = 5pt, anchor = north west, visible on = <2->] at (0,0) {};
+    \node[rectangle, fill = gray!40, minimum width = 14.7cm, minimum height = 6.5cm, rounded corners = 5pt, anchor = north west, visible on = <1->] at (0,0) {};
     \node[rectangle, fill = white, minimum width = 5.3cm, minimum height = 5cm, rounded corners = 5pt, anchor = north west, visible on = <2->] at (0.5,-0.8) {};
-    \node[rectangle, fill = white, minimum width = 8cm, minimum height = 5cm, rounded corners = 5pt, anchor = north west, visible on = <2->] at (6.2,-0.8) {};
+    \node[rectangle, fill = white, minimum width = 8cm, minimum height = 5cm, rounded corners = 5pt, anchor = north west, visible on = <5->] at (6.2,-0.8) {};
 
     %text
-    \node[anchor = west, visible on = <2->] at (0.1, -0.35) {Policy $\pi_{\text{KSP-...}}$};
-    \node[anchor = center, align = center, visible on = <2->] at (3.1, -6.15) {K-shortest paths (KSP)};
-    \node[anchor = center, align = center, visible on = <2->] at (10.2, -6.15) {Heuristic slot selection};
+    \foreach \heur/\v in {  FF/7,
+                            LF/8,
+                            BFF/9,
+                            BFL/10,
+                            WFF/11,
+                            WFL/12
+                         } \node[anchor = west, visible on = <\v>] at (0.1, -0.4) {Policy $\pi_{\text{KSP-\heur}}$};
+    \node[anchor = center, align = center, visible on = <3->] at (3.1, -6.15) {K-shortest paths (KSP)};
+    \node[anchor = center, align = center, visible on = <5->] at (10.2, -6.15) {Heuristic slot selection};
 
     %layer42
     \begin{scope}[x=0.8cm, y=0.7cm, shift={(3.15cm, -2.1cm)}]
@@ -78,51 +84,96 @@
                                     1.5/-5/{2.}/0, 2/-5/A/5, 3/-5/B/6, 4/-5/D/7, 5/-5/E/8,
                                     1.5/-6/{3.}/0, 2/-6/A/9, 3/-6/B/10, 4/-6/F/11, 5/-6/D/12, 6/-6/E/13,
                                     1.5/-7/{4.}/0, 2/-7/A/14, 3/-7/B/15, 4/-7/D/16, 5/-7/F/17, 6/-7/E/18} {
-                                    \node[visible on = <2->] (n\i) at (\x, \y) {\small \lbl};
+                                    \node[visible on = <4->] (n\i) at (\x, \y) {\small \lbl};
                                 }
     \end{scope}
     \foreach \i/\j in { 1/2, 2/3, 3/4, 
                         5/6, 6/7, 7/8, 
                         9/10, 10/11, 11/12, 12/13,
                         14/15, 15/16, 16/17, 17/18}
-                        \draw[->, > = Stealth, line width = 0.2pt, visible on = <2->] (n\i) -- (n\j);
+                        \draw[->, > = Stealth, line width = 0.2pt, visible on = <4->] (n\i) -- (n\j);
     
     
 
 
     %spectrum
 
-    \begin{scope}[shift={(6.45cm,-3.3cm)}]
+    \begin{scope}[shift={(6.45cm, -4.5cm)}]
     
-        %EON
+        % EON
     	\pgfmathtruncatemacro{\amount}{\numchannels*\fsperchannel}
     	\foreach \i in {1,...,\amount}{
     		\pgfmathtruncatemacro{\j}{\i-1}
-    		\node[slot, minimum width = \slotwidth, draw = black!20, line width = 0.5*\lw, visible on = <2->] (fs\i) at (\j*\slotwidth+0.125*\lw, 0) {};
+    		\node[slot, minimum width = \slotwidth, draw = black!20, line width = 0.5*\lw, visible on = <5->] (fs\i) at (\j*\slotwidth+0.125*\lw, 0) {};
     	}
     	
-    	%draw eon channels by hand	
+    	% draw eon channels by hand	
     	\foreach \ns/\nend in  {fs1/fs3,
-    						    fs7/fs10,
-    	                        fs23/fs28,
-    	                        fs41/fs50}{
+    						    fs13/fs18,
+    	                        fs26/fs29,
+    	                        fs45/fs47}{
     
-    	\fill[fill=red, opacity = 0.5, visible on = <2->] (\ns.north west)++(0.25*\lw,0) -- ($(\ns.south west)+(0.25*\lw, 0.5*\lw)$) -- ($(\nend.south east) + (-0.25*\lw, 0.5*\lw)$) -- ($(\nend.north east)+(-0.25*\lw,0)$) -- cycle;
+    	\fill[fill=red, opacity = 0.5, visible on = <5->] (\ns.north west)++(0.25*\lw,0) -- ($(\ns.south west)+(0.25*\lw, 0.5*\lw)$) -- ($(\nend.south east) + (-0.25*\lw, 0.5*\lw)$) -- ($(\nend.north east)+(-0.25*\lw,0)$) -- cycle;
     	                        
     	}
-    
-        \node[draw = black, 
-              minimum width = 10*\slotwidth*\fsperchannel, 
-    		   minimum height = \slotheight, 
-    		   text = black!100, 
-    		   anchor = west, 
-    		   line width = \lw,
-    		   inner sep = 0mm, visible on = <2->] (startboxeon) at (-0.005, 0) {};
 
-        \draw[->, line width = 1pt, draw = red, > = Stealth , shorten >= 0.5mm, visible on = <2->] ($(fs13.north) + (0, 0.6)$) -- (fs13.north);
+        % heuristics 	
+    	
+        % allocations
+        \foreach \ns/\nend/\strat/\v in  {  fs4/fs6/\kspff/7,
+                                            fs48/fs50/\kspff/8,
+    	                                      fs19/fs21/\kspff/9,
+                                            fs23/fs25/\kspff/10,
+                                            fs30/fs32/\kspff/11,
+                                            fs42/fs44/\kspff/12} {
+    
+    	\fill[fill=\strat, opacity = 0.5, visible on = <\v>] (\ns.north west)++(0.25*\lw,0) -- ($(\ns.south west)+(0.25*\lw, 0.5*\lw)$) -- ($(\nend.south east) + (-0.25*\lw, 0.5*\lw)$) -- ($(\nend.north east)+(-0.25*\lw,0)$) -- cycle;
+    	                        
+    	}
+
+
+        % Text
+        \foreach \heurtext/\v in  {   {\textbf{F}irst \textbf{F}it}/7,
+    	                               {\textbf{L}ast \textbf{F}it}/8,
+                                      {\textbf{B}est \textbf{F}it \textbf{F}irst}/9,
+                                      {\textbf{B}est \textbf{F}it \textbf{L}ast}/10,
+                                      {\textbf{W}orst \textbf{F}it \textbf{F}irst}/11,
+                                      {\textbf{W}orst \textbf{F}it \textbf{L}ast}/12}{
+
+            \node[align = center, visible on = <\v>] at (3, 2.4) {\heurtext};
+
+        }
+
+
+        % sample block
+        \pgfmathtruncatemacro{\amount}{3}
+    	\foreach \i in {1,...,\amount}{
+    		\pgfmathtruncatemacro{\j}{\i-1}
+    		\node[slot, minimum width = \slotwidth, draw = black!20, fill = \kspff!50, line width = 0.5*\lw, visible on = <6->] (fse\i) at (\j*\slotwidth+0.125*\lw+5cm, 2.4) {};
+    	}
+
+        % arrows
+        \foreach \s/\v in { fs5/7,
+                            fs20/9,
+                            fs24/10,
+                            fs31/11,
+                            fs43/12,
+                            fs49/8
+                            } {
+            \draw[-{Stealth[length=2mm, width=1mm]}, line width = 0.5pt, draw = black, visible on = <\v>] ($(fse2.south) + (0, -0.05)$) -- ($(\s.north) + (0, 0.05)$);
+        }
+
+        % FS numbers
+        \node[below = 0mm of fs1, align = center, visible on = <5->] {\tiny $1$};
+        \node[below = 0mm of fs50, align = center, visible on = <5->] {\tiny $50$};
     
     \end{scope}
-    
+
+    % Z1: I I I I _ I _ I I I
+    % Z2: W _ W _ _ _ W _ W W
+    % Z3: I _ I _ I _ I _ I _
+    % Z4: I links
+    % Z5: I links (rigged)
  
 \end{tikzpicture}
 					
