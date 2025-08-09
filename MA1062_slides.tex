@@ -10,6 +10,7 @@
 \usepackage{xcolor}
 \usepackage{pgfplots}
 \usepackage{xcolor}
+\usepackage{amsmath}
 
 
 \usetikzlibrary{positioning}
@@ -23,6 +24,7 @@
 \usetikzlibrary{shadows.blur}
 \usetikzlibrary{patterns}
 \usetikzlibrary{overlay-beamer-styles}
+\usetikzlibrary{matrix}
 
 \selectcolormodel{rgb}
 
@@ -151,138 +153,155 @@ bg= IKRBlue!15}
 
 \breadcrumbson
 
-\section{Introduction}
+% \section{Introduction}
 
-\begin{frame}{Introduction}{}
-    \vspace{0cm}
-    \begin{columns}
-        \column{0.4\textwidth}
-            \begin{adjustwidth}{3mm}{0cm}
-                \begin{itemize}
-                    \setlength\itemsep{1.5em}
-                    \visible<2->{\item growing volume of Internet traffic worldwide}
-                    \visible<3->{\item optical communication networks carry the traffic over long distances}
-                    \visible<4->{\item must efficiently utilize available resources}
-                    \visible<5->{\item network operators must decide on how to route traffic efficiently}
-                    \visible<6->{\item decisions highly impact performance}
-                \end{itemize}
-            \end{adjustwidth}
-        \column{0.5\textwidth}
-        \only<2-> {
-            \begin{figure}[ht]
-    	       \begin{adjustwidth}{0cm}{0cm}
-        		\centering
-        		\input{figures/annualreport.tex}
-        		\vspace{0.2cm}
-        		\caption{Cisco annual Internet report showing billions of Internet users}
-    	       \end{adjustwidth}
-            \end{figure}
-        }
-    \end{columns}
-\end{frame}
-
-
-\begin{frame}{Introduction}{Motivation: Deep Learning}
-    \vspace{0.5cm}
-    \begin{adjustwidth}{6mm}{2cm}
-                \begin{itemize}
-                    \setlength\itemsep{1em}
-                    \visible<2->{\item usually standard heuristic methods used for decision finding}
-                    \visible<3->{\item advances in machine learning (ML) enable new possibilities}
-                    \visible<4->{\item current research only applies reinforcement learning (RL), little to no research on application of deep learning (DL)}
-                    \visible<5->{\item DL has the potential to incorporate optimal decisions that can be found previously by an ILP but then be applied in real time by a DNN}
-                \end{itemize}
-    \end{adjustwidth}
-
-    \begin{center}
-    \visible<6-> {
-          \begin{minipage}{0.9\linewidth}
-              \begin{exampleblock}{First thesis goal}
-                derive a DL based decision finding algorithm for network routing
-              \end{exampleblock}
-          \end{minipage}
-    }
-   \end{center}
-
-\end{frame}
+% \begin{frame}{Introduction}{}
+%     \vspace{0cm}
+%     \begin{columns}
+%         \column{0.4\textwidth}
+%             \begin{adjustwidth}{3mm}{0cm}
+%                 \begin{itemize}
+%                     \setlength\itemsep{1.5em}
+%                     \visible<2->{\item growing volume of Internet traffic worldwide}
+%                     \visible<3->{\item optical communication networks carry the traffic over long distances}
+%                     \visible<4->{\item must efficiently utilize available resources}
+%                     \visible<5->{\item network operator rs must decide on how to route traffic efficiently}
+%                     \visible<6->{\item decisions highly impact performance}
+%                 \end{itemize}
+%             \end{adjustwidth}
+%         \column{0.5\textwidth}
+%         \only<2-> {
+%             \begin{figure}[ht]
+%     	       \begin{adjustwidth}{0cm}{0cm}
+%         		\centering
+%         		\input{figures/annualreport.tex}
+%         		\vspace{0.2cm}
+%         		\caption{Cisco annual Internet report showing billions of Internet users}
+%     	       \end{adjustwidth}
+%             \end{figure}
+%         }
+%     \end{columns}
+% \end{frame}
 
 
-\begin{frame}{Introduction}{Motivation: Autoencoders}
-    \vspace{0.5cm}
-    \begin{adjustwidth}{6mm}{2cm}
-                \begin{itemize}
-                    \setlength\itemsep{1em}
-                    \visible<2->{\item are a subfield of DL}
-                    \visible<3->{\item can reduce the complexity of neural networks}
-                    \visible<4->{\item can act as a unifier for input data of different dimensions}
-                    \visible<5->{\item potential to increase performance in decision finding}
-                \end{itemize}
-    \end{adjustwidth}
+% \begin{frame}{Introduction}{Motivation: Deep Learning}
+%     \vspace{0.5cm}
+%     \begin{adjustwidth}{6mm}{2cm}
+%                 \begin{itemize}
+%                     \setlength\itemsep{1em}
+%                     \visible<2->{\item usually standard heuristic methods used for decision finding}
+%                     \visible<3->{\item advances in machine learning (ML) enable new possibilities}
+%                     \visible<4->{\item current research only applies reinforcement learning (RL), little to no research on application of deep learning (DL)}
+%                     \visible<5->{\item DL has the potential to incorporate optimal decisions that can be found previously by an ILP but then be applied in real time by a DNN}
+%                 \end{itemize}
+%     \end{adjustwidth}
 
-    \begin{center}
-    \visible<6-> {
-          \begin{minipage}{0.9\linewidth}
-              \begin{exampleblock}{Second thesis goal}
-                examine the use of autoencoders and their effect on performance
-              \end{exampleblock}
-          \end{minipage}
-    }
-   \end{center}
-\end{frame}
+%     \begin{center}
+%     \visible<6-> {
+%           \begin{minipage}{0.9\linewidth}
+%               \begin{exampleblock}{First thesis goal}
+%                 derive a DL based decision finding algorithm for network routing
+%               \end{exampleblock}
+%           \end{minipage}
+%     }
+%    \end{center}
 
-
-\section{Theoretical Background}
+% \end{frame}
 
 
-\subsection{Optical Networks and the RSA Problem}
+% \begin{frame}{Introduction}{Motivation: Autoencoders}
+%     \vspace{0.5cm}
+%     \begin{adjustwidth}{6mm}{2cm}
+%                 \begin{itemize}
+%                     \setlength\itemsep{1em}
+%                     \visible<2->{\item are a subfield of DL}
+%                     \visible<3->{\item can reduce the complexity of neural networks}
+%                     \visible<4->{\item can act as a unifier for input data of different dimensions}
+%                     \visible<5->{\item potential to increase performance in decision finding}
+%                 \end{itemize}
+%     \end{adjustwidth}
 
-\begin{frame}{Optical Networks and the RSA Problem}{Optical Network Topology}
-    \vspace{0.5cm}
-	\begin{adjustwidth}{0cm}{0cm}
-		\centering
-		\input{figures/topologies.tex}
-	\end{adjustwidth}
-\end{frame}
-
-\begin{frame}{Optical Networks and the RSA Problem}{Wavelength-Division Multiplexing and Elastic Optical Networks (EONs)}
-	  \vspace{0.0cm}
-	\begin{adjustwidth}{0cm}{0cm}
-		\centering
-		\input{figures/eons.tex}
-	\end{adjustwidth}
-\end{frame}
-
-\begin{frame}{Optical Networks and the RSA Problem}{}
-	\begin{textblock}{5}(1, 1.4)
-        \input{figures/rsa.tex}
-    \end{textblock}
-\end{frame}
-
-
-\begin{frame}{Optical Networks and the RSA Problem}{Heuristic Two-Step Approaches}
-	\begin{textblock}{5}(0.6, 1.9)
-        \input{figures/heuristics.tex}
-    \end{textblock}
-\end{frame}
+%     \begin{center}
+%     \visible<6-> {
+%           \begin{minipage}{0.9\linewidth}
+%               \begin{exampleblock}{Second thesis goal}
+%                 examine the use of autoencoders and their effect on performance
+%               \end{exampleblock}
+%           \end{minipage}
+%     }
+%    \end{center}
+% \end{frame}
 
 
-\subsection{Deep Learning}
-
-\begin{frame}{Deep Learning}{}
-	
-\end{frame}
+% \section{Theoretical Background}
 
 
-\begin{frame}{Deep Learning}{Deep Neural Networks (DNNs)}
-            
-\end{frame}
+% \subsection{Optical Networks and the RSA Problem}
+
+% \begin{frame}{Optical Networks and the RSA Problem}{Optical Network Topology}
+%     \vspace{0.5cm}
+% 	\begin{adjustwidth}{0cm}{0cm}
+% 		\centering
+% 		\input{figures/topologies.tex}
+% 	\end{adjustwidth}
+% \end{frame}
+
+% \begin{frame}{Optical Networks and the RSA Problem}{Wavelength-Division Multiplexing and Elastic Optical Networks (EONs)}
+% 	  \vspace{0.0cm}
+% 	\begin{adjustwidth}{0cm}{0cm}
+% 		\centering
+% 		\input{figures/eons.tex}
+% 	\end{adjustwidth}
+% \end{frame}
+
+% \begin{frame}{Optical Networks and the RSA Problem}{}
+% 	\begin{textblock}{5}(1, 1.4)
+%         \input{figures/rsa.tex}
+%     \end{textblock}
+% \end{frame}
 
 
-\subsection{Autoencoders}
+% \begin{frame}{Optical Networks and the RSA Problem}{Heuristic Two-Step Approaches}
+% 	\begin{textblock}{5}(0.6, 1.9)
+%         \input{figures/heuristics.tex}
+%     \end{textblock}
+% \end{frame}
 
-\begin{frame}{Autoencoders}{}
-	
-\end{frame}
+
+% \subsection{Deep Learning}
+
+% \begin{frame}{Deep Learning}{}
+%     \begin{columns}
+%         \column{0.4\textwidth}
+%             \begin{adjustwidth}{3mm}{0cm}
+%                 \begin{itemize}
+%                     \setlength\itemsep{1.5em}
+%                     \visible<2->{\item subfield of ML that uses algorithms inspired by the human brain}
+%                     \visible<5->{\item supervised DL uses labeled datasets}
+%                     \visible<6->{\item model tries to learn context between given input data and labels and make it applicable to unseen data}
+%                     \visible<7->{\item datasets are used that are split into train and test set}
+%                     \visible<8->{\item learning happens by finding appropriate weights and biases with a method called training}
+%                 \end{itemize}
+%             \end{adjustwidth}
+%         \column{0.5\textwidth}
+%         \only<2-> {
+%             \begin{figure}[ht]
+%     	       \begin{adjustwidth}{0cm}{0cm}
+%         		\centering
+%         		\input{figures/perceptronrule}
+%     	       \end{adjustwidth}
+%             \end{figure}
+%         }
+%     \end{columns}
+% \end{frame}
+
+% \subsection{Autoencoders}
+
+% \begin{frame}{Autoencoders}{}
+% 	\begin{textblock}{5}(1, 1.4)
+%         \input{figures/aes.tex}
+%     \end{textblock}
+% \end{frame}
 
 
 \section{Environment Setup}
@@ -291,42 +310,54 @@ bg= IKRBlue!15}
 \subsection{Network State}
 
 \begin{frame}{Environment Setup}{}
-	
+	\begin{textblock}{5}(1, 1.4)
+        \input{figures/SU.tex}
+    \end{textblock}
 \end{frame}
 
 
-\subsection{The RSA Episode}
+% \subsection{The RSA Episode}
+% \begin{frame}{The RSA Episode}{}
+% 	\begin{textblock}{5}(1, 1.4)
+%         \input{figures/SU.tex}
+%     \end{textblock}
+% \end{frame}
 
 
+% \section{DL Policy for RSA Problem}
 
-\section{DL Policy for RSA Problem}
+% \subsection{Basic Policy}
 
-\subsection{Basic Policy}
-
-\begin{frame}{Basic DNNs for RSA Problem}{Processing Pipeline}
+% \begin{frame}{Basic DNNs for RSA Problem}{Processing Pipeline}
 	
-\end{frame}
+% \end{frame}
 
 
-\subsection{Policymix Approach}
+% \subsection{Policymix Approach}
 
-\begin{frame}{Policymix for RSA Problem}{}
+% \begin{frame}{Policymix for RSA Problem}{}
 	
-\end{frame}
+% \end{frame}
 
 
-\subsection{Autoencoder Policy}
+% \subsection{Autoencoder Policy}
 
-\begin{frame}{Autoencoder for RSA Problem}{}
+% \begin{frame}{Autoencoder for RSA Problem}{}
 	 
+% \end{frame}
+
+\section{Results}
+
+\begin{frame}{Results}{}
+    \begin{textblock}{5}(1, 1.4)
+        \input{figures/scores.tex}
+    \end{textblock}
 \end{frame}
 
+% \section{Conclusion and Outlook}
 
-
-\section{Conclusion and Outlook}
-
-\begin{frame}{Conclusion and Outlook}{}
+% \begin{frame}{Conclusion and Outlook}{}
 	 
-\end{frame}
+% \end{frame}
 
 \end{document}

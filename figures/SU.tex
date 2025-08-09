@@ -1,0 +1,45 @@
+\begin{tikzpicture}[x=1.25cm, y=0.8cm,
+	neuron/.style={circle, minimum size=0.4cm, inner sep = 0mm},
+	weight/.style={font=\small, midway, fill=white, inner sep=1pt},
+	>=stealth]
+
+    %background rectangles
+    \node[rectangle, fill = IKRBlue!20, minimum width = 14cm, minimum height = 6.9cm, rounded corners = 5pt, anchor = north west, visible on = <1->] at (0,-0.1) {};
+    \node[rectangle, fill = white, minimum width = 6.2cm, minimum height = 6.4cm, rounded corners = 5pt, anchor = north west, visible on = <2->] at (0.3,-0.4) {};
+    \node[rectangle, fill = white, minimum width = 6.2cm, minimum height = 6.4cm, rounded corners = 5pt, anchor = north west, visible on = <7->] at (5.9,-0.4) {};
+
+    %slot utilisation
+    \node[visible on = <2->] at (2.65,-1.2) {\large \textbf{slot utilization}};
+
+    \matrix[matrix of nodes,
+        nodes={draw, minimum size=4mm, anchor=center},
+        column sep=0mm, row sep=0mm] (m) at (2.8,-4) {
+        1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & ... & 1 \\
+        0 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & ... & 0 \\
+        1 & 1 & 0 & 0 & 1 & 1 & 1 & 1 & ... & 1 \\
+        $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\ddots$ & 0 \\
+        1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & ... & 0 \\
+        };
+
+    \draw[->] (1,-5.5) -- node[midway, below] {number of slots} (4.8,-5.5);
+    \draw[->] (1,-5.5) -- node[midway, above, rotate = 90] {links} (1,-2.5);
+
+    %route-slot table
+    \begin{scope}[xshift = 7cm]
+        \node[visible on = <2->] at (2.65,-1.2) {\large \textbf{action space}};
+    
+        \matrix[matrix of nodes,
+            nodes={draw, minimum size=4mm, anchor=center},
+            column sep=0mm, row sep=0mm] (m) at (2.8,-4) {
+            0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & ... & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & ... & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & ... & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & ... & 0 \\
+            };
+            
+        \draw[->] (1,-5.5) -- node[midway, below] {number of slots} (4.8,-5.5);
+        \draw[->] (1,-5.5) -- node[midway, above, rotate = 90] {k} (1,-2.5);
+    \end{scope}
+
+    
+\end{tikzpicture}

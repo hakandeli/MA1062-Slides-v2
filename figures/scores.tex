@@ -1,0 +1,128 @@
+\begin{tikzpicture}
+
+	% MREN
+	\begin{axis}[
+		width=\linewidth,
+		height=6cm,
+		grid style={dotted,gray},
+		xmajorgrids,
+        xminorgrids,
+		ymajorgrids,
+		legend columns=2,
+		legend pos=north east,   
+		legend cell align={left},
+        legend style = {xshift = 1mm, yshift = -1mm},
+		xlabel={$\gls{episode}_{i}$ for \mren},
+		ylabel={$\gls{score}$},
+		legend image post style={mark indices={}},
+		mark size=1.5pt,
+		xmin=0.5,
+		xmax=25.5,
+		ymin=20,
+		ymax=85,
+		xtick distance=5,
+        ytick distance = 20,
+        minor x tick num = 9
+		]
+		
+		\addplot [color=\ilpcolor,
+                  line width = 1pt,
+                  mark=-,
+                  mark size=2.5pt,
+                  mark options={solid, very thick}, 
+                  mark repeat = 1,
+                  only marks]
+		table[col sep=comma, x = INDEX, y = ILP]
+		{plots/Mren/policymix_mren.csv};
+		\addlegendentry{\footnotesize $\gls{policy}_{\text{\gls{ILP}}}$};
+
+        \addplot [color=\kspffcolor,
+                  line width = 1pt,
+                  mark=*,
+                  mark size=1.5pt,
+                  mark options={solid}, 
+                  mark repeat = 3]
+		table[col sep=comma, x = INDEX, y = KSPFF]
+		{plots/Mren/policymix_mren.csv};
+		\addlegendentry{\footnotesize $\gls{policy}_{\text{\gls{KSP}-\gls{FF}}}$};
+
+
+        \addplot [color=\policymixmergecolor,
+                  line width = 1pt,
+                  mark=asterisk,
+                  mark size=2pt,
+                  mark options={}, 
+                  mark repeat = 1,
+                  mark phase = 2]
+		table[col sep=comma, x = INDEX, y = POLICYMIXMERGE]
+		{plots/Mren/policymix_mren.csv};
+		\addlegendentry{\footnotesize \polmerge};
+
+		
+		
+	\end{axis}
+
+    % MREN
+	\begin{axis}[
+		width=\linewidth,
+		height=6cm,
+        at={(0,-6cm)},
+		grid style={dotted,gray},
+		xmajorgrids,
+        xminorgrids,
+		ymajorgrids,
+		legend columns=2,
+		legend pos=north east,   
+		legend cell align={left},
+        legend style = {xshift = 1mm, yshift = -1mm},
+		xlabel={$\gls{episode}_{i}$ for \layernet},
+		ylabel={$\gls{score}$},
+		legend image post style={mark indices={}},
+		mark size=1.5pt,
+		xmin=0.5,
+		xmax=25.5,
+		ymin=40,
+		ymax=110,
+		xtick distance=5,
+        ytick distance = 20,
+        minor x tick num = 9
+		]
+		
+		\addplot [color=\ilpcolor,
+                  line width = 1pt,
+                  mark=-,
+                  mark size=2.5pt,
+                  mark options={solid, very thick}, 
+                  mark repeat = 1,
+                  only marks]
+		table[col sep=comma, x = INDEX, y = ILP]
+		{plots/Layer42/policymix_l42.csv};
+		\addlegendentry{\footnotesize $\gls{policy}_{\text{\gls{ILP}}}$};
+
+        \addplot [color=\kspffcolor,
+                  line width = 1pt,
+                  mark=*,
+                  mark size=1.5pt,
+                  mark options={solid}, 
+                  mark repeat = 3]
+		table[col sep=comma, x = INDEX, y = KSPFF]
+		{plots/Layer42/policymix_l42.csv};
+		\addlegendentry{\footnotesize $\gls{policy}_{\text{\gls{KSP}-\gls{FF}}}$};
+        
+
+        \addplot [color=\policymixmergecolor,
+                  line width = 1pt,
+                  mark=asterisk,
+                  mark size=2pt,
+                  mark options={}, 
+                  mark repeat = 1,
+                  mark phase = 2]
+		table[col sep=comma, x = INDEX, y = POLICYMIXMERGE]
+		{plots/Layer42/policymix_l42.csv};
+		\addlegendentry{\footnotesize \polmerge};
+
+		
+		
+	\end{axis}
+	
+\end{tikzpicture}

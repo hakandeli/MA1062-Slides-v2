@@ -1,0 +1,137 @@
+
+\begin{tikzpicture}[x=1.25cm, y=0.8cm,
+	neuron/.style={circle, minimum size=0.4cm, inner sep = 0mm},
+	weight/.style={font=\small, midway, fill=white, inner sep=1pt},
+	>=stealth]
+
+    %background rectangles
+    \node[rectangle, fill = IKRBlue!20, minimum width = 14cm, minimum height = 6.9cm, rounded corners = 5pt, anchor = north west, visible on = <1->] at (0,-0.1) {};
+    \node[rectangle, fill = white, minimum width = 6.2cm, minimum height = 6.4cm, rounded corners = 5pt, anchor = north west, visible on = <2->] at (0.3,-0.4) {};
+    \node[rectangle, fill = white, minimum width = 6.2cm, minimum height = 6.4cm, rounded corners = 5pt, anchor = north west, visible on = <7->] at (5.9,-0.4) {};
+
+    %undercomplete
+    \begin{scope}[xshift = 1cm, yshift = -1.2cm, visible on = <3->]
+    	% Neuronenzahlen
+    	\def\none{7}
+    	\def\ntwo{5}
+    	\def\nthree{3}
+    	\def\nfour{5}
+        \def\nfive{7}
+    	
+    	% Schichtpositionen
+    	\def\xspace{0}
+    	
+    	% Eingabeschicht
+        \begin{scope}[yshift = 0.5cm]
+        	\foreach \y in {1, ..., \none}
+        	   \node[neuron, fill = CornflowerBlue] (A\y) at (0, -0.7*\y) {};
+        
+            \foreach \y in {1, ..., \ntwo}
+        	   \node[neuron, fill = CornflowerBlue!60] (B\y) at (1, -0.7*\y-0.7) {};
+        
+            \foreach \y in {1, ..., \nthree}
+        	   \node[neuron, fill = CornflowerBlue!30] (C\y) at (2, -0.7*\y-1.4) {};
+        
+            \foreach \y in {1, ..., \nfour}
+        	   \node[neuron, fill = CornflowerBlue!60] (D\y) at (3, -0.7*\y-0.7) {};
+        
+            \foreach \y in {1, ..., \nfive}
+        	   \node[neuron, fill = CornflowerBlue] (E\y) at (4, -0.7*\y) {};
+
+            
+    	\end{scope}
+        \foreach \d in {1, 2, ..., \none} {
+            \foreach \s in {1, 2, ..., \ntwo} {
+                \draw[->, thick, gray!60] (A\d) -- (B\s);
+            }
+        }
+    
+        \foreach \d in {1, 2, ..., \ntwo} {
+            \foreach \s in {1, 2, ..., \nthree} {
+                \draw[->, thick, gray!60] (B\d) -- (C\s);
+            }
+        }
+    
+        \foreach \d in {1, 2, ..., \nthree} {
+            \foreach \s in {1, 2, ..., \nfour} {
+                \draw[->, thick, gray!60] (C\d) -- (D\s);
+            }
+        }
+    
+        \foreach \d in {1, 2, ..., \nfour} {
+            \foreach \s in {1, 2, ..., \nfive} {
+                \draw[->, thick, gray!60] (D\d) -- (E\s);
+            }
+        }
+    
+        \draw [decorate,decoration={brace,amplitude=10pt},xshift=4pt,yshift = 4pt, visible on = <5->]
+        (1.9, -5.6) -- (-0.1, -5.6) node [midway,below=0.5cm] {encoder};
+    
+        \draw [decorate,decoration={brace,amplitude=10pt},xshift=4pt,yshift=4pt, visible on = <6->]
+        (4, -5.6) -- (2, -5.6) node [midway,below=0.5cm] {decoder};
+    
+        \node[color = red, align = center, visible on = <4->] (txt) at (2, -4*0.7+0.5) {\textbf{latent}\\\textbf{space}};
+	\end{scope}
+
+    %overcomplete
+    \begin{scope}[xshift = 8cm, yshift = -1.2cm, visible on = <7->]
+        % Neuronenzahlen
+    	\def\none{5}
+    	\def\ntwo{7}
+    	\def\nthree{9}
+    	\def\nfour{7}
+        \def\nfive{5}
+    	
+    	% Schichtpositionen
+    	\def\xspace{0}
+    	
+    	% Eingabeschicht
+    	\foreach \y in {1, ..., \none}
+    	   \node[neuron, fill = CornflowerBlue!30] (A\y) at (0, -0.7*\y) {};
+    
+        \foreach \y in {1, ..., \ntwo}
+    	   \node[neuron, fill = CornflowerBlue!60] (B\y) at (1, -0.7*\y+0.7) {};
+    
+        \foreach \y in {1, ..., \nthree}
+    	   \node[neuron, fill = CornflowerBlue] (C\y) at (2, -0.7*\y+1.4) {};
+    
+        \foreach \y in {1, ..., \nfour}
+    	   \node[neuron, fill = CornflowerBlue!60] (D\y) at (3, -0.7*\y+0.7) {};
+    
+        \foreach \y in {1, ..., \nfive}
+    	   \node[neuron, fill = CornflowerBlue!30] (E\y) at (4, -0.7*\y) {};
+    	
+        \foreach \d in {1, 2, ..., \none} {
+            \foreach \s in {1, 2, ..., \ntwo} {
+                \draw[->, thick, gray!60] (A\d) -- (B\s);
+            }
+        }
+    
+        \foreach \d in {1, 2, ..., \ntwo} {
+            \foreach \s in {1, 2, ..., \nthree} {
+                \draw[->, thick, gray!60] (B\d) -- (C\s);
+            }
+        }
+    
+        \foreach \d in {1, 2, ..., \nthree} {
+            \foreach \s in {1, 2, ..., \nfour} {
+                \draw[->, thick, gray!60] (C\d) -- (D\s);
+            }
+        }
+    
+        \foreach \d in {1, 2, ..., \nfour} {
+            \foreach \s in {1, 2, ..., \nfive} {
+                \draw[->, thick, gray!60] (D\d) -- (E\s);
+            }
+        }
+    
+        \draw [decorate,decoration={brace,amplitude=10pt},xshift=2pt, yshift = 2pt]
+        (1.9, -5.5) -- (-0.1, -5.5) node [midway,below=0.5cm] {encoder};
+    
+        \draw [decorate,decoration={brace,amplitude=10pt},xshift=2pt, yshift = 2pt]
+        (4, -5.5) -- (2, -5.5) node [midway,below=0.5cm] {decoder};
+    
+        \node[color = red, align = center] (txt) at (2, -3*0.7) {\textbf{latent}\\\textbf{space}};
+    \end{scope}
+    
+\end{tikzpicture}

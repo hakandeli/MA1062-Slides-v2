@@ -1,0 +1,81 @@
+
+\begin{tikzpicture}[>=stealth, thick, neuron/.style={circle, draw = black, line width = 0.5pt, fill = white, minimum size=0.2cm, inner sep = 0mm},
+	con/.style={line width = 0.1pt, black}]
+
+    \node[rectangle, fill=IKRBlue!20, anchor = center, minimum width = 6cm, minimum height = 6.5cm, rounded corners = 3pt] at (0.5, -1.6) {};
+
+    \begin{scope}[x = 0.8cm, y= 0.65cm, visible on = <3->, xshift = 0.6cm]
+        % neuron
+    	\node[draw, circle, minimum size=1cm, fill = white] (neuron) at (0,0) {$h$};
+    	
+    	% Inputs
+    	\foreach \y/\index in {1/1, 2/2, 4/n}{
+    		\node[inner sep = 1mm] (x\y) at (-3,-1*\y+3) {$x_{\index}$};
+    		\draw[->] (x\y) -- (neuron) node[midway, fill=IKRBlue!20, inner sep=1pt]{$w_{\index}$};
+        }
+    	\node at (-3, -1*3+3.1) {\vdots};
+    	\node[inner sep = 1mm] (bias) at (-3, -1*5+3) {$b$};
+    	\draw[->] (bias) -- (neuron);
+    	
+    	% Output
+    	\node[] (out) at (2.5, 0) {$y$};
+    	\draw[->] (neuron.east) -- (out);
+    \end{scope}
+	
+    \begin{scope}[x=1.4cm, y=0.5cm, xshift = -1.5cm, yshift = -1.8cm, visible on = <4->]
+        % Neuronenzahlen
+    	\def\none{5}
+    	\def\ntwo{10}
+    	\def\nthree{10}
+    	\def\nfour{3}
+        \def\nfive{0}
+
+        \def\fillcl{gray}
+    	% Schichtpositionen
+    	\def\xspace{0}
+    	
+    	% Eingabeschicht
+    	\foreach \y in {1, ..., \none}
+    	   \node[neuron] (A\y) at (0, -0.7*\y+0.2) {};
+    
+        \foreach \y in {1, ..., \ntwo}
+    	   \node[neuron] (B\y) at (1, -0.7*\y+1.7) {};
+    
+        \foreach \y in {1, ..., \nthree}
+    	   \node[neuron] (C\y) at (2, -0.7*\y+1.7) {};
+    
+        \foreach \y in {1, ..., \nfour}
+    	   \node[neuron] (D\y) at (3, -0.7*\y-0.7) {};
+    
+        % \foreach \y in {1, ..., \nfive}
+    	   % \node[neuron] (E\y) at (4, -0.7*\y-2.0) {};
+    	
+        \foreach \d in {1, 2, ..., \none} {
+            \foreach \s in {1, 2, ..., \ntwo} {
+                \draw[-, con] (A\d) -- (B\s);
+            }
+        }
+    
+        \foreach \d in {1, 2, ..., \ntwo} {
+            \foreach \s in {1, 2, ..., \nthree} {
+                \draw[-, con] (B\d) -- (C\s);
+            }
+        }
+    
+        \foreach \d in {1, 2, ..., \nthree} {
+            \foreach \s in {1, 2, ..., \nfour} {
+                \draw[-, con] (C\d) -- (D\s);
+            }
+        }
+    
+        % \foreach \d in {1, 2, ..., \nfour} {
+        %     \foreach \s in {1, 2, ..., \nfive} {
+        %         \draw[-, con] (D\d) -- (E\s);
+        %     }
+        % }
+    
+    
+        % \node[color = red, align = center] (txt) at (2, -4*0.7) {\textbf{latent}\\\textbf{space}};
+    \end{scope}
+	
+\end{tikzpicture}
