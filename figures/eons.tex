@@ -60,8 +60,7 @@
 %\tikzstyle{arrow}=[> = stealth, line width = 0.5pt]
 
 \begin{tikzpicture}[x=1cm, y=1cm]
-	
-	
+    
 	%WDM
 
     \node[draw = black, 
@@ -70,22 +69,22 @@
 		   text = black!100, 
 		   anchor = west, 
 		   line width = \lw,
-		   inner sep = 0mm, visible on = <2>] (startbox) at (0, -0.4) {};
+		   inner sep = 0mm, visible on = <3>] (startbox) at (-0.5, -0.4) {};
     
 	\foreach \i in {1,...,\numchannels}{
 		\pgfmathtruncatemacro{\j}{\i-1}
-		\node[slot, minimum width = \slotwidth*\fsperchannel, visible on = <3->] (wdm\i) at (\j*\slotwidth*\fsperchannel, -0.4) {};
+		\node[slot, minimum width = \slotwidth*\fsperchannel, xshift = -0.5cm, visible on = <4->] (wdm\i) at (\j*\slotwidth*\fsperchannel, -0.4) {};
 	}
 	
-	\node[text = black, left = 0.5cm of wdm1.west, anchor = east, visible on = <3->] (wdmtext) {WDM};
+	\node[text = black, left = 0.5cm of wdm1.west, anchor = east, visible on = <4->] (wdmtext) {WDM};
 	
 	%WDM spectras
-	\visible<5->{\threeslot{wdm1.south}{0.98*\slotheight}}
-	\visible<5->{\fiveslot{wdm2.south}{0.98*\slotheight}}
-	\visible<5->{\twoslot{wdm3.south}{0.98*\slotheight}}
-	\visible<5->{\fourslot{wdm7.south}{0.98*\slotheight}}
-	\visible<5->{\fourslot{wdm8.south}{0.98*\slotheight}}
-	\visible<5->{\twoslot{wdm9.south}{0.98*\slotheight}}
+	\visible<6->{\threeslot{wdm1.south}{0.98*\slotheight}}
+	\visible<6->{\fiveslot{wdm2.south}{0.98*\slotheight}}
+	\visible<6->{\twoslot{wdm3.south}{0.98*\slotheight}}
+	\visible<6->{\fourslot{wdm7.south}{0.98*\slotheight}}
+	\visible<6->{\fourslot{wdm8.south}{0.98*\slotheight}}
+	\visible<6->{\twoslot{wdm9.south}{0.98*\slotheight}}
 	
 	%cut the top off
 %	\draw[-, draw=white, line width=1mm, align=center] (wdm1.north west) -- (wdm\numchannels.north east);	
@@ -95,10 +94,10 @@
 	\pgfmathtruncatemacro{\amount}{\numchannels*\fsperchannel}
 	\foreach \i in {1,...,\amount}{
 		\pgfmathtruncatemacro{\j}{\i-1}
-		\node[slot, minimum width = \slotwidth, draw = black!20, line width = 0.5*\lw, visible on = <7->] (fs\i) at (\j*\slotwidth+0.125*\lw, -3.4) {};
+		\node[slot, minimum width = \slotwidth, draw = black!20, line width = 0.5*\lw, xshift = -0.49cm, visible on = <8->] (fs\i) at (\j*\slotwidth+0.125*\lw, -3.4) {};
 	}
 	
-	\node[text = black, left = 0.5cm+0.5*\lw of fs1.west, anchor = east, visible on = <7->] (eontext) {EON};
+	\node[text = black, left = 0.5cm+0.5*\lw of fs1.west, anchor = east, visible on = <8->] (eontext) {EON};
 	
 	%draw eon channels by hand	
 	\foreach \ns/\nend in  {fs1/fs3,
@@ -111,35 +110,35 @@
 	                        fs39/fs40,
 	                        fs41/fs50}{
 
-	\draw[-, draw=black, line width=\lw, align=center, visible on = <9->] (\ns.north west)++(0.25*\lw,0) -- ($(\ns.south west)+(0.25*\lw, 0.5*\lw)$) -- ($(\nend.south east) + (-0.25*\lw, 0.5*\lw)$) -- ($(\nend.north east)+(-0.25*\lw,0)$);
+	\draw[-, draw=black, line width=\lw, align=center, visible on = <10->] (\ns.north west)++(0.25*\lw,0) -- ($(\ns.south west)+(0.25*\lw, 0.5*\lw)$) -- ($(\nend.south east) + (-0.25*\lw, 0.5*\lw)$) -- ($(\nend.north east)+(-0.25*\lw,0)$);
 	                        
 	}
 
 	%eon spectra
-	\visible<9->{\threeslot{fs2.south}{0.98*\slotheight}}
-	\visible<9->{\fiveslot{fs6.south}{0.98*\slotheight}}
-	\visible<9->{\twoslot{fs9.south east}{0.98*\slotheight}}
-	\visible<9->{\twelveslot{fs16.south east}{0.98*\slotheight}}
-	\visible<9->{\fourslot{fs32.south east}{0.98*\slotheight}}
-	\visible<9->{\fourslot{fs36.south east}{0.98*\slotheight}}
-	\visible<9->{\twoslot{fs39.south east}{0.98*\slotheight}}
+	\visible<10->{\threeslot{fs2.south}{0.98*\slotheight}}
+	\visible<10->{\fiveslot{fs6.south}{0.98*\slotheight}}
+	\visible<10->{\twoslot{fs9.south east}{0.98*\slotheight}}
+	\visible<10->{\twelveslot{fs16.south east}{0.98*\slotheight}}
+	\visible<10->{\fourslot{fs32.south east}{0.98*\slotheight}}
+	\visible<10->{\fourslot{fs36.south east}{0.98*\slotheight}}
+	\visible<10->{\twoslot{fs39.south east}{0.98*\slotheight}}
 	
 	%legend
 	\foreach \y in {1,2,...,5}{
-		\node[inner sep = 0mm, anchor = center, visible on = <5->] (l\y) at (12,-1.3*\y+1.8) {};
+		\node[inner sep = 0mm, anchor = center, visible on = <6->] (l\y) at (12,-1.3*\y+1.8) {};
 	}
 	
-	\node[legendtext, below = 1pt of l1.south, visible on = <5->] {25 GHz};
-	\node[legendtext, below = 1pt of l2.south, visible on = <5->] {37.5 GHz};
-	\node[legendtext, below = 1pt of l3.south, visible on = <5->] {50 GHz};
-	\node[legendtext, below = 1pt of l4.south, visible on = <5->] {62.5 GHz};
-	\node[legendtext, below = 1pt of l5.south, visible on = <5->] {150 GHz};
+	\node[legendtext, below = 1pt of l1.south, visible on = <6->] {25 GHz};
+	\node[legendtext, below = 1pt of l2.south, visible on = <6->] {37.5 GHz};
+	\node[legendtext, below = 1pt of l3.south, visible on = <6->] {50 GHz};
+	\node[legendtext, below = 1pt of l4.south, visible on = <6->] {62.5 GHz};
+	\node[legendtext, below = 1pt of l5.south, visible on = <6->] {150 GHz};
 	
-	\visible<5->{\twoslot{l1.center}{0.2*\slotheight}}
-	\visible<5->{\threeslot{l2.center}{0.2*\slotheight}}
-	\visible<5->{\fourslot{l3.center}{0.2*\slotheight}}
-	\visible<5->{\fiveslot{l4.center}{0.2*\slotheight}}
-	\visible<5->{\twelveslot{l5.center}{0.2*\slotheight}}
+	\visible<6->{\twoslot{l1.center}{0.2*\slotheight}}
+	\visible<6->{\threeslot{l2.center}{0.2*\slotheight}}
+	\visible<6->{\fourslot{l3.center}{0.2*\slotheight}}
+	\visible<6->{\fiveslot{l4.center}{0.2*\slotheight}}
+	\visible<6->{\twelveslot{l5.center}{0.2*\slotheight}}
 
     \node[draw = black, 
           minimum width = 10*\slotwidth*\fsperchannel, 
@@ -147,18 +146,22 @@
 		   text = black!100, 
 		   anchor = west, 
 		   line width = \lw,
-		   inner sep = 0mm, visible on = <6->] (startboxeon) at (-0.005, -3.4) {};
+		   inner sep = 0mm, xshift = -0.49cm, visible on = <7->] (startboxeon) at (0, -3.4) {};
+
+     % add axis to block
+    \draw[->, line width = \lw, > = Stealth, visible on = <2->] ($(startbox.south west) + (-0.35, 0.17mm)$) -- ($(startbox.south east) + (0.5, 0.17mm)$) node[right] {$\lambda$};
+
+    \draw[->, line width = \lw, > = Stealth, visible on = <7->] ($(startboxeon.south west) + (-0.35, 0.17mm)$) -- ($(startboxeon.south east) + (0.5, 0.17mm)$) node[right] {$\lambda$};
     
 	%highlight one frequency slot and one optical channel
-	\node[slot, minimum width = \slotwidth, draw = red, line width = 1.25*\lw, left = 0cm of fs44.west, anchor = west, pattern = north east lines, pattern color = red, visible on = <8->] (fsred) {};
-	\node[slot, minimum width = \slotwidth*\fsperchannel, draw = red, line width = 1.25*\lw, left = 0cm of wdm5.west, anchor = west, pattern = north east lines, pattern color = red, visible on = <4->] (wdmred) {};
+	\node[slot, minimum width = \slotwidth, draw = red, line width = 1.25*\lw, left = 0cm of fs44.west, anchor = west, pattern = north east lines, pattern color = red, visible on = <9->] (fsred) {};
+	\node[slot, minimum width = \slotwidth*\fsperchannel, draw = red, line width = 1.25*\lw, left = 0cm of wdm5.west, anchor = west, pattern = north east lines, pattern color = red, visible on = <5->] (wdmred) {};
 	
 	%add arrows and explanatory text
-	\node[legendtext, font = \normalsize, visible on = <4->] (wdmarrowtext) at (4.5,-1.55) {\small one WDM channel};
-	\node[legendtext, font = \normalsize, align = center, visible on = <8->] (eonarrowtext) at (8.71,-4.7) {\small one FS \\ \small (12.5 GHz)};
+	\node[legendtext, font = \normalsize, visible on = <5->] (wdmarrowtext) at (4,-1.55) {\small one WDM channel};
+	\node[legendtext, font = \normalsize, align = center, visible on = <9->] (eonarrowtext) at (8.21,-4.7) {\small one frequency slot (FS) \\ \small (12.5 GHz)};
 	
-	\draw[->, draw = gray, > = stealth, line width = 0.5pt, visible on = <2->] (-0.1,-1.9) -- (10.2,-1.9) node[right] {\textcolor{gray}{$\lambda$}};
+	% \draw[->, draw = gray, > = stealth, line width = 0.5pt, visible on = <2->] (-0.1,-1.9) -- (10.2,-1.9) node[right] {\textcolor{gray}{$\lambda$}};
     
-	
-	
+    
 \end{tikzpicture}

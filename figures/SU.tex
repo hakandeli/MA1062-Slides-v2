@@ -1,19 +1,22 @@
+
 \begin{tikzpicture}[x=1.25cm, y=0.8cm,
 	neuron/.style={circle, minimum size=0.4cm, inner sep = 0mm},
 	weight/.style={font=\small, midway, fill=white, inner sep=1pt},
 	>=stealth]
 
+    \def\lw{0.5pt}
+    
     %background rectangles
-    \node[rectangle, fill = IKRBlue!20, minimum width = 14cm, minimum height = 6.9cm, rounded corners = 5pt, anchor = north west, visible on = <1->] at (0,-0.1) {};
-    \node[rectangle, fill = white, minimum width = 6.2cm, minimum height = 6.4cm, rounded corners = 5pt, anchor = north west, visible on = <2->] at (0.3,-0.4) {};
-    \node[rectangle, fill = white, minimum width = 6.2cm, minimum height = 6.4cm, rounded corners = 5pt, anchor = north west, visible on = <7->] at (5.9,-0.4) {};
+    \node[bgrect, minimum width = 15.2cm, minimum height = 6.9cm, anchor = north west, visible on = <1->] at (0,-0.1) {};
+    \node[bgrectw, minimum width = 7cm, minimum height = 6.4cm, anchor = north west, visible on = <2->] at (0.35,-0.4) {};
+    \node[bgrectw, minimum width = 7cm, minimum height = 6.4cm, anchor = north west, visible on = <5->] at (6.25,-0.4) {};
 
     %slot utilisation
-    \node[visible on = <2->] at (2.65,-1.2) {\large \textbf{slot utilization}};
+    \node[visible on = <2->] at (3.1,-1.6) {\large \textbf{slot utilization}};
 
-    \matrix[matrix of nodes,
-        nodes={draw, minimum size=4mm, anchor=center},
-        column sep=0mm, row sep=0mm] (m) at (2.8,-4) {
+    \matrix[matrix of nodes, visible on = <2->,
+        nodes={draw, minimum size=5.5mm, anchor=center},
+        column sep=-\lw, row sep=-\lw] (m) at (3.3,-4.5) {
         1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & ... & 1 \\
         0 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & ... & 0 \\
         1 & 1 & 0 & 0 & 1 & 1 & 1 & 1 & ... & 1 \\
@@ -21,24 +24,40 @@
         1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & ... & 0 \\
         };
 
-    \draw[->] (1,-5.5) -- node[midway, below] {number of slots} (4.8,-5.5);
-    \draw[->] (1,-5.5) -- node[midway, above, rotate = 90] {links} (1,-2.5);
+    \node[visible on = <4->] at (3.3,-6.7) {FSs};
+    \node[rotate=90, visible on = <4->] at (0.75,-4.5) {links};
 
     %route-slot table
-    \begin{scope}[xshift = 7cm]
-        \node[visible on = <2->] at (2.65,-1.2) {\large \textbf{action space}};
+    \begin{scope}[xshift = 7.3cm]
+        \node[visible on = <5->] at (3.1,-1.6) {\large \textbf{action space}};
     
-        \matrix[matrix of nodes,
-            nodes={draw, minimum size=4mm, anchor=center},
-            column sep=0mm, row sep=0mm] (m) at (2.8,-4) {
-            0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & ... & 0 \\
+        \matrix[matrix of nodes, visible on = <5->,
+            nodes={draw, minimum size=5.5mm, anchor=center, line width = \lw},
+            column sep=-\lw, row sep=-\lw] (m) at (3.4,-4.5) {
+            1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & ... & 0 \\
             0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & ... & 0 \\
             0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & ... & 0 \\
             0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & ... & 0 \\
             };
-            
-        \draw[->] (1,-5.5) -- node[midway, below] {number of slots} (4.8,-5.5);
-        \draw[->] (1,-5.5) -- node[midway, above, rotate = 90] {k} (1,-2.5);
+
+        \node[visible on = <5->] at (3.3,-6.4) {FSs};
+        \node[rotate=90, visible on = <5->] at (0.8,-4.5) {paths};
+        
+
+
+        \node[visible on = <8->] at (3.1,-2.1) {\large \textcolor{red}{\textbf{mask}}};
+
+        \newcommand{\alloc}{|[fill=red, draw = black, line width = \lw]|{}}
+
+        \matrix[matrix of nodes, visible on = <8->,
+            nodes={draw, minimum size=5.5mm, anchor=center},
+            column sep=-\lw, row sep=-\lw] (m) at (3.4,-4.5) {
+            {} & \alloc & \alloc & {} & {} & \alloc & \alloc & {} & ... & {} \\
+            {} & {} & \alloc & {} & {} & \alloc & {} & {} & ... & {} \\
+            {} & {} & {} & {} & \alloc & {} & {} & {} & ... & \alloc \\
+            {} & \alloc & {} & \alloc & {} & {} & {} & \alloc & ... & {} \\
+            };
+        
     \end{scope}
 
     

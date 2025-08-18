@@ -25,16 +25,15 @@
 					anchor = west, 
 					line width = \lw,
 					inner sep = 0mm]
-
     
 \begin{tikzpicture}
 
-    %background rectangles
+    % background rectangles
     \node[rectangle, fill = IKRBlue!20, minimum width = 14cm, minimum height = 6.9cm, rounded corners = 5pt, anchor = north west, visible on = <2->] at (0,0) {};
     \node[rectangle, fill = white, minimum width = 6cm, minimum height = 3cm, rounded corners = 5pt, anchor = north west, visible on = <3->] at (0.5,-0.8) {};
     \node[rectangle, fill = white, minimum width = 6cm, minimum height = 3cm, rounded corners = 5pt, anchor = north west, visible on = <5->] at (7.5,-0.8) {};
 
-    %plus
+    % plus
     \begin{scope}[shift={(7cm,-2.3cm)}, visible on = <5->]
           \def\arm{0.05}   % half-width of arms
           \def\len{0.2}     % half-length of plus arms
@@ -44,15 +43,15 @@
           (-\len, -\arm) rectangle (\len, \arm); % horizontal bar
     \end{scope}
 
-    %text
+    % text
     \node[anchor = west, visible on = <2->] at (0.2, -0.45) {\textbf{R}outing and \textbf{S}pectrum \textbf{A}ssignment Problem};
-    \node[anchor = center, align = center, visible on = <3->] at (3.4, -4.15) {Route};
-    \node[anchor = center, align = center, visible on = <5->] at (10.5, -4.15) {Spectrum};
+    \node[anchor = center, align = center, visible on = <3->] at (3.4, -4.15) {route};
+    \node[anchor = center, align = center, visible on = <5->] at (10.5, -4.15) {spectrum};
 
-    %layer42
+    % layer42
     \begin{scope}[x=1.3cm, y=1.1cm, shift={(3.5cm, -2.6cm)}]
     
-        %vanilla
+        % vanilla
         \node[netnode, visible on = <3->] (nA) at (-0.53, 1.29) {\small A};
         \node[netnode, visible on = <3>] (nB) at (-0.35, 0.21) {\small B};
         \node[netnode, visible on = <3->] (nC) at (-1.39, -0.16) {\small C};
@@ -68,7 +67,7 @@
         \draw[edge, <->, visible on = <3>] (nD) -- (nE);
         \draw[edge, <->, visible on = <3>] (nE) -- (nF);  
     
-        %scenario
+        % scenario
         \node[  netnode, 
                 inner color = red!20, 
 				outer color = red!70,
@@ -81,26 +80,26 @@
 
         \draw[edge, <->, opacity = 0.3, visible on = <4->] (nA) -- (nB); 
         \draw[edge, <->, opacity = 0.3, visible on = <4->] (nB) -- (nC);
-        \draw[edge, draw = ForestGreen, ->, visible on = <4->] (nB) -- (nF);
-        \draw[edge, draw = Orchid, ->, visible on = <4->] (nB) -- (nD);
-        \draw[edge, draw = Orchid, ->, visible on = <4->] (nD) -- (nF);
+        \draw[edge, draw = green, ->, visible on = <4->, line width = 1pt] (nB) -- (nF);
+        \draw[edge, draw = purple, ->, visible on = <4->, line width = 1pt] (nB) -- (nD);
+        \draw[edge, draw = purple, ->, visible on = <4->, line width = 1pt] (nD) -- (nF);
         \draw[edge, <->, opacity = 0.3, visible on = <4->] (nD) -- (nE);
         \draw[edge, <->, opacity = 0.3, visible on = <4->] (nE) -- (nF); 
         
     \end{scope}
 
-    %spectrum
+    % spectrum
 
     \begin{scope}[shift={(8cm,-2.5cm)}]
     
-        %EON
+        % EON
     	\pgfmathtruncatemacro{\amount}{\numchannels*\fsperchannel}
     	\foreach \i in {1,...,\amount}{
     		\pgfmathtruncatemacro{\j}{\i-1}
     		\node[slot, minimum width = \slotwidth, draw = black!20, line width = 0.5*\lw, visible on = <5->] (fs\i) at (\j*\slotwidth+0.125*\lw, 0) {};
     	}
     	
-    	%draw eon channels by hand	
+    	% draw EON channels by hand	
     	\foreach \ns/\nend in  {fs1/fs3,
     						    fs7/fs10,
     	                        fs23/fs28,
@@ -118,19 +117,25 @@
     		   line width = \lw,
     		   inner sep = 0mm, visible on = <5->] (startboxeon) at (-0.005, 0) {};
 
+        % draw chosen spectrum
+
         \draw[->, line width = 1pt, draw = red, > = Stealth , shorten >= 0.5mm, visible on = <6->] ($(fs13.north) + (0, 0.6)$) -- (fs13.north);
+
+      
+    	\fill[fill=\kspff, opacity = 0.5, visible on = <6->] (fs13.north west)++(0.25*\lw,-0.7*\lw) -- ($(fs13.south west)+(0.25*\lw, 0.7*\lw)$) -- ($(fs16.south east) + (-0.25*\lw, 0.7*\lw)$) -- ($(fs16.north east)+(-0.25*\lw,-0.7*\lw)$) -- cycle;
+    	                        
     
     \end{scope}
 
 
     % constraints
-    \node[rectangle, fill = IKRBlue!5, minimum width = 4.4cm, minimum height = 2cm, rounded corners = 5pt, anchor = north west, align = center, text height = 1cm, text depth = 0.5cm, visible on = <7->] at (0.2,-4.7) {FS $\leftrightarrow$ optical channel};
+    \node[rectangle, fill = IKRBlue!5, minimum width = 4.4cm, minimum height = 2cm, rounded corners = 5pt, anchor = north west, align = center, text height = 1cm, text depth = 0.5cm, visible on = <7->] at (0.2,-4.7) {enough FSs available};
     \node[rectangle, fill = IKRBlue!5, minimum width = 4.4cm, minimum height = 2cm, rounded corners = 5pt, anchor = north west, align = center, text height = 1cm, text depth = 0.5cm, visible on = <8->] at (4.8,-4.7) {no wavelength conversion};
     \node[rectangle, fill = IKRBlue!5, minimum width = 4.4cm, minimum height = 2cm, rounded corners = 5pt, anchor = north west, align = center, text height = 1cm, text depth = 0cm, visible on = <9->] at (9.4,-4.7) {assigned FSs are \\ adjacent};
 
-    \node[anchor = center, align = center, visible on = <7->] at (2.4, -5.2) {\textbf{Capacity}};
-    \node[anchor = center, align = center, visible on = <8->] at (7, -5.2) {\textbf{Continuity}};
-    \node[anchor = center, align = center, visible on = <9->] at (11.6, -5.2) {\textbf{Contiguity}};
+    \node[anchor = center, align = center, visible on = <7->] at (2.4, -5.2) {\textbf{capacity}};
+    \node[anchor = center, align = center, visible on = <8->] at (7, -5.2) {\textbf{continuity}};
+    \node[anchor = center, align = center, visible on = <9->] at (11.6, -5.2) {\textbf{contiguity}};
     
  
 \end{tikzpicture}

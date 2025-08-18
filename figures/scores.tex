@@ -1,87 +1,125 @@
+\newcommand{\kspffcolor}{blue}
+\newcommand{\ilpcolor}{red}
+\newcommand{\unmaskedcolor}{green}
+\newcommand{\maskedcolor}{orange}
+\newcommand{\policymixcolor}{Goldenrod}
+\newcommand{\policymixmergecolor}{SkyBlue}
+
+\newcommand{\polilp}{$\pi_{\text{opt}}$}
+\newcommand{\polkspff}{$\pi_{\text{KSP-FF}}$}
+\newcommand{\poldnn}{$\pi_{\text{DNN}}$}
+\newcommand{\poldnnm}{$\pi_{\text{DNN}, \text{mask}}$}
+\newcommand{\polmerge}{$\pi_{\text{AE}, \text{Mren}+\text{Layer42}}$}
+
+\newcommand{\mren}{$ \text{Mren} $}
+\newcommand{\layernet}{$ \text{Layer42} $}
+
 \begin{tikzpicture}
 
-	% MREN
+	% % MREN
+	% \begin{axis}[
+	% 	width=7cm,
+	% 	height=7.5cm,
+	% 	grid style={dotted,gray},
+	% 	xmajorgrids,
+ %        xminorgrids,
+	% 	ymajorgrids,
+	% 	legend columns=2,
+	% 	legend pos=north east,   
+	% 	legend cell align={left},
+ %        at={(6.5cm,0cm)},
+ %        legend style = {xshift = 1mm, yshift = -1mm},
+	% 	xlabel={episodes for \mren},
+	% 	ylabel={},
+	% 	legend image post style={mark indices={}},
+	% 	mark size=1.5pt,
+	% 	xmin=0.5,
+	% 	xmax=25.5,
+	% 	ymin=20,
+	% 	ymax=85,
+	% 	xtick distance=5,
+ %        ytick distance = 20,
+ %        minor x tick num = 9
+	% 	]
+		
+	% 	\addplot [color=\ilpcolor,
+ %                  line width = 1pt,
+ %                  mark=-,
+ %                  mark size=2.5pt,
+ %                  mark options={solid, very thick}, 
+ %                  mark repeat = 1,
+ %                  only marks]
+	% 	table[col sep=comma, x = INDEX, y = ILP]
+	% 	{plots/Mren/policymix_mren.csv};
+	% 	\addlegendentry{\footnotesize \polilp};
+
+ %        \addplot [color=\kspffcolor,
+ %                  line width = 1pt,
+ %                  mark=*,
+ %                  mark size=1.5pt,
+ %                  mark options={solid}, 
+ %                  mark repeat = 3]
+	% 	table[col sep=comma, x = INDEX, y = KSPFF]
+	% 	{plots/Mren/policymix_mren.csv};
+	% 	\addlegendentry{\footnotesize \polkspff};
+
+ %        \addplot [color=\unmaskedcolor,
+ %                  line width = 1pt,
+ %                  mark=triangle*,
+ %                  mark size=1.5pt,
+ %                  mark options={solid}, 
+ %                  mark repeat = 1,
+ %                  mark phase = 1]
+	% 	table[col sep=comma, x = INDEX, y = UNMASKED]
+	% 	{plots/Mren/basicandeqscores_mren.csv};
+	% 	\addlegendentry{\footnotesize \poldnn };
+
+ %        \addplot [color=\maskedcolor,
+ %                  line width = 1pt,
+ %                  mark=asterisk,
+ %                  mark size=2pt,
+ %                  mark options={}, 
+ %                  mark repeat = 1,
+ %                  mark phase = 2]
+	% 	table[col sep=comma, x = INDEX, y = MASKED]
+	% 	{plots/Mren/basicandeqscores_mren.csv};
+	% 	\addlegendentry{\footnotesize \poldnnm};
+
+ %        \addplot [color=\policymixmergecolor,
+ %                  line width = 1pt,
+ %                  mark=asterisk,
+ %                  mark size=2pt,
+ %                  mark options={}, 
+ %                  mark repeat = 1,
+ %                  mark phase = 2]
+	% 	table[col sep=comma, x = INDEX, y = POLICYMIXMERGE]
+	% 	{plots/Mren/policymix_mren.csv};
+	% 	\addlegendentry{\footnotesize \polmerge};
+		
+		
+	% \end{axis}
+
+    % LAYER42
 	\begin{axis}[
-		width=\linewidth,
-		height=6cm,
+		width=15cm,
+		height=7.4cm,
 		grid style={dotted,gray},
 		xmajorgrids,
         xminorgrids,
 		ymajorgrids,
-		legend columns=2,
+		legend columns=6,
 		legend pos=north east,   
 		legend cell align={left},
-        legend style = {xshift = 1mm, yshift = -1mm},
-		xlabel={$\gls{episode}_{i}$ for \mren},
-		ylabel={$\gls{score}$},
+        legend style = {xshift = 4.2mm, yshift = 8mm, font = \normalsize, minimum width = 1.57cm},
+		xlabel={test episodes for \layernet},
+        xlabel style = {yshift = 1mm},
+		ylabel={score},
+        ylabel style = {yshift = -3mm},
 		legend image post style={mark indices={}},
 		mark size=1.5pt,
 		xmin=0.5,
 		xmax=25.5,
-		ymin=20,
-		ymax=85,
-		xtick distance=5,
-        ytick distance = 20,
-        minor x tick num = 9
-		]
-		
-		\addplot [color=\ilpcolor,
-                  line width = 1pt,
-                  mark=-,
-                  mark size=2.5pt,
-                  mark options={solid, very thick}, 
-                  mark repeat = 1,
-                  only marks]
-		table[col sep=comma, x = INDEX, y = ILP]
-		{plots/Mren/policymix_mren.csv};
-		\addlegendentry{\footnotesize $\gls{policy}_{\text{\gls{ILP}}}$};
-
-        \addplot [color=\kspffcolor,
-                  line width = 1pt,
-                  mark=*,
-                  mark size=1.5pt,
-                  mark options={solid}, 
-                  mark repeat = 3]
-		table[col sep=comma, x = INDEX, y = KSPFF]
-		{plots/Mren/policymix_mren.csv};
-		\addlegendentry{\footnotesize $\gls{policy}_{\text{\gls{KSP}-\gls{FF}}}$};
-
-
-        \addplot [color=\policymixmergecolor,
-                  line width = 1pt,
-                  mark=asterisk,
-                  mark size=2pt,
-                  mark options={}, 
-                  mark repeat = 1,
-                  mark phase = 2]
-		table[col sep=comma, x = INDEX, y = POLICYMIXMERGE]
-		{plots/Mren/policymix_mren.csv};
-		\addlegendentry{\footnotesize \polmerge};
-
-		
-		
-	\end{axis}
-
-    % MREN
-	\begin{axis}[
-		width=\linewidth,
-		height=6cm,
-        at={(0,-6cm)},
-		grid style={dotted,gray},
-		xmajorgrids,
-        xminorgrids,
-		ymajorgrids,
-		legend columns=2,
-		legend pos=north east,   
-		legend cell align={left},
-        legend style = {xshift = 1mm, yshift = -1mm},
-		xlabel={$\gls{episode}_{i}$ for \layernet},
-		ylabel={$\gls{score}$},
-		legend image post style={mark indices={}},
-		mark size=1.5pt,
-		xmin=0.5,
-		xmax=25.5,
-		ymin=40,
+		ymin=0,
 		ymax=110,
 		xtick distance=5,
         ytick distance = 20,
@@ -94,21 +132,56 @@
                   mark size=2.5pt,
                   mark options={solid, very thick}, 
                   mark repeat = 1,
-                  only marks]
+                  only marks, visible on = <2->]
 		table[col sep=comma, x = INDEX, y = ILP]
 		{plots/Layer42/policymix_l42.csv};
-		\addlegendentry{\footnotesize $\gls{policy}_{\text{\gls{ILP}}}$};
+		\addlegendentry{\polilp};
 
         \addplot [color=\kspffcolor,
                   line width = 1pt,
                   mark=*,
                   mark size=1.5pt,
                   mark options={solid}, 
-                  mark repeat = 3]
+                  mark repeat = 3, visible on = <3->]
 		table[col sep=comma, x = INDEX, y = KSPFF]
 		{plots/Layer42/policymix_l42.csv};
-		\addlegendentry{\footnotesize $\gls{policy}_{\text{\gls{KSP}-\gls{FF}}}$};
+		\addlegendentry{\polkspff};
         
+
+        \addplot [color=\unmaskedcolor,
+                  line width = 1pt,
+                  mark=triangle*,
+                  mark size=1.5pt,
+                  mark options={solid}, 
+                  mark repeat = 1,
+                  mark phase = 1, visible on = <4->]
+		table[col sep=comma, x = INDEX, y = UNMASKED]
+		{plots/Layer42/basicandeqscores_l42.csv};
+		\addlegendentry{\poldnn};
+
+        \addplot [color=\maskedcolor,
+                  line width = 1pt,
+                  mark=asterisk,
+                  mark size=2pt,
+                  mark options={}, 
+                  mark repeat = 1,
+                  mark phase = 2, visible on = <5->]
+		table[col sep=comma, x = INDEX, y = EQMASKED]
+		{plots/Layer42/basicandeqscores_l42.csv};
+		\addlegendentry{\poldnnm};
+
+
+        \addplot [color=\policymixcolor,
+                  line width = 1pt,
+                  mark=asterisk,
+                  mark size=2pt,
+                  mark options={}, 
+                  mark repeat = 1,
+                  mark phase = 2, visible on = <6->]
+		table[col sep=comma, x = INDEX, y = POLICYMIX]
+		{plots/Layer42/policymix_l42.csv};
+		\addlegendentry{$\pi_{\text{policymix}}$};
+
 
         \addplot [color=\policymixmergecolor,
                   line width = 1pt,
@@ -116,12 +189,12 @@
                   mark size=2pt,
                   mark options={}, 
                   mark repeat = 1,
-                  mark phase = 2]
+                  mark phase = 2, visible on = <7->]
 		table[col sep=comma, x = INDEX, y = POLICYMIXMERGE]
 		{plots/Layer42/policymix_l42.csv};
-		\addlegendentry{\footnotesize \polmerge};
+		\addlegendentry{\polmerge};
 
-		
+        
 		
 	\end{axis}
 	

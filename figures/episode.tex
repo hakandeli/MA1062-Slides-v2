@@ -1,0 +1,97 @@
+\newcommand{\partialarc}[4]{%
+    \draw ($(#1) + ({#2*cos(#3)},{#2*sin(#3)})$)
+        arc[start angle=#3, end angle=#4, radius=#2];
+}
+
+\newcommand{\partialarcarrow}[4]{%
+    \draw[->] ($(#1) + ({#2*cos(#3)},{#2*sin(#3)})$)
+        arc[start angle=#3, end angle=#4, radius=#2];
+}
+
+\def\centerarc[#1](#2)(#3:#4:#5){ 
+    \draw[#1] ($(#2)+({#5*cos(#3)},{#5*sin(#3)})$) arc (#3:#4:#5); 
+}
+
+\newcommand{\lw}{1pt}
+
+\begin{tikzpicture}[x = 2cm, y = 2cm, > = Stealth]
+
+    \node[rectangle, fill = IKRBlue!20, minimum width = 15.2cm, minimum height = 6.9cm, rounded corners = 5pt, anchor = north west, visible on = <1->] at (-0.2,-0.1) {};
+
+    \node[visible on = <1->] at (0.5, -0.3) {The RSA episode};
+
+    \begin{scope}[shift={(10cm,-3.5cm)}]
+
+        \newcommand{\rc}{2.5cm}
+
+        % arcs
+
+        \visible<3->{\centerarc[->, black, line width = \lw](-1.25,0)(180:68:\rc)}
+        \visible<4->{\centerarc[->, black, line width = \lw](-1.25,0)(40:-22:\rc)}
+        \visible<5->{\centerarc[->, black, line width = \lw](-1.25,0)(292:203:\rc)}
+
+        % nodes
+
+        \node[circle, minimum width = 1mm, fill = black, visible on = <2->] (start) at (-3.2*\rc, 0) {};
+
+        \node[circle, draw = black, minimum size = 2cm, line width = 0.5pt, anchor = center, fill = white, visible on = <2->] (state) at (-2*\rc, 0) {state};
+        
+        \node[circle, draw = black, minimum size = 2cm, line width = 0.5pt, anchor = center, fill = white, visible on = <3->] (policy) at (-0.293*\rc, 0.707*\rc) {policy $\pi$};
+
+        \node[circle, draw = black, minimum size = 2cm, line width = 0.5pt, anchor = center, fill = white, visible on = <4->] (update) at (-0.293*\rc, -0.707*\rc) {update};
+
+
+        % text
+
+        \node[fill = IKRBlue!20, align = center, visible on = <3->] at (-1.8*\rc, 0.6*\rc) {time++};
+        
+        \node[fill = IKRBlue!20, align = center, visible on = <4->] at (0, 0) {decision};
+
+        \node[fill = IKRBlue!20, align = center, visible on = <5->] at (-1.45*\rc, -0.85*\rc) {score++};
+
+        \node[fill = IKRBlue!20, align = center, inner sep = 0mm, visible on = <2->] at (-2.8*\rc, 0.25*\rc) {$\text{score} = 0$};
+        
+        \node[fill = IKRBlue!20, align = center, inner sep = 0mm, visible on = <2->] at (-2.8*\rc, 0.11*\rc) {$\text{time} = 0$};
+
+        % text nodes
+
+        \node[fill = IKRBlue!20, align = center, visible on = <3->] (demand) at (-2*\rc, 1.005*\rc) {demand};
+
+        \node[fill = IKRBlue!20, align = center, visible on = <6->] (ebreak) at (0.8*\rc, -0.707*\rc) {episode \\ termination};
+
+        % arrows
+        
+        \draw[->, line width = \lw, visible on = <2->] (start) -- (state);
+
+        \draw[-, line width = \lw, visible on = <3->] (demand) -- (-\rc, 1.005*\rc);
+       
+        \draw[->, line width = \lw, visible on = <6->] (update) -- (ebreak);
+    
+    \end{scope}
+    
+    
+\end{tikzpicture}
+
+
+  %  \coordinate (C) at (0,0);
+    
+    % \node[circle, draw = black, minimum size = 2cm, line width = 0.5pt, anchor = center, fill = white, visible on = <3->] (policy) at (-1, 1) {\Large$\pi$};
+    
+    % \node[circle, draw = black, align = center, minimum size = 2cm, line width = 0.5pt, anchor = center, fill = white, visible on = <5->] (state) at (1, -1) {\large state};
+
+    % \draw[->, line width = 0.5pt, rounded corners, visible on = <2->] (-1.25, -1.25) -- (-1, -1) arc[start angle=225, end angle=160, radius=2.828cm] -- (policy);
+
+    % % \draw[] (-1.5, -1.5) grid (1.5, 1.5);
+
+    % % Partial arcs
+    % \visible<6->{\partialarc{C}{2.828cm}{294.5}{225}}
+    % \visible<4->{\partialarcarrow{C}{2.828cm}{114.5}{-24.5}}
+
+    % \draw[->, rounded corners, visible on = <7->] (0.95, 1.05) -- (1, 1) -- (1.25, 1.25);
+
+    % \node[visible on = <2->] at (-1.35, -1.35) {demand};
+    % \node[visible on = <7->] at (1.35, 1.35) {episode terminated};
+
+    % \node[fill = IKRBlue!20, visible on = <4->] at (0, 1.38) {$\delta = (k, \text{FS})$};
+
+    % \node[fill = IKRBlue!20, visible on = <5->] at (1.424, 0) {update};

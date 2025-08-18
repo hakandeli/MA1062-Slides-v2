@@ -1,0 +1,32 @@
+\begin{tikzpicture}[x=5cm, 
+                    y=1.5cm, 
+                    arrow/.style={->, draw = black, line width = 0.5pt, > = Stealth},
+                    arrowbold/.style={-{Latex[length=3mm, width=5mm]}, draw = MidnightBlue!80, line width = 5pt},
+                    on grid]
+    \node[bgrect, minimum width = 15.21cm, minimum height = 5cm, anchor = center] at (0, 0) {};
+
+    \node[bgrectw, minimum width = 14.5cm, minimum height = 0.7cm, align = center, anchor = center, visible on = <1->] (n1) at (0, 1) {advances in machine learning $\rightarrow$ new possibilities};
+    \node[bgrectw, minimum width = 4.4cm, minimum height = 1.2cm, align = center, anchor = center, visible on = <2->] (n2) at (-1, -0.7) {reinforcement \\ learning};
+    \node[bgrectw, minimum width = 3cm, minimum height = 1.2cm, align = center, anchor = center, visible on = <2->] (n3) at (0, -0.7) {how incorporate \\ potential optimum?};
+    \node[bgrectw, minimum width = 4.4cm, minimum height = 1.2cm, align = center, anchor = center, visible on = <3->] (n4) at (1, -0.7) {supervised \\ deep learning (DL)};
+    % \node[bgrectw, minimum width = 8.7cm, minimum height = 1.2cm, align = center, anchor = center, visible on = <3->] (n5) at (0.57, -1.1) {deep neural networks (DNNs) learn \\ from precomputed optimum};
+    % \node[bgrectw, minimum width = 4.4cm, minimum height = 1.2cm, align = center, anchor = center, visible on = <3->] (n6) at (-1, -1.1) {act in \\ real-time};
+
+    \draw[arrowbold, visible on = <2->] (n2.north)++(0,1.05) -- node[right, xshift = 2mm] {current research} (n2.north);
+    \draw[arrow,  visible on = <2->] (n2) -- (n3);
+    \draw[arrow,  visible on = <3->] (n3) -- (n4);
+    \draw[arrowbold, visible on = <3->] (n4.north)++(0,1.05) -- node[right, xshift = 2mm] {this thesis} (n4.north);
+    % \draw[arrow,  visible on = <3->] (n4.south) -- ($(n4.south)+(0,-0.29)$);
+    % \draw[arrow,  visible on = <3->] (n5) -- (n6);
+    
+\end{tikzpicture}
+
+  % \begin{adjustwidth}{6mm}{2cm}
+  %               \begin{itemize}
+  %                   \setlength\itemsep{1em}
+  %                   \visible<2->{\item usually heuristic methods used for decision}
+  %                   \visible<3->{\item advances in machine learning (ML) -> new possibilities}
+  %                   \visible<4->{\item current research mainly applies reinforcement learning (RL), little to no research on supervised learning with labeled datasets}
+  %                   \visible<5->{\item deep learning (DL) has the potential to incorporate optimal decisions that can be precomputed but then be applied in real time by a deep neural network (DNN)}
+  %               \end{itemize}
+  %   \end{adjustwidth}

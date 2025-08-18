@@ -1,0 +1,83 @@
+\tikzstyle{dnnnode} = [circle, draw=black, line width = 1pt, minimum size=8pt, inner sep = 0mm, on grid]
+
+
+\begin{tikzpicture}[x=1.7cm, y=1cm, yscale = 1.0,
+	layer/.style={rectangle, fill = gray!60, draw = none, line width = 1pt, minimum width=0.5cm, inner sep = 0mm, anchor = center, fill = sapphirelatte!70, rounded corners = 3pt},
+	arrow/.style={->, line width = 0.5pt},>=stealth]
+
+    \node[rectangle, fill = IKRBlue!20, minimum width = 15cm, minimum height = 6.7cm, rounded corners = 5pt, anchor = north west, visible on = <1->] at (0,-0.1) {};
+
+    \node[align = center, anchor = west, visible on = <1->] at (0.1,-0.6) {\large Processing Pipeline};
+
+    \begin{scope}[xshift = 5.08cm, yshift = -3.2cm]
+
+    \node[align = center, visible on = <2->] (demand) at (-2.25, 0) {demand and \\ network info};
+
+    \node[rectangle, shading = axis, left color = Apricot!20, right color = white, rounded corners = 5pt, minimum height = 2.65cm, minimum width = 0.75cm, anchor = center, visible on = <2->] (pre) at (-1, 0) {\rotatebox{90}{feature encoding}};
+
+ %    \node[rectangle, fill = gray!20, rounded corners = 5pt, minimum width = 12cm, minimum height = 14cm, anchor = center] at (2, 0.6) {};
+ %    \node[] at (-0.4, -6) {$\mathcal{N}$};
+
+    \node[layer, minimum height = 2.65cm, visible on = <2->] (input) at (0, 0) {};
+    \begin{scope}[shift = {(0,-1)}]
+        \node[layer, minimum height = 0.5375cm, draw = black, visible on = <2->] at (0, 2.0375) {\small $\mathbf{s}$};
+        \node[layer, minimum height = 0.5375cm, draw = black, visible on = <2->] at (0, 1.5) {\small $\mathbf{t}$};
+        \node[layer, minimum height = 0.5375cm, draw = black, visible on = <2->] at (0, 0.96) {\small $\mathbf{n}$};
+        \node[layer, minimum height = 1.0375cm, draw = black, visible on = <2->] at (0, 0.18) {\small $\mathbf{SU}$};
+    \end{scope}
+
+    \begin{scope}[x=0.3cm, y= 0.5cm, shift = {(1.82cm, 1.44cm)}, visible on = <3->]
+
+        %white bg
+        \node[bgrectw, minimum width = 2.5cm, minimum height = 2.65cm, anchor = north] (dnn) at (3, -0.2) {};
+        \node[align = center] at (3, -4.8) {DNN};
+        
+		% Define nodes for each layer
+		\foreach \i in {1,...,4} {
+			\node[dnnnode] (input\i) at (0,-\i) {};
+			\node[dnnnode] (hiddenA\i) at (2,-\i) {};
+			\node[dnnnode] (hiddenB\i) at (4,-\i) {};
+			\node[dnnnode] (output\i) at (6,-\i) {};
+		}
+		
+		% Draw connections
+		\foreach \i in {1,...,4} {
+			\foreach \j in {1,...,4} {
+				\draw[line width = 1pt] (input\i) -- (hiddenA\j);
+				\draw[line width = 1pt] (hiddenA\i) -- (hiddenB\j);
+				\draw[line width = 1pt] (hiddenB\i) -- (output\j);
+			}
+		}
+		
+    \end{scope}
+
+    \node[layer, minimum height = 2.65cm, draw = black, fill = peachlatte!60, visible on = <3->] (output) at (3.2, 0) {\rotatebox{90}{action space}};
+
+    \node[rectangle, shading = axis, left color = Apricot!20, right color = white, rounded corners = 5pt, minimum height = 2.65cm, minimum width = 0.75cm, anchor = center, visible on = <4->] (post) at (4.2, 0) {\rotatebox{90}{mapping}};
+
+    \node[visible on = <4->] (decision) at (5.25, 0) {decision};
+
+    % arrows
+    
+    \draw[arrow, visible on = <2->] (demand.east) -- (pre.west);
+    
+    \draw[arrow, visible on = <2->] (pre.east) -- (input.west);
+
+    \draw[arrow, visible on = <3->] (input.east) -- (dnn.west);
+
+    \draw[arrow, visible on = <3->] (dnn.east) -- (output.west);
+
+    \draw[arrow, visible on = <4->] (output.east) -- (post.west);
+
+    \draw[arrow, visible on = <4->] (post.east) -- (decision.west);
+
+    \draw[arrow, dashed, visible on = <4->] (pre.south) -- ($(pre.south) + (0, -1.0)$) -- node[midway, fill = IKRBlue!20] {mask} ($(post.south) + (0, -1.0)$) -- (post.south);
+
+
+    \end{scope}
+
+
+    
+
+ 	
+\end{tikzpicture}

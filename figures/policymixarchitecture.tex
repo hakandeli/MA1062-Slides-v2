@@ -1,0 +1,32 @@
+\tikzstyle{network} = [rectangle, 
+					minimum width = 3.5cm, 
+					minimum height = 2.5cm, 
+					text = black!100, 
+					align=center, 
+					line width = 1, 
+					inner sep = 1mm]
+					   
+\tikzstyle{arrow}=[> = stealth, line width = 0.5pt]
+
+
+\begin{tikzpicture}[x=2cm, y = 1cm]
+
+    \node[rectangle, fill = IKRBlue!20, rounded corners = 5pt, minimum width = 14cm, minimum height = 6cm, anchor = center] at (2, 0) {};
+    
+	\node[] (input) at (-0.7, 0) {$\mathbf{x}$};
+	\node[network, fill = BurntOrange!60, rounded corners=3pt, visible on = <2->] (npol) at (2, 1.5) {policy model}; 
+	\node[network, fill = ForestGreen!60, rounded corners=3pt, visible on = <3->] (nilp) at (2, -1.5) {basic model};
+	\node[align = center, visible on = <2->] (outpol) at (4.3, 1.5) {policy or fallback \\ to basic model};
+	\node[align = center, visible on = <3->] (outilp) at (4.3, -1.5) {absolute decision};
+    \node[circle, minimum size = 1.5mm, inner sep = 0mm, fill=black] (c) at (0.5, 0) {};
+
+    \node[] at (-0.8, -2.6) {policymix model};
+
+    \draw[-, arrow, shorten <= 0mm, shorten >= 0mm] (input) -- (c.center);
+	\draw[->, arrow, shorten <= 0mm, shorten >= 0mm] (c) |- (npol.west);
+    \draw[->, arrow, shorten <= 0mm, shorten >= 0mm] (c) |- (nilp.west);
+	\draw[->, arrow, shorten <= 0mm, shorten >= 0mm, visible on = <2->] (npol) -- (outpol);
+	\draw[->, arrow, shorten <= 0mm, shorten >= 0mm, visible on = <3->] (nilp) -- (outilp);
+	     
+	 
+\end{tikzpicture}

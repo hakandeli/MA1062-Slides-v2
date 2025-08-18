@@ -1,28 +1,34 @@
 
 
 \begin{tikzpicture}
+
+  \node[bgrect, minimum width = 7cm, minimum height = 5.5cm, anchor = center] at (3.2,2) {};
+
   \begin{axis}[
     ybar,
-    bar width=12pt,
-    ymin=3.4,
-    ymax=5.6,
-    ylabel={},
+    bar width=10pt,
+    ymin=2.7,
+    ymax=5.5,
+    ylabel={in billions},
+    ylabel style={at={(axis description cs:1.33,0.28)}, anchor=west},
     xlabel={},
     xtick=data, 
     ymajorgrids,
-    grid style={dotted,gray},
+    grid style={dotted,black},
     y axis line style = {draw = none},
     tick style = {draw=none},
     xticklabel pos = bottom,
     xtick pos = bottom,
     ytick pos = left,
-    yticklabels=\empty,
+    ytick distance = 1,
+    yticklabel pos=right,
     bar width = 15pt,
     xticklabels={2018,2019,2020,2021,2022,2023},
     nodes near coords,
     nodes near coords align={vertical},
-    enlarge x limits=0.2,
-    width=8cm, height=6cm
+    enlarge x limits=0.1,
+    width=7.2cm, height=6cm,
+    x=9.5mm
   ]
 
     \addplot[fill=sapphiremacchiato, draw=none] coordinates {
