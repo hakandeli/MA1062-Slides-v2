@@ -8,25 +8,162 @@
 					   
 \tikzstyle{arrow}=[> = stealth, line width = 0.5pt]
 
+\tikzstyle{dnnnode} = [circle, draw=black, line width = 0.5pt, minimum size=3pt, inner sep = 0mm, on grid]
+
+\tikzstyle{layer} = [rectangle, fill = gray!60, draw = none, line width = 1pt, minimum width=0.5cm, inner sep = 0mm, anchor = center, fill = sapphirelatte!70, rounded corners = 3pt]
 
 \begin{tikzpicture}[x=2cm, y = 1cm]
 
-    \node[rectangle, fill = IKRBlue!20, rounded corners = 5pt, minimum width = 14cm, minimum height = 6cm, anchor = center] at (2, 0) {};
+    \node[rectangle, fill = IKRBlue!20, rounded corners = 5pt, minimum width = 15cm, minimum height = 6.8cm, anchor = north west] at (0, 0) {};
+
+    \node[align = center, anchor = west, visible on = <1->] at (0.1,-0.6) {\large Processing Pipeline for $\pi_{\text{policymix}}$};
+
+    %policymix pipeline
+    \begin{scope}[shift = {(1.4cm, -3.7cm)}]
     
-	\node[] (input) at (-0.7, 0) {$\mathbf{x}$};
-	\node[network, fill = BurntOrange!60, rounded corners=3pt, visible on = <2->] (npol) at (2, 1.5) {policy model}; 
-	\node[network, fill = ForestGreen!60, rounded corners=3pt, visible on = <3->] (nilp) at (2, -1.5) {basic model};
-	\node[align = center, visible on = <2->] (outpol) at (4.3, 1.5) {policy or fallback \\ to basic model};
-	\node[align = center, visible on = <3->] (outilp) at (4.3, -1.5) {absolute decision};
-    \node[circle, minimum size = 1.5mm, inner sep = 0mm, fill=black] (c) at (0.5, 0) {};
+        \node[align = center, visible on = <1->] (input) at (0, 0) {demand and \\ topology info};
+    	\node[network, minimum width = 5cm, fill = BurntOrange!60, rounded corners=3pt, visible on = <2->] (npol) at (3.3, 1.4) {}; 
+    	\node[network, minimum width = 5cm, fill = ForestGreen!60, rounded corners=3pt, visible on = <3->] (nilp) at (3.3, -1.4) {};
+    	\node[align = center, visible on = <2->] (outpol) at (6, 1.4) {$\pi_{\text{KSP-FF}}$, $\pi_{\text{KSP-LF}}$,\\ $\pi_{\text{KSP-BFF}}$, ...};
+    	\node[align = center, visible on = <2->] (outilp) at (6, -1.4) {decision};
+        \node[circle, minimum size = 1.5mm, inner sep = 0mm, fill=black, visible on = <1->] (c) at (1, 0) {};
+    
+        \draw[-, arrow, shorten <= 0mm, shorten >= 0mm, visible on = <1->] (input) -- (c.center);
+    	\draw[-, arrow, shorten <= 0mm, shorten >= 0mm, visible on = <2->] (c) |- (npol.west);
+        \draw[-, arrow, shorten <= 0mm, shorten >= 0mm, visible on = <3->] (c) |- (nilp.west);
+    	\draw[->, arrow, shorten <= 0mm, shorten >= 0mm, visible on = <2->] (npol) -- (outpol);
+    	\draw[->, arrow, shorten <= 0mm, shorten >= 0mm, visible on = <3->] (nilp) -- (outilp);
+        \draw[->, arrow, shorten <= 0mm, shorten >= 0mm, visible on = <2->] ($(outpol.south)+(0.1,0)$) -- ($(outilp.north)+(0.1,0)$);
+        \draw[->, arrow, shorten <= 0mm, shorten >= 0mm, visible on = <3->] ($(outpol.south)+(-0.1,0)$) |-  ($(nilp.east)+(0,0.5)$);
+        \node[visible on = <3->] at (5.75,0) {$\pi_{\text{?}}$};
+    
+    \end{scope}
 
-    \node[] at (-0.8, -2.6) {policymix model};
+    %heuristics insight
+    \begin{scope}[xshift = 5.9cm, yshift = -2.7cm]
 
-    \draw[-, arrow, shorten <= 0mm, shorten >= 0mm] (input) -- (c.center);
-	\draw[->, arrow, shorten <= 0mm, shorten >= 0mm] (c) |- (npol.west);
-    \draw[->, arrow, shorten <= 0mm, shorten >= 0mm] (c) |- (nilp.west);
-	\draw[->, arrow, shorten <= 0mm, shorten >= 0mm, visible on = <2->] (npol) -- (outpol);
-	\draw[->, arrow, shorten <= 0mm, shorten >= 0mm, visible on = <3->] (nilp) -- (outilp);
-	     
+    \node[rectangle, shading = axis, left color = Apricot!20, right color = white, rounded corners = 3pt, minimum height = 10mm, minimum width = 3mm, anchor = center, visible on = <2->] (pre) at (0.1, 0) {};
+
+    \node[layer, minimum height = 10mm, minimum width = 3mm, visible on = <2->] (input) at (0.5, 0) {};
+
+    \begin{scope}[x=0.1cm, y= 0.2cm, shift = {(1.8cm, 0.52cm)}, visible on = <2->]
+
+        %white bg
+        \node[bgrectw, minimum width = 1cm, minimum height = 1cm, anchor = north] (dnn) at (3, -0.06) {};
+        % \node[align = center] at (3, -4.8) {DNN};
+        
+		% Define nodes for each layer
+		\foreach \i in {1,...,4} {
+			\node[dnnnode] (input\i) at (0,-\i) {};
+			\node[dnnnode] (hiddenA\i) at (2,-\i) {};
+			\node[dnnnode] (hiddenB\i) at (4,-\i) {};
+			\node[dnnnode] (output\i) at (6,-\i) {};
+		}
+		
+		% Draw connections
+		\foreach \i in {1,...,4} {
+			\foreach \j in {1,...,4} {
+				\draw[line width = 0.5pt] (input\i) -- (hiddenA\j);
+				\draw[line width = 0.5pt] (hiddenA\i) -- (hiddenB\j);
+				\draw[line width = 0.5pt] (hiddenB\i) -- (output\j);
+			}
+		}
+		
+    \end{scope}
+
+    \node[layer, minimum height = 10mm, minimum width = 3mm, fill = BrickRed!50, visible on = <2->] (output) at (1.64, 0) {\tiny\rotatebox{90}{policy}};
+
+    \node[rectangle, shading = axis, left color = Apricot!20, right color = white, rounded corners = 3pt, minimum height = 10mm, minimum width = 3mm, anchor = center, visible on = <2->] (post) at (2, 0) {};
+
+    % \node[visible on = <3->] (decision) at (5.25, 0) {decision};
+
+    % arrows
+    
+    % \draw[arrow, visible on = <3->] (demand.east) -- (pre.west);
+    
+    \draw[arrow, ->, visible on = <2->] (pre.east) -- (input.west);
+
+    \draw[arrow, ->, visible on = <2->] (input.east) -- (dnn.west);
+
+    \draw[arrow, ->, visible on = <2->] (dnn.east) -- (output.west);
+
+    \draw[arrow, ->, visible on = <2->] (output.east) -- (post.west);
+
+    % \draw[arrow, visible on = <3->] (post.east) -- (decision.west);
+
+    % \draw[arrow, dashed, visible on = <3->] (pre.south) -- ($(pre.south) + (0, -1.0)$) -- node[midway, fill = IKRBlue!20] {mask} ($(post.south) + (0, -1.0)$) -- (post.south);
+
+
+    \end{scope}
+
+     %from insights to outsights and vice versa
+    \draw[arrow, ->, visible on = <2->] (npol.west) -- (pre.west);
+    \draw[arrow, -, visible on = <2->] (post.east) -- (npol.east);
+    \node[align = center, visible on = <2->] at (4, -1.6) {$\pi_{\text{heuristics}}$};
+
+    %basic insight
+    \begin{scope}[xshift = 5.9cm, yshift = -5.5cm]
+
+    \node[rectangle, shading = axis, left color = Apricot!20, right color = white, rounded corners = 3pt, minimum height = 10mm, minimum width = 3mm, anchor = center, visible on = <3->] (pre) at (0.1, 0) {};
+
+    \node[layer, minimum height = 10mm, minimum width = 3mm, visible on = <3->] (input) at (0.5, 0) {};
+
+    \begin{scope}[x=0.1cm, y= 0.2cm, shift = {(1.8cm, 0.52cm)}, visible on = <3->]
+
+        %white bg
+        \node[bgrectw, minimum width = 1cm, minimum height = 1cm, anchor = north] (dnn) at (3, -0.06) {};
+        % \node[align = center] at (3, -4.8) {DNN};
+        
+		% Define nodes for each layer
+		\foreach \i in {1,...,4} {
+			\node[dnnnode] (input\i) at (0,-\i) {};
+			\node[dnnnode] (hiddenA\i) at (2,-\i) {};
+			\node[dnnnode] (hiddenB\i) at (4,-\i) {};
+			\node[dnnnode] (output\i) at (6,-\i) {};
+		}
+		
+		% Draw connections
+		\foreach \i in {1,...,4} {
+			\foreach \j in {1,...,4} {
+				\draw[line width = 0.5pt] (input\i) -- (hiddenA\j);
+				\draw[line width = 0.5pt] (hiddenA\i) -- (hiddenB\j);
+				\draw[line width = 0.5pt] (hiddenB\i) -- (output\j);
+			}
+		}
+		
+    \end{scope}
+
+    \node[layer, minimum height = 10mm, minimum width = 3mm, fill = peachlatte!60, visible on = <3->] (output) at (1.64, 0) {};
+
+    \node[rectangle, shading = axis, left color = Apricot!20, right color = white, rounded corners = 3pt, minimum height = 10mm, minimum width = 3mm, anchor = center, visible on = <3->] (post) at (2, 0) {};
+
+    % \node[visible on = <3->] (decision) at (5.25, 0) {decision};
+
+    % arrows
+    
+    % \draw[arrow, visible on = <3->] (demand.east) -- (pre.west);
+    
+    \draw[arrow, ->, visible on = <3->] (pre.east) -- (input.west);
+
+    \draw[arrow, ->, visible on = <3->] (input.east) -- (dnn.west);
+
+    \draw[arrow, ->, visible on = <3->] (dnn.east) -- (output.west);
+
+    \draw[arrow, ->, visible on = <3->] (output.east) -- (post.west);
+
+    % \draw[arrow, visible on = <3->] (post.east) -- (decision.west);
+
+    % \draw[arrow, dashed, visible on = <3->] (pre.south) -- ($(pre.south) + (0, -1.0)$) -- node[midway, fill = IKRBlue!20] {mask} ($(post.south) + (0, -1.0)$) -- (post.south);
+
+
+    \end{scope}
+
+    %from insights to outsights and vice versa
+    \draw[arrow, ->, visible on = <3->] (nilp.west) -- (pre.west);
+    \draw[arrow, -, visible on = <3->] (post.east) -- (nilp.east);
+    \node[align = center, visible on = <3->] at (4, -4.4) {$\pi_{\text{basic}}$};
+
+    % \draw[help lines] (0,0) grid (8,-6);
 	 
 \end{tikzpicture}
+

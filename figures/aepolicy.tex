@@ -1,16 +1,7 @@
-\tikzstyle{layer} = [rectangle,
-					draw, 
-					   minimum width = 0.75cm, 
-					   minimum height = 2cm, 
-					   text = black!100, 
-					   align=center,
-					   rotate=90, 
-					   line width = 1, 
-					   inner sep = 0mm]
-				
+
 \tikzstyle{network} = [rectangle, 
-					minimum width = 3cm, 
-					minimum height = 2cm, 
+					minimum width = 3.5cm, 
+					minimum height = 2.5cm, 
 					text = black!100, 
 					align=center, 
 					line width = 1, 
@@ -18,57 +9,133 @@
 					   
 \tikzstyle{arrow}=[> = stealth, line width = 0.5pt]
 
+\tikzstyle{dnnnode} = [circle, draw=black, line width = 0.5pt, minimum size=3pt, inner sep = 0mm, on grid]
 
-\begin{tikzpicture}[x=2cm, y = 1.7cm, scale = 1]
+\tikzstyle{layer} = [rectangle, fill = gray!60, draw = none, line width = 1pt, minimum width=0.5cm, inner sep = 0mm, anchor = center, fill = sapphirelatte!70, rounded corners = 3pt]
 
-    \node[rectangle, fill = IKRBlue!20, rounded corners = 0pt, minimum width = 14cm, minimum height = 6.3cm, anchor = center] at (3.2, 0) {};
-    \node[rectangle, shading = axis, right color = IKRBlue!20, left color = white, rounded corners = 0pt, minimum width = 0.5cm, minimum height = 6.3cm, anchor = center] at (-0.3, 0) {};
-    \node[rectangle, shading = axis, right color = white, left color = IKRBlue!20, rounded corners = 0pt, minimum width = 0.5cm, minimum height = 6.3cm, anchor = center] at (6.7, 0) {};
+\begin{tikzpicture}[x=2cm, y = 1cm]
 
+    % boxes and titles
+    \node[rectangle, fill = IKRBlue!20, rounded corners = 5pt, minimum width = 15cm, minimum height = 6.9cm, anchor = center] at (0, 0) {};
+
+    \node[align = center, anchor = west, visible on = <1->] at (-3.65,2.9) {\large Processing Pipeline for $\pi_{\text{AE}}$};
+
+    % nodes
+
+    \begin{scope}
+
+
+        \node[align = center, visible on = <1->] (input) at (-3, 0) {demand and \\ topology info};
     
-	\node[] (input) at (-0.1, 0) {$\mathbf{x}$};
+        \node[rectangle, shading = axis, left color = Apricot!20, right color = white, rounded corners = 3pt, minimum height = 50mm, minimum width = 60mm, anchor = center, visible on = <1->] (pre) at (-1, 0) {};
+        
+        \node[align = center, visible on = <1->] at (-1, 2) {feature encoding};
 
-    \begin{scope}[shift={(1.5,1)}]
-        \fill[Purple!60, rounded corners=2pt] (0, -0.4) -- (0, 0.4) -- (0.9, 0.75) -- (0.9, -0.75) -- cycle;
-        \node[anchor = center] (amren) at (0.45, 0) {$\text{AE}_{1}$};
+        \node[rectangle, draw = black, rounded corners = 3pt, anchor = center, minimum width = 4mm, minimum height = 10mm] (preb) at (-2,-0.5) {\rotatebox{90}{basic encoding}};
+
+        %Enc1
+        \begin{scope}[shift={(-1, 0.7)}]
+            \fill[Cerulean!60, rounded corners=2pt] (0, 0.4) -- (0.75, 0.7) -- (0.75, -0.7) -- (0, -0.4) -- cycle;
+            \node[anchor = center, align = center] (amren) at (0.4, 0) {$\text{Encoder}_{1}$};
+        \end{scope}
+        
+        \begin{scope}[shift={(-1, -1.5)}]
+            \fill[Cerulean!60, rounded corners=2pt] (0, 0.4) -- (0.75, 0.7) -- (0.75, -0.7) -- (0, -0.4) -- cycle;
+            \node[anchor = center, align = center] (amren) at (0.4, 0) {$\text{Encoder}_{N}$};
+        \end{scope}
+    
+    
+    
+
+
     \end{scope}
-
-    \begin{scope}[shift={(1.5,-1)}]
-        \fill[WildStrawberry!50, rounded corners=2pt] (0, -0.4) -- (0, 0.4) -- (0.9, 0.75) -- (0.9, -0.75) -- cycle;
-        \node[anchor = center] (al42) at (0.45, 0) {$\text{AE}_{2}$};
-    \end{scope}
-
-    \node[circle, minimum size = 2mm, inner sep = 0mm, fill=black] (cinput) at (0.5, 0) {};
-	\node[circle, minimum size = 2mm, inner sep = 0mm, fill=black] (cmren) at (2.6, 1) {};
-	\node[circle, minimum size = 2mm, inner sep = 0mm, fill=black] (cl42) at (2.6, -1) {};
-    \node[circle, minimum size = 2mm, inner sep = 0mm, fill=black] (cmrenv) at (1.3, 1) {};
-	\node[circle, minimum size = 2mm, inner sep = 0mm, fill=black] (cl42v) at (1.3, -1) {};
-	\node[circle, minimum size = 2mm, inner sep = 0mm, fill=black] (c) at (3.4, 0) {};
-	\node[network, fill = CornflowerBlue!60, rounded corners=3pt, minimum height = 2.5cm, align = center, baseline] (n) at (4.9, 0) {policymix model};
-	\node[align = center, baseline] (output) at (6.5, 0) {\textbf{y}};
-	
-	% \draw[->, arrow, shorten <= 1mm, shorten >= 2mm] (input) -- (amren.west);
-	% \draw[->, arrow, shorten <= 1mm, shorten >= 2mm] (input) -- (alayer42.west);
-
-    \draw[->, arrow] (-0.5, 0) -- (input);
-    \draw[-, arrow] (input) -- (cinput.center);
-    \draw[->, arrow] (cinput.center) |- (cmrenv);
-    \draw[->, arrow, loosely dashed] (cinput.center) |- (cl42v);
-
-    \draw[-, line width=0.5pt] (cmrenv.center) -- (1.5,1);
-    \draw[-, line width=0.5pt] (cl42v.center) -- (1.5,-1);
-
-    \draw[-, line width=0.5pt] (2.4,1) -- (cmren.center);
-	\draw[-, line width=0.5pt] (cmren.center) -| (c.center);
-	\draw[->, arrow, shorten >= 0mm] (c.center) -- (n);
-
-    \draw[-, line width=0.5pt] (2.4,-1) -| (cl42.center);
-    \draw[-, line width=0.5pt, loosely dashed] (cl42.center) -| (c.center);
-
-    \draw[->, arrow, shorten >= 0mm] (n) -- (output);
-    \draw[->, arrow] (output) -- (6.9, 0);
-
-    \node[] at (0, -1.6) {$\pi_{\text{AE}}$};
-	     
+ 
+  % help lines
+  \draw[step=1cm, help lines, color=gray!50] (-3,-3) grid (3,3);
+  % Label grid coordinates
+  \foreach \x in {-3,...,3}
+    \foreach \y in {-3,...,3}
+      \node[fill=white] at (\x,\y) {\tiny (\x,\y)};
 	 
 \end{tikzpicture}
+
+
+
+
+
+% OLD AE POLICY TIKZ
+
+% \tikzstyle{layer} = [rectangle,
+% 					draw, 
+% 					   minimum width = 0.75cm, 
+% 					   minimum height = 2cm, 
+% 					   text = black!100, 
+% 					   align=center,
+% 					   rotate=90, 
+% 					   line width = 1, 
+% 					   inner sep = 0mm]
+				
+% \tikzstyle{network} = [rectangle, 
+% 					minimum width = 3cm, 
+% 					minimum height = 2cm, 
+% 					text = black!100, 
+% 					align=center, 
+% 					line width = 1, 
+% 					inner sep = 1mm]
+					   
+% \tikzstyle{arrow}=[> = stealth, line width = 0.5pt]
+
+
+% \begin{tikzpicture}[x=2cm, y = 1.7cm, scale = 1]
+
+%     \node[rectangle, fill = IKRBlue!20, rounded corners = 0pt, minimum width = 14cm, minimum height = 6.3cm, anchor = center] at (3.2, 0) {};
+%     \node[rectangle, shading = axis, right color = IKRBlue!20, left color = white, rounded corners = 0pt, minimum width = 0.5cm, minimum height = 6.3cm, anchor = center] at (-0.3, 0) {};
+%     \node[rectangle, shading = axis, right color = white, left color = IKRBlue!20, rounded corners = 0pt, minimum width = 0.5cm, minimum height = 6.3cm, anchor = center] at (6.7, 0) {};
+
+    
+% 	\node[] (input) at (-0.1, 0) {$\mathbf{x}$};
+
+%     \begin{scope}[shift={(1.5,1)}]
+%         \fill[Purple!60, rounded corners=2pt] (0, -0.4) -- (0, 0.4) -- (0.9, 0.75) -- (0.9, -0.75) -- cycle;
+%         \node[anchor = center] (amren) at (0.45, 0) {$\text{AE}_{1}$};
+%     \end{scope}
+
+%     \begin{scope}[shift={(1.5,-1)}]
+%         \fill[WildStrawberry!50, rounded corners=2pt] (0, -0.4) -- (0, 0.4) -- (0.9, 0.75) -- (0.9, -0.75) -- cycle;
+%         \node[anchor = center] (al42) at (0.45, 0) {$\text{AE}_{2}$};
+%     \end{scope}
+
+%     \node[circle, minimum size = 2mm, inner sep = 0mm, fill=black] (cinput) at (0.5, 0) {};
+% 	\node[circle, minimum size = 2mm, inner sep = 0mm, fill=black] (cmren) at (2.6, 1) {};
+% 	\node[circle, minimum size = 2mm, inner sep = 0mm, fill=black] (cl42) at (2.6, -1) {};
+%     \node[circle, minimum size = 2mm, inner sep = 0mm, fill=black] (cmrenv) at (1.3, 1) {};
+% 	\node[circle, minimum size = 2mm, inner sep = 0mm, fill=black] (cl42v) at (1.3, -1) {};
+% 	\node[circle, minimum size = 2mm, inner sep = 0mm, fill=black] (c) at (3.4, 0) {};
+% 	\node[network, fill = CornflowerBlue!60, rounded corners=3pt, minimum height = 2.5cm, align = center, baseline] (n) at (4.9, 0) {policymix model};
+% 	\node[align = center, baseline] (output) at (6.5, 0) {\textbf{y}};
+	
+% 	% \draw[->, arrow, shorten <= 1mm, shorten >= 2mm] (input) -- (amren.west);
+% 	% \draw[->, arrow, shorten <= 1mm, shorten >= 2mm] (input) -- (alayer42.west);
+
+%     \draw[->, arrow] (-0.5, 0) -- (input);
+%     \draw[-, arrow] (input) -- (cinput.center);
+%     \draw[->, arrow] (cinput.center) |- (cmrenv);
+%     \draw[->, arrow, loosely dashed] (cinput.center) |- (cl42v);
+
+%     \draw[-, line width=0.5pt] (cmrenv.center) -- (1.5,1);
+%     \draw[-, line width=0.5pt] (cl42v.center) -- (1.5,-1);
+
+%     \draw[-, line width=0.5pt] (2.4,1) -- (cmren.center);
+% 	\draw[-, line width=0.5pt] (cmren.center) -| (c.center);
+% 	\draw[->, arrow, shorten >= 0mm] (c.center) -- (n);
+
+%     \draw[-, line width=0.5pt] (2.4,-1) -| (cl42.center);
+%     \draw[-, line width=0.5pt, loosely dashed] (cl42.center) -| (c.center);
+
+%     \draw[->, arrow, shorten >= 0mm] (n) -- (output);
+%     \draw[->, arrow] (output) -- (6.9, 0);
+
+%     \node[] at (0, -1.6) {$\pi_{\text{AE}}$};
+	     
+	 
+% \end{tikzpicture}
