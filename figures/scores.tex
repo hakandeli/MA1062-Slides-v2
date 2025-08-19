@@ -2,8 +2,8 @@
 \newcommand{\ilpcolor}{red}
 \newcommand{\unmaskedcolor}{green}
 \newcommand{\maskedcolor}{orange}
-\newcommand{\policymixcolor}{Goldenrod}
-\newcommand{\policymixmergecolor}{SkyBlue}
+\newcommand{\policymixcolor}{Mulberry}
+\newcommand{\policymixmergecolor}{Cerulean}
 
 \newcommand{\polilp}{$\pi_{\text{opt}}$}
 \newcommand{\polkspff}{$\pi_{\text{KSP-FF}}$}
@@ -142,7 +142,8 @@
                   mark=*,
                   mark size=1.5pt,
                   mark options={solid}, 
-                  mark repeat = 3, visible on = <3->]
+                  mark repeat = 4, 
+                  mark phase = 1, visible on = <3->]
 		table[col sep=comma, x = INDEX, y = KSPFF]
 		{plots/Layer42/policymix_l42.csv};
 		\addlegendentry{\polkspff};
@@ -164,7 +165,7 @@
                   mark=asterisk,
                   mark size=2pt,
                   mark options={}, 
-                  mark repeat = 1,
+                  mark repeat =4,
                   mark phase = 2, visible on = <5->]
 		table[col sep=comma, x = INDEX, y = EQMASKED]
 		{plots/Layer42/basicandeqscores_l42.csv};
@@ -173,11 +174,11 @@
 
         \addplot [color=\policymixcolor,
                   line width = 1pt,
-                  mark=asterisk,
+                  mark=diamond,
                   mark size=2pt,
                   mark options={}, 
-                  mark repeat = 1,
-                  mark phase = 2, visible on = <6->]
+                  mark repeat = 4,
+                  mark phase = 3, visible on = <6->]
 		table[col sep=comma, x = INDEX, y = POLICYMIX]
 		{plots/Layer42/policymix_l42.csv};
 		\addlegendentry{$\pi_{\text{policymix}}$};
@@ -185,11 +186,11 @@
 
         \addplot [color=\policymixmergecolor,
                   line width = 1pt,
-                  mark=asterisk,
+                  mark=star,
                   mark size=2pt,
                   mark options={}, 
-                  mark repeat = 1,
-                  mark phase = 2, visible on = <7->]
+                  mark repeat = 4,
+                  mark phase = 4, visible on = <7->]
 		table[col sep=comma, x = INDEX, y = POLICYMIXMERGE]
 		{plots/Layer42/policymix_l42.csv};
 		\addlegendentry{\polmerge};
