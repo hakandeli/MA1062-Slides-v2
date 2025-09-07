@@ -1,17 +1,32 @@
 
-\begin{tikzpicture}[x=1.25cm, y=0.8cm,
-	neuron/.style={circle, minimum size=0.4cm, inner sep = 0mm},
+\tikzstyle{dnnnode} = [circle, draw=black, line width = 1pt, minimum size=8pt, inner sep = 0mm, on grid]
+\tikzstyle{dnnnodetwo} = [circle, draw=black, line width = 0.5pt, minimum size=3pt, inner sep = 0mm, on grid]
+
+\begin{tikzpicture}[x=1.7cm, y=1cm, yscale = 1.0,
+	layer/.style={rectangle, fill = gray!60, draw = none, line width = 1pt, minimum width=0.5cm, inner sep = 0mm, anchor = center, fill = sapphirelatte!70, rounded corners = 3pt},
+	arrow/.style={->, line width = 0.5pt},
+    neuron/.style={circle, draw = black, line width = 0.5pt, fill = white, minimum size=0.2cm, inner sep = 0mm},
+	con/.style={line width = 0.1pt, black},
+    >=stealth]
+
+    % background rects
+
+    \node[rectangle, fill = IKRBlue!20, minimum width = 7cm, minimum height = 3.3cm, rounded corners = 5pt, anchor = north west, visible on = <2->] at (0,0) {};
+    
+    \node[visible on = <2->] at (2.05, -2.9) {\large dimension reduction};
+    
+    \node[rectangle, fill = IKRBlue!20, minimum width = 7cm, minimum height = 3.3cm, rounded corners = 5pt, anchor = north west, visible on = <3->] at (0,-3.5) {};
+    
+    \node[rectangle, fill = IKRBlue!20, minimum width = 7.9cm, minimum height = 6.8cm, rounded corners = 5pt, anchor = north west, visible on = <4->] at (4.3,0) {};
+
+    % undercomplete AE
+    \begin{scope}[x=1cm, y=0.5cm,
+	neuron/.style={circle, minimum size=0.2cm, inner sep = 0mm, draw = black},
 	weight/.style={font=\small, midway, fill=white, inner sep=1pt},
-	>=stealth]
+	>=stealth,
+    xshift = 1.45cm, yshift = -0.5cm, visible on = <2->]
 
-    %background rectangles
-    \node[rectangle, fill = IKRBlue!20, minimum width = 14cm, minimum height = 6.9cm, rounded corners = 5pt, anchor = north west, visible on = <1->] at (0,-0.1) {};
-    \node[rectangle, fill = white, minimum width = 6.2cm, minimum height = 6.4cm, rounded corners = 5pt, anchor = north west, visible on = <2->] at (0.3,-0.4) {};
-    \node[rectangle, fill = white, minimum width = 6.2cm, minimum height = 6.4cm, rounded corners = 5pt, anchor = north west, visible on = <7->] at (5.9,-0.4) {};
-
-    %undercomplete
-    \begin{scope}[xshift = 1cm, yshift = -1.2cm, visible on = <3->]
-    	% Neuronenzahlen
+        % Neuronenzahlen
     	\def\none{7}
     	\def\ntwo{5}
     	\def\nthree{3}
@@ -24,114 +39,178 @@
     	% Eingabeschicht
         \begin{scope}[yshift = 0.5cm]
         	\foreach \y in {1, ..., \none}
-        	   \node[neuron, fill = CornflowerBlue] (A\y) at (0, -0.7*\y) {};
+        	   \node[neuron, fill = white] (A\y) at (0, -0.7*\y) {};
         
             \foreach \y in {1, ..., \ntwo}
-        	   \node[neuron, fill = CornflowerBlue!60] (B\y) at (1, -0.7*\y-0.7) {};
+        	   \node[neuron, fill = white] (B\y) at (1, -0.7*\y-0.7) {};
         
             \foreach \y in {1, ..., \nthree}
-        	   \node[neuron, fill = CornflowerBlue!30] (C\y) at (2, -0.7*\y-1.4) {};
+        	   \node[neuron, fill = MidnightBlue!50] (C\y) at (2, -0.7*\y-1.4) {};
         
             \foreach \y in {1, ..., \nfour}
-        	   \node[neuron, fill = CornflowerBlue!60] (D\y) at (3, -0.7*\y-0.7) {};
+        	   \node[neuron, fill = white] (D\y) at (3, -0.7*\y-0.7) {};
         
             \foreach \y in {1, ..., \nfive}
-        	   \node[neuron, fill = CornflowerBlue] (E\y) at (4, -0.7*\y) {};
+        	   \node[neuron, fill = white] (E\y) at (4, -0.7*\y) {};
 
             
     	\end{scope}
         \foreach \d in {1, 2, ..., \none} {
             \foreach \s in {1, 2, ..., \ntwo} {
-                \draw[->, thick, gray!60] (A\d) -- (B\s);
+                \draw[-] (A\d) -- (B\s);
             }
         }
     
         \foreach \d in {1, 2, ..., \ntwo} {
             \foreach \s in {1, 2, ..., \nthree} {
-                \draw[->, thick, gray!60] (B\d) -- (C\s);
+                \draw[-] (B\d) -- (C\s);
             }
         }
     
         \foreach \d in {1, 2, ..., \nthree} {
             \foreach \s in {1, 2, ..., \nfour} {
-                \draw[->, thick, gray!60] (C\d) -- (D\s);
+                \draw[-] (C\d) -- (D\s);
             }
         }
     
         \foreach \d in {1, 2, ..., \nfour} {
             \foreach \s in {1, 2, ..., \nfive} {
-                \draw[->, thick, gray!60] (D\d) -- (E\s);
+                \draw[-] (D\d) -- (E\s);
             }
         }
     
-        \draw [decorate,decoration={brace,amplitude=10pt},xshift=4pt,yshift = 4pt, visible on = <5->]
-        (1.9, -5.6) -- (-0.1, -5.6) node [midway,below=0.5cm] {encoder};
-    
-        \draw [decorate,decoration={brace,amplitude=10pt},xshift=4pt,yshift=4pt, visible on = <6->]
-        (4, -5.6) -- (2, -5.6) node [midway,below=0.5cm] {decoder};
-    
-        \node[color = red, align = center, visible on = <4->] (txt) at (2, -4*0.7+0.5) {\textbf{latent}\\\textbf{space}};
-	\end{scope}
+        \node[color = MidnightBlue!70, align = center] (txt) at (2, -4*0.7-1) {\small \textbf{latent space}};
+        
+    \end{scope}
 
-    %overcomplete
-    \begin{scope}[xshift = 8cm, yshift = -1.2cm, visible on = <7->]
+    % overcomplete AE
+
+    \begin{scope}[x=1cm, y=0.5cm,
+	neuron/.style={circle, minimum size=0.2cm, inner sep = 0mm, draw = black},
+	weight/.style={font=\small, midway, fill=white, inner sep=1pt},
+	>=stealth,
+    xshift = 1.45cm, yshift = -4.2cm, visible on = <3->]
         % Neuronenzahlen
-    	\def\none{5}
-    	\def\ntwo{7}
-    	\def\nthree{9}
-    	\def\nfour{7}
-        \def\nfive{5}
+    	\def\none{3}
+    	\def\ntwo{5}
+    	\def\nthree{7}
+    	\def\nfour{5}
+        \def\nfive{3}
     	
     	% Schichtpositionen
     	\def\xspace{0}
     	
     	% Eingabeschicht
     	\foreach \y in {1, ..., \none}
-    	   \node[neuron, fill = CornflowerBlue!30] (A\y) at (0, -0.7*\y) {};
+    	   \node[neuron, fill = white] (A\y) at (0, -0.7*\y) {};
     
         \foreach \y in {1, ..., \ntwo}
-    	   \node[neuron, fill = CornflowerBlue!60] (B\y) at (1, -0.7*\y+0.7) {};
+    	   \node[neuron, fill = white] (B\y) at (1, -0.7*\y+0.7) {};
     
         \foreach \y in {1, ..., \nthree}
-    	   \node[neuron, fill = CornflowerBlue] (C\y) at (2, -0.7*\y+1.4) {};
+    	   \node[neuron, fill = MidnightBlue!50] (C\y) at (2, -0.7*\y+1.4) {};
     
         \foreach \y in {1, ..., \nfour}
-    	   \node[neuron, fill = CornflowerBlue!60] (D\y) at (3, -0.7*\y+0.7) {};
+    	   \node[neuron, fill = white] (D\y) at (3, -0.7*\y+0.7) {};
     
         \foreach \y in {1, ..., \nfive}
-    	   \node[neuron, fill = CornflowerBlue!30] (E\y) at (4, -0.7*\y) {};
+    	   \node[neuron, fill = white] (E\y) at (4, -0.7*\y) {};
     	
         \foreach \d in {1, 2, ..., \none} {
             \foreach \s in {1, 2, ..., \ntwo} {
-                \draw[->, thick, gray!60] (A\d) -- (B\s);
+                \draw[-] (A\d) -- (B\s);
             }
         }
     
         \foreach \d in {1, 2, ..., \ntwo} {
             \foreach \s in {1, 2, ..., \nthree} {
-                \draw[->, thick, gray!60] (B\d) -- (C\s);
+                \draw[-] (B\d) -- (C\s);
             }
         }
     
         \foreach \d in {1, 2, ..., \nthree} {
             \foreach \s in {1, 2, ..., \nfour} {
-                \draw[->, thick, gray!60] (C\d) -- (D\s);
+                \draw[-] (C\d) -- (D\s);
             }
         }
     
         \foreach \d in {1, 2, ..., \nfour} {
             \foreach \s in {1, 2, ..., \nfive} {
-                \draw[->, thick, gray!60] (D\d) -- (E\s);
+                \draw[-] (D\d) -- (E\s);
             }
         }
     
-        \draw [decorate,decoration={brace,amplitude=10pt},xshift=2pt, yshift = 2pt]
-        (1.9, -5.5) -- (-0.1, -5.5) node [midway,below=0.5cm] {encoder};
-    
-        \draw [decorate,decoration={brace,amplitude=10pt},xshift=2pt, yshift = 2pt]
-        (4, -5.5) -- (2, -5.5) node [midway,below=0.5cm] {decoder};
-    
-        \node[color = red, align = center] (txt) at (2, -3*0.7) {\textbf{latent}\\\textbf{space}};
+        % \node[color = red, align = center] (txt) at (2, -3*0.7+0.35) {\textbf{latent space}};
     \end{scope}
+	
+    \node[visible on = <3->] at (2.05, -6.4) {\large dimension unification};
+
+    % supervised DL
+
+    \node[visible on = <4->] at (6.63, -6.4) {\large unsupervised DL};
+
+    \node[minimum width = 7.2cm, minimum height = 1.3cm, align = center, rounded corners = 3pt,
+    path picture={
+      \fill[orange!30, rounded corners = 0pt] (path picture bounding box.south west) rectangle ([xshift=0.5\pgflinewidth]path picture bounding box.north);
+      \fill[orange!30, rounded corners = 0pt] ([xshift=0.5\pgflinewidth]path picture bounding box.south) rectangle (path picture bounding box.north east);
+      \draw[-, dashed] (path picture bounding box.south) -- node[midway, fill = orange!30, align = center, minimum width = 0cm, minimum height = 0cm] {unlabeled \\ data} (path picture bounding box.north);
+      \node[] at ($(path picture bounding box.west)+(0.85,0)$) {train};
+      \node[] at ($(path picture bounding box.east)+(-0.85,0)$) {test};
+    }, visible on = <4->] at (6.63, -1) {};
+
+    %training
+
+    \node[rectangle, fill=white, minimum width = 7.2cm, minimum height = 4.1cm, rounded corners = 5pt, visible on = <4->] at (6.63, -3.95) {};
+
+    \begin{scope}[x=0.8cm, y=0.4cm, xshift = 10.5cm, yshift = -3cm, visible on = <4->]
+        % Neuronenzahlen
+    	\def\none{6}
+    	\def\ntwo{4}
+    	\def\nthree{6}
+    	\def\nfour{6}
+        \def\nfive{0}
+
+        \def\fillcl{gray}
+    	% Schichtpositionen
+    	\def\xspace{0}
+    	
+    	% Eingabeschicht
+    	\foreach \y in {1, ..., \none}
+    	   \node[neuron, minimum size = 1.5mm] (A\y) at (0, -0.7*\y) {};
     
+        \foreach \y in {1, ..., \ntwo}
+    	   \node[neuron, minimum size = 1.5mm] (B\y) at (1, -0.7*\y-0.7) {};
+    
+        \foreach \y in {1, ..., \nthree}
+    	   \node[neuron, minimum size = 1.5mm] (C\y) at (2, -0.7*\y) {};
+    
+        \foreach \d in {1, 2, ..., \none} {
+            \foreach \s in {1, 2, ..., \ntwo} {
+                \draw[-, con] (A\d) -- (B\s);
+            }
+        }
+    
+        \foreach \d in {1, 2, ..., \ntwo} {
+            \foreach \s in {1, 2, ..., \nthree} {
+                \draw[-, con] (B\d) -- (C\s);
+            }
+        }
+
+       \node[] (x) at (-2, -2.5) {$\mathbf{x}$};
+       \node[] (loss) at (4, -2.5) {$\text{loss}(\hat{\mathbf{x}}, \mathbf{x})$};
+
+       \draw[->] (x) -- ($(x)+(1.7,0)$); 
+       \draw[->] ($(loss)+(-1.7,0)$) -- node[midway, fill = white] {$\hat{\mathbf{x}}$} (loss); 
+       
+
+       \draw[->] (loss) -- ($(loss) + (0,3.7)$) -- node[midway, fill = white] {update} ($(loss) + (-3,3.7)$) -- ($(loss) + (-3,2.1)$);
+
+       \draw[<-] (loss) -- ($(loss) + (0,-2.7)$) -- ($(loss) + (-5,-2.7)$) -- ($(loss) + (-5,0)$);
+ 
+    \end{scope}
+
+    \node[visible on = <4->] at (6.63, -5.6) {\large training};
+
+    
+ 	
 \end{tikzpicture}

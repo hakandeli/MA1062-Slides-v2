@@ -41,7 +41,7 @@
 \begin{tikzpicture}
 
     %background rectangles
-    \node[rectangle, fill = gray!40, minimum width = 14.7cm, minimum height = 6.5cm, rounded corners = 5pt, anchor = north west, visible on = <1->] at (0,0) {};
+    \node[rectangle, fill = IKRBlue!20, minimum width = 14.7cm, minimum height = 6.5cm, rounded corners = 5pt, anchor = north west, visible on = <1->] at (0,0) {};
     \node[rectangle, fill = white, minimum width = 5.3cm, minimum height = 5cm, rounded corners = 5pt, anchor = north west, visible on = <2->] at (0.5,-0.8) {};
     \node[rectangle, fill = white, minimum width = 8cm, minimum height = 5cm, rounded corners = 5pt, anchor = north west, visible on = <4->] at (6.2,-0.8) {};
 
@@ -157,8 +157,9 @@
         \pgfmathtruncatemacro{\amount}{3}
     	\foreach \i in {1,...,\amount}{
     		\pgfmathtruncatemacro{\j}{\i-1}
-    		\node[slot, minimum width = \slotwidth, draw = black!20, fill = \kspff!50, line width = 0.5*\lw, visible on = <5->] (fse\i) at (\j*\slotwidth+0.125*\lw+5cm, 2.4) {};
+    		\node[slot, minimum width = \slotwidth, draw = black!20, line width = 0.5*\lw, visible on = <5->] (fse\i) at (\j*\slotwidth+0.125*\lw+5cm, 2.4) {};
     	}
+        \fill[fill=\kspff, opacity = 0.5, visible on = <5->] (fse1.north west)++(0.25*\lw,0) -- ($(fse1.south west)+(0.25*\lw, 0.5*\lw)$) -- ($(fse3.south east) + (-0.25*\lw, 0.5*\lw)$) -- ($(fse3.north east)+(-0.25*\lw,0)$) -- cycle;
 
         % arrows
         \foreach \s/\v in { fs5/6,

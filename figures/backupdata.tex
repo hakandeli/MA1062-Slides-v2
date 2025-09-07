@@ -1,0 +1,65 @@
+\tikzstyle{dnnnode} = [circle, draw=black, line width = 1pt, minimum size=8pt, inner sep = 0mm, on grid]
+\tikzstyle{dnnnodetwo} = [circle, draw=black, line width = 0.5pt, minimum size=3pt, inner sep = 0mm, on grid]
+
+\begin{tikzpicture}[x=1.7cm, y=1cm, yscale = 1.0,
+	layer/.style={rectangle, fill = gray!60, draw = none, line width = 1pt, minimum width=0.5cm, inner sep = 0mm, anchor = center, fill = sapphirelatte!70, rounded corners = 3pt},
+	arrow/.style={->, line width = 0.5pt},
+    neuron/.style={circle, draw = black, line width = 0.5pt, fill = white, minimum size=0.2cm, inner sep = 0mm},
+	con/.style={line width = 0.1pt, black},
+    >=stealth]
+
+    % background rects
+
+    \node[rectangle, fill = IKRBlue!20, minimum width = 7cm, minimum height = 4cm, rounded corners = 5pt, anchor = north west, visible on = <1->] at (0,0) {};
+    
+    
+    \node[rectangle, fill = IKRBlue!20, minimum width = 7cm, minimum height = 2.7cm, rounded corners = 5pt, anchor = north west, visible on = <1->] at (0,-4.2) {};
+    
+    \node[rectangle, fill = IKRBlue!20, minimum width = 7.9cm, minimum height = 6.9cm, rounded corners = 5pt, anchor = north west, visible on = <1->] at (4.3,0) {};
+
+    \node[anchor = center] at (0.25,-2) {\rotatebox{90}{\textbf{DEMAND}}};
+
+    \node[anchor = center, align = center] at (2.1,-0.7) {$d = \{s,t,n,a,a+\tau\}$};
+    \node[anchor = center, align = center] at (1.5,-2.2) {
+        \begin{tabular}{lll}
+            $s$ & source node \\
+            $t$ & target node \\
+            $n$ & number FSs \\
+            $a$ & arrival time \\
+            $\tau$ & hold time  \\
+        \end{tabular}
+    };
+
+    \draw[decorate,decoration={brace, amplitude=5pt}]
+    (2.3,-1.3) -- (2.3,-2.3) node[midway, right=10pt] {uniformly dist.};
+
+    \draw[decorate,decoration={brace, amplitude=5pt}]
+    (2.3,-2.4) -- (2.3,-3.1) node[midway, right=10pt] {exponentially dist.};
+    
+    \node[anchor = center] at (0.25,-5.5) {\rotatebox{90}{\textbf{PATTERN}}};
+
+    \node[anchor = center, align = center, text width = 5cm] at (2.1,-5.5) {\textit{constanterlang}\\fixed ratio of arrival rate and average service time};
+
+    \node[anchor = center] at (6.6,-0.5) {\textbf{PROVIDED DATA}};
+
+    \node[anchor = center, align = center] at (6.6,-2.6) {
+        \begin{tabular}{ccc}
+             & \textbf{episodes} & \textbf{samples} \\
+             \textbf{train} & 2687 & 189925\\
+             \textbf{test} & 672 & 47482\\
+        \end{tabular}
+    };
+
+    \node[anchor = center, align = center] at (6.6,-5) {
+        \begin{tabular}{ccc}
+             & \textbf{episodes} & \textbf{samples} \\
+             \textbf{train} & 6622 & 377304\\
+             \textbf{test} & 1656 & 94326\\
+        \end{tabular}
+    };
+
+    \node[anchor = center] at (6.6, -1.6) {\large \textbf{Layer42}};
+
+    \node[anchor = center] at (6.6, -4) {\large \textbf{Mren}};
+ 	
+\end{tikzpicture}

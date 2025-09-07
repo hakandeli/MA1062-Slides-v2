@@ -18,13 +18,16 @@
  %    \node[rectangle, fill = gray!20, rounded corners = 5pt, minimum width = 12cm, minimum height = 14cm, anchor = center] at (2, 0.6) {};
  %    \node[] at (-0.4, -6) {$\mathcal{N}$};
 
-    \node[layer, minimum height = 2.65cm, visible on = <2->] (input) at (0, 0) {};
+    \node[layer, minimum height = 2.65cm, draw = black, visible on = <2->] (input) at (0, 0) {};
     \begin{scope}[shift = {(0,-1)}]
-        \node[layer, minimum height = 0.5375cm, draw = black, visible on = <2->] at (0, 2.0375) {\small $\mathbf{s}$};
-        \node[layer, minimum height = 0.5375cm, draw = black, visible on = <2->] at (0, 1.5) {\small $\mathbf{t}$};
-        \node[layer, minimum height = 0.5375cm, draw = black, visible on = <2->] at (0, 0.96) {\small $\mathbf{n}$};
-        \node[layer, minimum height = 1.0375cm, draw = black, visible on = <2->] at (0, 0.18) {\small $\mathbf{SU}$};
+        \node[minimum height = 0.5375cm, visible on = <2->] (s) at (0, 2.0375) {\small $\mathbf{s}$};
+        \node[minimum height = 0.5375cm, visible on = <2->] (t) at (0, 1.5) {\small $\mathbf{t}$};
+        \node[minimum height = 0.5375cm, visible on = <2->] (n) at (0, 0.95) {\small $\mathbf{n}$};
+        \node[minimum height = 1.0375cm, visible on = <2->] (su) at (0, 0.19) {\small $\mathbf{SU}$};
     \end{scope}
+    \draw[-, dashed, visible on = <2->] (s.south west) -- (s.south east);
+    \draw[-, dashed, visible on = <2->] (t.south west) -- (t.south east);
+    \draw[-, dashed, visible on = <2->] (n.south west) -- (n.south east);
 
     \begin{scope}[x=0.3cm, y= 0.5cm, shift = {(1.82cm, 1.435cm)}, visible on = <3->]
 
@@ -75,9 +78,5 @@
 
 
     \end{scope}
-
-
-    
-
  	
 \end{tikzpicture}

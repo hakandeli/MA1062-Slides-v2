@@ -8,13 +8,13 @@
     
     %background rectangles
     \node[bgrect, minimum width = 15.2cm, minimum height = 6.9cm, anchor = north west, visible on = <1->] at (0,-0.1) {};
-    \node[bgrectw, minimum width = 7cm, minimum height = 6.4cm, anchor = north west, visible on = <2->] at (0.35,-0.4) {};
-    \node[bgrectw, minimum width = 7cm, minimum height = 6.4cm, anchor = north west, visible on = <5->] at (6.25,-0.4) {};
+    \node[bgrectw, minimum width = 7cm, minimum height = 6.4cm, anchor = north west, visible on = <1->] at (0.35,-0.4) {};
+    \node[bgrectw, minimum width = 7cm, minimum height = 6.4cm, anchor = north west, visible on = <2->] at (6.25,-0.4) {};
 
     %slot utilisation
-    \node[visible on = <2->] at (3.1,-1.6) {\large \textbf{slot utilization}};
+    \node[visible on = <1->] at (3.15,-1.6) {\large \textbf{slot utilization}};
 
-    \matrix[matrix of nodes, visible on = <2->,
+    \matrix[matrix of nodes, visible on = <1->,
         nodes={draw, minimum size=5.5mm, anchor=center},
         column sep=-\lw, row sep=-\lw] (m) at (3.3,-4.5) {
         1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & ... & 1 \\
@@ -24,14 +24,14 @@
         1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & ... & 0 \\
         };
 
-    \node[visible on = <4->] at (3.3,-6.7) {FSs};
-    \node[rotate=90, visible on = <4->] at (0.75,-4.5) {links};
+    \node[visible on = <1->] at (3.3,-6.7) {FSs};
+    \node[rotate=90, visible on = <1->] at (0.75,-4.5) {links};
 
     %route-slot table
     \begin{scope}[xshift = 7.3cm]
-        \node[visible on = <5->] at (3.1,-1.6) {\large \textbf{action space}};
+        \node[visible on = <2->] at (3.25,-1.6) {\large \textbf{action space}};
     
-        \matrix[matrix of nodes, visible on = <5->,
+        \matrix[matrix of nodes, visible on = <2->,
             nodes={draw, minimum size=5.5mm, anchor=center, line width = \lw},
             column sep=-\lw, row sep=-\lw] (m) at (3.4,-4.5) {
             1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & ... & 0 \\
@@ -40,16 +40,14 @@
             0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & ... & 0 \\
             };
 
-        \node[visible on = <5->] at (3.3,-6.4) {FSs};
-        \node[rotate=90, visible on = <5->] at (0.8,-4.5) {paths};
-        
+        \node[visible on = <2->] at (3.3,-6.4) {FSs};
+        \node[rotate=90, visible on = <2->] at (0.8,-4.5) {paths};
 
-
-        \node[visible on = <8->] at (3.1,-2.1) {\large \textcolor{red}{\textbf{mask}}};
+        \node[visible on = <3->] at (3.25,-2.1) {\large \textcolor{red}{\textbf{mask}}};
 
         \newcommand{\alloc}{|[fill=red, draw = black, line width = \lw]|{}}
 
-        \matrix[matrix of nodes, visible on = <8->,
+        \matrix[matrix of nodes, visible on = <3->,
             nodes={draw, minimum size=5.5mm, anchor=center},
             column sep=-\lw, row sep=-\lw] (m) at (3.4,-4.5) {
             {} & \alloc & \alloc & {} & {} & \alloc & \alloc & {} & ... & {} \\

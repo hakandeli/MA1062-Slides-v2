@@ -1,0 +1,151 @@
+\tikzstyle{dnnnode} = [circle, draw=black, line width = 1pt, minimum size=8pt, inner sep = 0mm, on grid]
+\tikzstyle{dnnnodetwo} = [circle, draw=black, line width = 0.5pt, minimum size=3pt, inner sep = 0mm, on grid]
+
+\begin{tikzpicture}[x=1.7cm, y=1cm, yscale = 1.0,
+	layer/.style={rectangle, fill = gray!60, draw = none, line width = 1pt, minimum width=0.5cm, inner sep = 0mm, anchor = center, fill = sapphirelatte!70, rounded corners = 3pt},
+	arrow/.style={->, line width = 0.5pt},
+    neuron/.style={circle, draw = black, line width = 0.5pt, fill = white, minimum size=0.2cm, inner sep = 0mm},
+	con/.style={line width = 0.1pt, black},
+    >=stealth]
+
+    % background rects
+
+    \node[rectangle, fill = IKRBlue!20, minimum width = 7cm, minimum height = 3.3cm, rounded corners = 5pt, anchor = north west, visible on = <2->] at (0,0) {};
+    
+    \node[visible on = <2->] at (2.05, -2.9) {\large neuron};
+    
+    \node[rectangle, fill = IKRBlue!20, minimum width = 7cm, minimum height = 3.3cm, rounded corners = 5pt, anchor = north west, visible on = <3->] at (0,-3.5) {};
+    
+    \node[rectangle, fill = IKRBlue!20, minimum width = 7.9cm, minimum height = 6.8cm, rounded corners = 5pt, anchor = north west, visible on = <4->] at (4.3,0) {};
+
+    % perceptron rule
+
+    \begin{scope}[x = 0.7cm, y= 0.5cm, visible on = <2->, xshift = 3.7cm, yshift=-1.5cm]
+        % neuron
+    	\node[draw, circle, minimum size=1cm, fill = white] (neuron) at (0,0) {$h$};
+    	
+    	% Inputs
+    	\foreach \y/\index in {1/1, 2/2, 4/n}{
+    		\node[inner sep = 1mm] (x\y) at (-3,-1*\y+3) {$x_{\index}$};
+    		\draw[->] (x\y) -- (neuron) node[midway, fill=IKRBlue!20, inner sep=1pt]{$w_{\index}$};
+        }
+    	\node at (-3, -1*3+3.1) {\vdots};
+    	\node[inner sep = 1mm] (bias) at (-3, -1*5+3) {$b$};
+    	\draw[->] (bias) -- (neuron);
+    	
+    	% Output
+    	\node[] (out) at (2.5, 0) {$y$};
+    	\draw[->] (neuron.east) -- (out);
+    \end{scope}
+
+    % DNN
+    \begin{scope}[x=1.4cm, y=0.4cm, xshift = 2.1cm, yshift = -3.7cm, visible on = <3->]
+        % Neuronenzahlen
+    	\def\none{8}
+    	\def\ntwo{8}
+    	\def\nthree{8}
+    	\def\nfour{8}
+        \def\nfive{0}
+
+        \def\fillcl{gray}
+    	% Schichtpositionen
+    	\def\xspace{0}
+    	
+    	% Eingabeschicht
+    	\foreach \y in {1, ..., \none}
+    	   \node[neuron] (A\y) at (0, -0.7*\y) {};
+    
+        \foreach \y in {1, ..., \ntwo}
+    	   \node[neuron] (B\y) at (1, -0.7*\y) {};
+    
+        \foreach \y in {1, ..., \nthree}
+    	   \node[neuron] (C\y) at (2, -0.7*\y) {};
+    
+        \foreach \d in {1, 2, ..., \none} {
+            \foreach \s in {1, 2, ..., \ntwo} {
+                \draw[-, con] (A\d) -- (B\s);
+            }
+        }
+    
+        \foreach \d in {1, 2, ..., \ntwo} {
+            \foreach \s in {1, 2, ..., \nthree} {
+                \draw[-, con] (B\d) -- (C\s);
+            }
+        }
+
+        \node[align = center, visible on = <3->] at (-0.8, -4.5*0.7) {input \\ $\mathbf{x}$};
+
+        \node[align = center, visible on = <3->] at (2.8, -4.5*0.7) {output \\ $\mathbf{y}$};
+ 
+    \end{scope}
+	
+    \node[visible on = <3->] at (2.05, -6.4) {\large deep neural network (DNN)};
+
+    % supervised DL
+
+    \node[visible on = <4->] at (6.63, -6.4) {\large supervised DL};
+
+    \node[minimum width = 7.2cm, minimum height = 1.3cm, align = center, rounded corners = 3pt,
+    path picture={
+      \fill[greenlatte!40, rounded corners = 0pt] (path picture bounding box.south west) rectangle ([xshift=0.5\pgflinewidth]path picture bounding box.north);
+      \fill[greenlatte!40, rounded corners = 0pt] ([xshift=0.5\pgflinewidth]path picture bounding box.south) rectangle (path picture bounding box.north east);
+      \draw[-, dashed] (path picture bounding box.south) -- node[midway, fill = greenlatte!40, align = center, minimum width = 0cm, minimum height = 0cm] {labeled \\ data} (path picture bounding box.north);
+      \node[] at ($(path picture bounding box.west)+(0.85,0)$) {train};
+      \node[] at ($(path picture bounding box.east)+(-0.85,0)$) {test};
+    }, visible on = <4->] at (6.63, -1) {labeled \\ data};
+
+    %training
+
+    \node[rectangle, fill=white, minimum width = 7.2cm, minimum height = 4.1cm, rounded corners = 5pt, visible on = <4->] at (6.63, -3.95) {};
+
+    \begin{scope}[x=0.8cm, y=0.4cm, xshift = 10.5cm, yshift = -3cm, visible on = <4->]
+        % Neuronenzahlen
+    	\def\none{6}
+    	\def\ntwo{6}
+    	\def\nthree{6}
+    	\def\nfour{6}
+        \def\nfive{0}
+
+        \def\fillcl{gray}
+    	% Schichtpositionen
+    	\def\xspace{0}
+    	
+    	% Eingabeschicht
+    	\foreach \y in {1, ..., \none}
+    	   \node[neuron, minimum size = 1.5mm] (A\y) at (0, -0.7*\y) {};
+    
+        \foreach \y in {1, ..., \ntwo}
+    	   \node[neuron, minimum size = 1.5mm] (B\y) at (1, -0.7*\y) {};
+    
+        \foreach \y in {1, ..., \nthree}
+    	   \node[neuron, minimum size = 1.5mm] (C\y) at (2, -0.7*\y) {};
+    
+        \foreach \d in {1, 2, ..., \none} {
+            \foreach \s in {1, 2, ..., \ntwo} {
+                \draw[-, con] (A\d) -- (B\s);
+            }
+        }
+    
+        \foreach \d in {1, 2, ..., \ntwo} {
+            \foreach \s in {1, 2, ..., \nthree} {
+                \draw[-, con] (B\d) -- (C\s);
+            }
+        }
+
+       \node[] (x) at (-2, -2.5) {$\mathbf{x}$};
+       \node[] (loss) at (4, -2.5) {$\text{loss}(\hat{\mathbf{y}}, \mathbf{y})$};
+       \node[] (y) at (4, -5) {$\mathbf{y}$};
+
+       \draw[->] (x) -- ($(x)+(1.7,0)$); 
+       \draw[->] ($(loss)+(-1.7,0)$) -- node[midway, fill = white] {$\hat{\mathbf{y}}$} (loss); 
+       \draw[->] (y) -- (loss);
+
+       \draw[->] (loss) -- ($(loss) + (0,3.7)$) -- node[midway, fill = white] {update} ($(loss) + (-3,3.7)$) -- ($(loss) + (-3,2.1)$);
+ 
+    \end{scope}
+
+    \node[visible on = <4->] at (6.63, -5.6) {\large training};
+
+    
+ 	
+\end{tikzpicture}

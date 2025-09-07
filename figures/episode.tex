@@ -18,7 +18,7 @@
 
     \node[rectangle, fill = IKRBlue!20, minimum width = 15.2cm, minimum height = 6.9cm, rounded corners = 5pt, anchor = north west, visible on = <1->] at (-0.2,-0.1) {};
 
-    \node[visible on = <1->] at (0.5, -0.3) {The RSA episode};
+    \node[visible on = <1->] at (0.5, -0.3) {The RSA Episode};
 
     \begin{scope}[shift={(10cm,-3.5cm)}]
 
@@ -34,11 +34,11 @@
 
         \node[circle, minimum width = 1mm, fill = black, visible on = <2->] (start) at (-3.2*\rc, 0) {};
 
-        \node[circle, draw = black, minimum size = 2cm, line width = 0.5pt, anchor = center, fill = white, visible on = <2->] (state) at (-2*\rc, 0) {state};
+        \node[circle, draw = black, minimum size = 2cm, line width = 0.5pt, anchor = center, fill = white, inner color = MidnightBlue!10, outer color = MidnightBlue!30, visible on = <2->] (state) at (-2*\rc, 0) {state};
         
-        \node[circle, draw = black, minimum size = 2cm, line width = 0.5pt, anchor = center, fill = white, visible on = <3->] (policy) at (-0.293*\rc, 0.707*\rc) {policy $\pi$};
+        \node[circle, draw = black, minimum size = 2cm, line width = 0.5pt, anchor = center, fill = white, inner color = MidnightBlue!10, outer color = MidnightBlue!30, visible on = <3->] (policy) at (-0.293*\rc, 0.707*\rc) {policy $\pi$};
 
-        \node[circle, draw = black, minimum size = 2cm, line width = 0.5pt, anchor = center, fill = white, visible on = <4->] (update) at (-0.293*\rc, -0.707*\rc) {update};
+        \node[circle, draw = black, minimum size = 2cm, line width = 0.5pt, anchor = center, fill = white, inner color = MidnightBlue!10, outer color = MidnightBlue!30, visible on = <4->] (update) at (-0.293*\rc, -0.707*\rc) {update};
 
 
         % text

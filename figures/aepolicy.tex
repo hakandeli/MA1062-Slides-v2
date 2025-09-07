@@ -27,34 +27,36 @@
 
         \node[align = center, visible on = <1->] (input) at (-3.1, -0.45) {demand and \\ topology info};
     
-        \node[rectangle, shading = axis, left color = Apricot!20, right color = white, rounded corners = 3pt, minimum height = 50mm, minimum width = 60mm, anchor = center, visible on = <1->] (pre) at (-1, 0) {};
+        \node[rectangle, shading = axis, left color = Apricot!20, right color = white, rounded corners = 3pt, minimum height = 50mm, minimum width = 60mm, anchor = center, visible on = <2->] (pre) at (-1, 0) {};
         
-        \node[align = center, visible on = <1->] at (-1, 2) {feature encoding};
+        \node[align = center, visible on = <2->] at (-1, 2) {feature encoding};
 
-        \node[rectangle, draw = black, rounded corners = 3pt, anchor = center, minimum width = 4mm, minimum height = 10mm] (preb) at (-2.1,-0.45) {\rotatebox{90}{basic encoding}};
+        \node[rectangle, draw = black, rounded corners = 3pt, anchor = center, minimum width = 4mm, minimum height = 10mm, visible on = <2->] (preb) at (-2.1,-0.45) {\rotatebox{90}{basic encoding}};
 
         %Enc1
-        \begin{scope}[shift={(-1.1, 0.7)}]
+        \begin{scope}[shift={(-1.1, 0.7)}, visible on = <2->]
             \fill[Cerulean!60, rounded corners=2pt] (0, 0.4) -- (0.75, 0.7) -- (0.75, -0.7) -- (0, -0.4) -- cycle;
             \node[anchor = center, align = center] (amren) at (0.4, 0) {$\text{Encoder}_{1}$};
         \end{scope}
+
+        \node[visible on = <2->] at (-0.73,-0.45) {$\vdots$};
         
-        \begin{scope}[shift={(-1.1, -1.5)}]
+        \begin{scope}[shift={(-1.1, -1.5)}, visible on = <2->]
             \fill[Cerulean!60, rounded corners=2pt] (0, 0.4) -- (0.75, 0.7) -- (0.75, -0.7) -- (0, -0.4) -- cycle;
             \node[anchor = center, align = center] (amren) at (0.4, 0) {$\text{Encoder}_{N}$};
         \end{scope}
 
-        \node[rectangle, fill = Mulberry!60, rounded corners = 3pt, minimum height = 50mm, minimum width = 40mm, anchor = center, visible on = <1->] (policymix) at (1.75, 0) {};
+        \node[rectangle, fill = Mulberry!60, rounded corners = 3pt, minimum height = 50mm, minimum width = 40mm, anchor = center, visible on = <3->] (policymix) at (1.75, 0) {};
 
-        \node[align = center, visible on = <1->] at (1.75, 2) {policymix};
+        \node[align = center, visible on = <3->] at (1.75, 2) {policymix};
 
-        \node[network, minimum height = 1.8cm, minimum width = 2.5cm, fill = BurntOrange!60, rounded corners=3pt, visible on = <1->] (npol) at (1.75, 0.7) {}; 
+        \node[network, minimum height = 1.8cm, minimum width = 2.5cm, fill = BurntOrange!60, rounded corners=3pt, visible on = <3->] (npol) at (1.75, 0.7) {}; 
         
-    	\node[network, minimum height = 1.8cm, minimum width = 2.5cm, fill = ForestGreen!60, rounded corners=3pt, visible on = <1->] (nilp) at (1.75, -1.3) {};
+    	\node[network, minimum height = 1.8cm, minimum width = 2.5cm, fill = ForestGreen!60, rounded corners=3pt, visible on = <3->] (nilp) at (1.75, -1.3) {};
 
         %dnn 1
 
-        \begin{scope}[x=0.1cm, y= 0.2cm, shift = {(2.65cm, 1cm)}, visible on = <1->]
+        \begin{scope}[x=0.1cm, y= 0.2cm, shift = {(2.65cm, 1cm)}, visible on = <3->]
 
             %white bg
             \node[bgrectw, minimum width = 1cm, minimum height = 1cm, anchor = north] (dnnone) at (3, -0.06) {};
@@ -79,17 +81,17 @@
 		
         \end{scope}
 
-        \node[layer, minimum height = 10mm, minimum width = 3mm, fill = BrickRed!50, visible on = <1->] (output) at (1.9, 0.48) {};
+        \node[layer, minimum height = 10mm, minimum width = 3mm, fill = BrickRed!50, visible on = <3->] (output) at (1.9, 0.48) {};
 
-        \node[rectangle, shading = axis, left color = Apricot!20, right color = white, rounded corners = 3pt, minimum height = 10mm, minimum width = 3mm, anchor = center, visible on = <1->] (post) at (2.15, 0.48) {};
+        \node[rectangle, shading = axis, left color = Apricot!20, right color = white, rounded corners = 3pt, minimum height = 10mm, minimum width = 3mm, anchor = center, visible on = <3->] (post) at (2.15, 0.48) {};
 
-        \node[align = center, visible on = <1->] at (1.75, 1.3) {\small heuristics};
+        \node[align = center, visible on = <3->] at (1.75, 1.3) {\small heuristics};
 
-        \node[align = center, visible on = <1->] at (1.75, -0.68) {\small basic};
+        \node[align = center, visible on = <3->] at (1.75, -0.68) {\small basic};
 
         % dnn 2
 
-        \begin{scope}[x=0.1cm, y= 0.2cm, shift = {(2.65cm, -1cm)}, visible on = <1->]
+        \begin{scope}[x=0.1cm, y= 0.2cm, shift = {(2.65cm, -1cm)}, visible on = <3->]
 
             %white bg
             \node[bgrectw, minimum width = 1cm, minimum height = 1cm, anchor = north] (dnntwo) at (3, -0.06) {};
@@ -114,59 +116,59 @@
 		
         \end{scope}
 
-        \node[layer, minimum height = 10mm, minimum width = 3mm, fill = peachlatte!60, visible on = <1->] (outputtwo) at (1.9, -1.52) {};
+        \node[layer, minimum height = 10mm, minimum width = 3mm, fill = peachlatte!60, visible on = <3->] (outputtwo) at (1.9, -1.52) {};
 
-        \node[rectangle, shading = axis, left color = Apricot!20, right color = white, rounded corners = 3pt, minimum height = 10mm, minimum width = 3mm, anchor = center, visible on = <1->] (posttwo) at (2.15, -1.52) {};
+        \node[rectangle, shading = axis, left color = Apricot!20, right color = white, rounded corners = 3pt, minimum height = 10mm, minimum width = 3mm, anchor = center, visible on = <3->] (posttwo) at (2.15, -1.52) {};
 
-        \node[align = center, visible on = <1->] (decision) at (3.3, -0.45) {decision};
+        \node[align = center, visible on = <3->] (decision) at (3.3, -0.45) {decision};
 
         % circles
 
-        \node[circle, minimum size = 1.5mm, inner sep = 0mm, fill=black, visible on = <1->] (aein) at (-1.6, -0.45) {};
+        \node[circle, minimum size = 1.5mm, inner sep = 0mm, fill=black, visible on = <2->] (aein) at (-1.6, -0.45) {};
     
-        \node[circle, minimum size = 1.5mm, inner sep = 0mm, fill=black, visible on = <1->] (aeout) at (0.2, -0.45) {};
+        \node[circle, minimum size = 1.5mm, inner sep = 0mm, fill=black, visible on = <2->] (aeout) at (0.2, -0.45) {};
 
-        \node[circle, minimum size = 1.5mm, inner sep = 0mm, fill=black, visible on = <1->] (polin) at (0.95, -0.45) {};
+        \node[circle, minimum size = 1.5mm, inner sep = 0mm, fill=black, visible on = <3->] (polin) at (0.95, -0.45) {};
 
         % connections
 
-        \draw[arrow, ->, visible on = <1->] (input.east) -- (preb.west);
-        \draw[arrow, -, visible on = <1->] (preb.east) -- (aein);
+        \draw[arrow, ->, visible on = <2->] (input.east) -- (preb.west);
+        \draw[arrow, -, visible on = <2->] (preb.east) -- (aein);
 
-        \draw[arrow, ->, visible on = <1->] (aein) -- (-1.1, 0.65);
-        \draw[arrow, ->, dashed, visible on = <1->] (aein) -- (-1.1, -1.55);
+        \draw[arrow, ->, visible on = <2->] (aein) -- (-1.1, 0.65);
+        \draw[arrow, ->, dashed, visible on = <2->] (aein) -- (-1.1, -1.55);
 
-        \draw[arrow, <->, dashed, visible on = <1->] (-1.3, 0.1) to[bend left = 30] (-1.3, -0.95); 
+        \draw[arrow, <->, dashed, visible on = <2->] (-1.3, 0.1) to[bend left = 30] (-1.3, -0.95); 
         
-        \draw[arrow, -, visible on = <1->] (-0.35, 0.65) -- (aeout);
-        \draw[arrow, -, dashed, visible on = <1->] (-0.35, -1.5) -- (aeout);
+        \draw[arrow, -, visible on = <2->] (-0.35, 0.65) -- (aeout);
+        \draw[arrow, -, dashed, visible on = <2->] (-0.35, -1.5) -- (aeout);
 
-        \draw[arrow, -, visible on = <1->] (aeout) -- (polin);
+        \draw[arrow, -, visible on = <3->] (aeout) -- (polin);
 
-        \draw[arrow, -, visible on = <1->] (polin) |- (npol.west);
-        \draw[arrow, -, visible on = <1->] (polin) |- (nilp.west);
+        \draw[arrow, -, visible on = <3->] (polin) |- (npol.west);
+        \draw[arrow, -, visible on = <3->] (polin) |- (nilp.west);
 
-        \draw[arrow, -, visible on = <1->] (polin) |- (npol.west);
-        \draw[arrow, ->, visible on = <1->] (npol.west) -- (dnnone.west);
-        \draw[arrow, ->, visible on = <1->] (dnnone.east) -- (output.west);
-        \draw[arrow, ->, visible on = <1->] (output.east) -- (post.west);
-        \draw[arrow, -, visible on = <1->] (post.east) -- (npol.east);
+        \draw[arrow, -, visible on = <3->] (polin) |- (npol.west);
+        \draw[arrow, ->, visible on = <3->] (npol.west) -- (dnnone.west);
+        \draw[arrow, ->, visible on = <3->] (dnnone.east) -- (output.west);
+        \draw[arrow, ->, visible on = <3->] (output.east) -- (post.west);
+        \draw[arrow, -, visible on = <3->] (post.east) -- (npol.east);
 
 
-        \draw[arrow, -, visible on = <1->] (polin) |- (nilp.west);
-        \draw[arrow, ->, visible on = <1->] (nilp.west) -- (dnntwo.west);
-        \draw[arrow, ->, visible on = <1->] (dnntwo.east) -- (outputtwo.west);
-        \draw[arrow, ->, visible on = <1->] (outputtwo.east) -- (posttwo.west);
-        \draw[arrow, -, visible on = <1->] (posttwo.east) -- (nilp.east);
+        \draw[arrow, -, visible on = <3->] (polin) |- (nilp.west);
+        \draw[arrow, ->, visible on = <3->] (nilp.west) -- (dnntwo.west);
+        \draw[arrow, ->, visible on = <3->] (dnntwo.east) -- (outputtwo.west);
+        \draw[arrow, ->, visible on = <3->] (outputtwo.east) -- (posttwo.west);
+        \draw[arrow, -, visible on = <3->] (posttwo.east) -- (nilp.east);
 
-        \node[circle, minimum size = 1.5mm, inner sep = 0mm, fill = black, right = 0.3cm of nilp] (dummy) {};
-        \draw[arrow, ->, visible on = <1->] (npol.east) -| (dummy);
-        \draw[arrow, ->, visible on = <1->] (nilp.east) -- (dummy);
+        \node[circle, minimum size = 1.5mm, inner sep = 0mm, fill = black, right = 0.3cm of nilp, visible on = <3->] (dummy) {};
+        \draw[arrow, ->, visible on = <3->] (npol.east) -| (dummy);
+        \draw[arrow, ->, visible on = <3->] (nilp.east) -- (dummy);
         % \draw[arrow, -, visible on = <1->] (nilp.east) -| (dummy.center);
 
-        \draw[arrow, ->, visible on = <1->] ($(dummy.center)+(0, 0.3)$) -- ($(nilp.east)+(0, 0.3)$);
+        \draw[arrow, ->, visible on = <3->] ($(dummy.center)+(0, 0.3)$) -- ($(nilp.east)+(0, 0.3)$);
 
-        \draw[arrow, ->, visible on = <1->] (dummy) -| (decision);
+        \draw[arrow, ->, visible on = <3->] (dummy) -| (decision);
 
     \end{scope}
  

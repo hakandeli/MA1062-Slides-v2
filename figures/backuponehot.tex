@@ -1,0 +1,71 @@
+\tikzstyle{netnode} = [circle, 
+					   minimum width = 0.75cm, 
+					   minimum height = 0.75cm, 
+					   text = black!100, 
+					   align=center, 
+					   line width = 1, 
+					   inner sep = 1mm, 
+					   shading=radial, 
+					   inner color = sapphiremacchiato!50, 
+					   outer color = sapphiremacchiato!100]
+
+\tikzstyle{edge}=[> = stealth, line width = 0.5pt, shorten <= 0mm, shorten >= 0mm]
+\tikzstyle{arrow}=[> = stealth, line width = 0.5pt]
+
+
+\begin{tikzpicture}[x=1.5cm, y = 1.5cm]
+	
+	%Mren
+	\node[netnode, visible on = <1->] (nA) at (-1, 1) {A};
+	\node[netnode, visible on = <1->] (nB) at (1, 1) {B};
+	\node[netnode, visible on = <1->] (nC) at (1, -1) {D};
+	\node[netnode, visible on = <1->] (nD) at (-1, -1) {C};
+	
+	\draw[edge, <->, visible on = <1->] (nA) -- (nB); 
+    \draw[edge, <->, visible on = <1->] (nB) -- (nC); 
+	\draw[edge, <->, visible on = <1->] (nC) -- (nD);
+	\draw[edge, <->, visible on = <1->] (nD) -- (nA);
+
+    \node[netnode, visible on = <1->] (nA) at (3, 1) {A};
+    \node[anchor = center, right= 0.25cm of nA]{$=\quad
+    \begin{bmatrix}
+        \textcolor{red}{1} \\
+        0 \\
+        0 \\
+        0 \\
+    \end{bmatrix}$
+    };
+
+    \node[netnode, visible on = <1->] (nB) at (6, 1) {B};
+    \node[anchor = center, right= 0.25cm of nB]{$=\quad
+    \begin{bmatrix}
+        0 \\
+        \textcolor{red}{1} \\
+        0 \\
+        0 \\
+    \end{bmatrix}$
+    };
+
+    \node[netnode, visible on = <1->] (nC) at (3, -1) {C};
+    \node[anchor = center, right= 0.25cm of nC]{$=\quad
+    \begin{bmatrix}
+        0 \\
+        0 \\
+        \textcolor{red}{1} \\
+        0 \\
+    \end{bmatrix}$
+    };
+
+    \node[netnode, visible on = <1->] (nD) at (6, -1) {D};
+    \node[anchor = center, right= 0.25cm of nD]{$=\quad
+    \begin{bmatrix}
+        0 \\
+        0 \\
+        0 \\
+        \textcolor{red}{1} \\
+    \end{bmatrix}$
+    };
+
+     
+\end{tikzpicture}
+

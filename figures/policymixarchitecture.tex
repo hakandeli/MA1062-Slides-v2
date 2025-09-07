@@ -46,7 +46,7 @@
 
     \node[layer, minimum height = 10mm, minimum width = 3mm, visible on = <2->] (input) at (0.5, 0) {};
 
-    \begin{scope}[x=0.1cm, y= 0.2cm, shift = {(1.8cm, 0.52cm)}, visible on = <2->]
+    \begin{scope}[x=0.1cm, y= 0.2cm, shift = {(1.85cm, 0.52cm)}, visible on = <2->]
 
         %white bg
         \node[bgrectw, minimum width = 1cm, minimum height = 1cm, anchor = north] (dnn) at (3, -0.06) {};
@@ -71,9 +71,9 @@
 		
     \end{scope}
 
-    \node[layer, minimum height = 10mm, minimum width = 3mm, fill = BrickRed!50, visible on = <2->] (output) at (1.64, 0) {\tiny\rotatebox{90}{policy}};
+    \node[layer, minimum height = 10mm, minimum width = 3mm, fill = BrickRed!50, visible on = <2->] (output) at (1.64, 0) {\tiny\rotatebox{90}{\textcolor{black}{policy}}};
 
-    \node[rectangle, shading = axis, left color = Apricot!20, right color = white, rounded corners = 3pt, minimum height = 10mm, minimum width = 3mm, anchor = center, visible on = <2->] (post) at (2, 0) {\tiny\rotatebox{90}{policy}};
+    \node[rectangle, shading = axis, left color = Apricot!20, right color = white, rounded corners = 3pt, minimum height = 10mm, minimum width = 3mm, anchor = center, visible on = <2->] (post) at (2, 0) {};
 
     % \node[visible on = <3->] (decision) at (5.25, 0) {decision};
 
@@ -108,7 +108,7 @@
 
     \node[layer, minimum height = 10mm, minimum width = 3mm, visible on = <3->] (input) at (0.5, 0) {};
 
-    \begin{scope}[x=0.1cm, y= 0.2cm, shift = {(1.8cm, 0.52cm)}, visible on = <3->]
+    \begin{scope}[x=0.1cm, y= 0.2cm, shift = {(1.85cm, 0.52cm)}, visible on = <3->]
 
         %white bg
         \node[bgrectw, minimum width = 1cm, minimum height = 1cm, anchor = north] (dnn) at (3, -0.06) {};

@@ -12,6 +12,7 @@
 \usepackage{xcolor}
 \usepackage{amsmath}
 \usepackage{pgf-pie}
+\usepackage{appendixnumberbeamer}
 
 
 \usetikzlibrary{positioning}
@@ -77,7 +78,7 @@
 
 
 % policies colors
-\newcommand{\kspff}{CornflowerBlue}
+\newcommand{\kspff}{RoyalBlue}
 \newcommand{\ffksp}{SkyBlue}
 \newcommand{\ksplf}{YellowGreen}
 \newcommand{\kspbff}{Fuchsia}
@@ -172,239 +173,225 @@ bg= IKRBlue!15}
 
 \breadcrumbson
 
-% \section{Motivation}
+\section{Motivation}
 
-% \begin{frame}{Motivation}
-%     \vspace{0cm}
-%     % \only<2->{
-%     % \begin{textblock}{5}(0.4, 1.36)
-%     %     \begin{tikzpicture}
-%     %         \node[bgrect, minimum width = 7.6cm, minimum height = 6.3cm, anchor = center] at (0, 0) {};
-%     %     \end{tikzpicture}
-%     % \end{textblock}
-%     % }
-%     \only<2->{
-%     \begin{textblock}{5}(0.6, 1.5)
-%         \begin{tikzpicture}
-%             \node[bgrectw, minimum width = 7.2cm, minimum height = 6.5mm, anchor = center] at (0, 0) {};
-%         \end{tikzpicture}
-%     \end{textblock}
-%     }
-%     \only<3->{
-%     \begin{textblock}{5}(0.6, 2.28)
-%         \begin{tikzpicture}
-%             \node[bgrectw, minimum width = 7.2cm, minimum height = 2.2cm, anchor = center] at (0, 0) {};
-%         \end{tikzpicture}
-%     \end{textblock}
-%     }
-%     \only<4->{
-%     \begin{textblock}{5}(0.6, 4.6)
-%         \begin{tikzpicture}
-%             \node[bgrectw, minimum width = 7.2cm, minimum height = 2.9cm, anchor = center] at (0, 0) {};
-%         \end{tikzpicture}
-%     \end{textblock}
-%     }
-%     \begin{columns}
-%         \column{0.5\textwidth}
-%             \vspace{0.3cm}
-%             \begin{textblock}{6.5}(1.0, 1.55)
-%                 \begin{itemize}
-%                     \setlength\itemsep{1em}
-%                     \visible<2->{\item[]\hspace{-7mm} \textbf{growing volume of Internet traffic worldwide}}
-%                     \visible<3->{\item[]\hspace{-7mm} \textbf{optical networks}}
-%                     \visible<3->{\item for long distances (countries, continents...)}
-%                     \visible<3->{\item indispensable for everydays communication}
-%                     \visible<4->{\item[]\hspace{-7mm} \textbf{network operators need to route traffic}}
-%                     \visible<4->{\item decision highly impacts performance}
-%                     \visible<4->{\item affects energy consumption, data rate, ...}
-%                     \visible<4->{\item heuristic methods usually used}
-%                 \end{itemize}
-%             \end{textblock}
-%         \column{0.5\textwidth}
-%         \only<2-> {
-%             \vspace{0cm}
-%             \begin{figure}[ht]
-%     	       \begin{adjustwidth}{0cm}{0cm}
-%         		\centering
-%         		\input{figures/annualreport.tex}
-%         		\vspace{0cm}
-%                 \captionsetup{justification=centering}
-%         		\caption*{
-%                         % \begin{center} 
-%                         number of Internet users from 2018 - 2023 \\ (adopted from the Cisco annual Internet report) 
-%                         % \end{center}
-%                         }
-%     	       \end{adjustwidth}
-%             \end{figure}
-%         }
-%     \end{columns}
-% \end{frame}
+\begin{frame}{Motivation}
+    \vspace{0cm}
+    % \only<2->{
+    % \begin{textblock}{5}(0.4, 1.36)
+    %     \begin{tikzpicture}
+    %         \node[bgrect, minimum width = 7.6cm, minimum height = 6.3cm, anchor = center] at (0, 0) {};
+    %     \end{tikzpicture}
+    % \end{textblock}
+    % }
+    \only<2->{
+    \begin{textblock}{5}(0.6, 1.5)
+        \begin{tikzpicture}
+            \node[bgrectw, minimum width = 7.2cm, minimum height = 6.5mm, anchor = center] at (0, 0) {};
+        \end{tikzpicture}
+    \end{textblock}
+    }
+    \only<3->{
+    \begin{textblock}{5}(0.6, 2.28)
+        \begin{tikzpicture}
+            \node[bgrectw, minimum width = 7.2cm, minimum height = 2.2cm, anchor = center] at (0, 0) {};
+        \end{tikzpicture}
+    \end{textblock}
+    }
+    \only<4->{
+    \begin{textblock}{5}(0.6, 4.6)
+        \begin{tikzpicture}
+            \node[bgrectw, minimum width = 7.2cm, minimum height = 2.9cm, anchor = center] at (0, 0) {};
+        \end{tikzpicture}
+    \end{textblock}
+    }
+    \begin{columns}
+        \column{0.5\textwidth}
+            \vspace{0.3cm}
+            \begin{textblock}{6.5}(1.0, 1.55)
+                \begin{itemize}
+                    \setlength\itemsep{1em}
+                    \visible<2->{\item[]\hspace{-7mm} \textbf{Growing Volume of Internet Traffic Worldwide}}
+                    \visible<3->{\item[]\hspace{-7mm} \textbf{Optical Networks}}
+                    \visible<3->{\item for long distances (countries, continents...)}
+                    \visible<3->{\item indispensable for everydays communication}
+                    \visible<4->{\item[]\hspace{-7mm} \textbf{Network Operators Need to Route Traffic}}
+                    \visible<4->{\item decision highly impacts performance}
+                    \visible<4->{\item affects energy consumption, data rate, ...}
+                    \visible<4->{\item heuristic methods usually used}
+                \end{itemize}
+            \end{textblock}
+        \column{0.5\textwidth}
+        \only<2-> {
+            \vspace{0cm}
+            \begin{figure}[ht]
+    	       \begin{adjustwidth}{0cm}{0cm}
+        		\centering
+        		\input{figures/annualreport.tex}
+        		\vspace{0cm}
+                \captionsetup{justification=centering}
+        		\caption*{
+                        % \begin{center} 
+                        number of Internet users from 2018 - 2023 \\ (adopted from the Cisco annual Internet report) 
+                        % \end{center}
+                        }
+    	       \end{adjustwidth}
+            \end{figure}
+        }
+    \end{columns}
+\end{frame}
 
 
-% \begin{frame}{Deep Learning}
+\begin{frame}{Deep Learning (DL)}
     
-%     \begin{textblock}{5}(0.36, 1.4)
-%         \input{figures/dlmotivation.tex}
-%     \end{textblock}
+    \begin{textblock}{5}(0.36, 1.4)
+        \input{figures/dlmotivation.tex}
+    \end{textblock}
 
-%     \begin{textblock}{14.97}(0.48, 6.5)
-%         \visible<4-> {
-%           \begin{exampleblock}{\centering First thesis goal}
-%             \centering derive a DL based decision finding algorithm for network routing
-%           \end{exampleblock}
-%         }
-%     \end{textblock}
+    \begin{textblock}{14.96}(0.486, 6.5)
+        \visible<4-> {
+          \begin{exampleblock}{\centering First Thesis Goal}
+            \centering derive a DL based decision finding algorithm for network routing
+          \end{exampleblock}
+        }
+    \end{textblock}
     
     
 
-% \end{frame}
+\end{frame}
 
 
-% \begin{frame}{Autoencoders}
+\begin{frame}{Autoencoders}
 
-%     \only<2->{
-%         \begin{textblock}{5}(1, 2)
-%             \begin{tikzpicture}
-%                 \node[bgrect, minimum width = 4cm, minimum height = 3.3cm, anchor = center, align = center] at (0, 0) {complexity \\ reduction};
-%             \end{tikzpicture}
-%         \end{textblock}
-%     }
+    \only<2->{
+        \begin{textblock}{5}(1, 2)
+            \begin{tikzpicture}
+                \node[bgrect, minimum width = 4cm, minimum height = 3.3cm, anchor = center, align = center] at (0, 0) {complexity \\ reduction};
+            \end{tikzpicture}
+        \end{textblock}
+    }
 
-%     \only<3->{
-%     \begin{textblock}{5}(6, 2)
-%         \begin{tikzpicture}
-%             \node[bgrect, minimum width = 4cm, minimum height = 3.3cm, anchor = center, align = center] at (0, 0) {dimension \\ unification};
-%         \end{tikzpicture}
-%     \end{textblock}
-%     }
+    \only<3->{
+    \begin{textblock}{5}(6, 2)
+        \begin{tikzpicture}
+            \node[bgrect, minimum width = 4cm, minimum height = 3.3cm, anchor = center, align = center] at (0, 0) {dimension \\ unification};
+        \end{tikzpicture}
+    \end{textblock}
+    }
 
-%     \only<4->{
-%     \begin{textblock}{5}(11, 2)
-%         \begin{tikzpicture}
-%             \node[bgrect, minimum width = 4cm, minimum height = 3.3cm, anchor = center, align = center] at (0, 0) {performance \\ increase};
-%         \end{tikzpicture}
-%     \end{textblock}
-%     }
+    \only<4->{
+    \begin{textblock}{5}(11, 2)
+        \begin{tikzpicture}
+            \node[bgrect, minimum width = 4cm, minimum height = 3.3cm, anchor = center, align = center] at (0, 0) {performance \\ increase};
+        \end{tikzpicture}
+    \end{textblock}
+    }
 
-%     \only<5->{
-%     \begin{textblock}{13.7}(1.14, 5.5)
-%             \begin{exampleblock}{\centering Second thesis goal}
-%                 \centering leverage autoencoders and examine their effect on performance
-%             \end{exampleblock}
-%     \end{textblock}
-%     }
+    \only<5->{
+    \begin{textblock}{13.7}(1.14, 5.5)
+            \begin{exampleblock}{\centering Second Thesis Goal}
+                \centering leverage autoencoders and examine their effect on performance
+            \end{exampleblock}
+    \end{textblock}
+    }
   
-%     % \begin{adjustwidth}{6mm}{2cm}
-%     %             \begin{itemize}
-%     %                 \setlength\itemsep{1em}
-%     %                 \visible<2->{\item are a subfield of DL}
-%     %                 \visible<3->{\item can reduce the complexity of neural networks}
-%     %                 \visible<4->{\item can act as a unifier for input data of different dimensions}
-%     %                 \visible<5->{\item potential to increase performance in decision finding}
-%     %             \end{itemize}
-%     % \end{adjustwidth}
-
-%     % \begin{center}
-%     % \visible<6-> {
-%     %       \begin{minipage}{0.9\linewidth}
-%     %           \begin{exampleblock}{Second thesis goal}
-%     %             leverage autoencoders and examine their effect on performance
-%     %           \end{exampleblock}
-%     %       \end{minipage}
-%     % }
-%    % \end{center}
-% \end{frame}
+\end{frame}
 
 
-% \section{Theoretical Background}
+\section{Theoretical Background}
 
 
-% \subsection{Optical Networks and the RSA Problem}
+\subsection{Optical Networks and the RSA Problem}
 
-% \begin{frame}{Optical Network Topology}
-%     \vspace{0.2cm}
-%     \begin{figure}
-%     	\begin{adjustwidth}{0cm}{0cm}
-%     		\centering
-%     		\input{figures/topologies.tex}
-%             \only<4->{\caption*{Network topologies from topology-zoo.org}}
-%     	\end{adjustwidth}
-%     \end{figure}
-% \end{frame}
+\begin{frame}{Optical Network Topology}
+    \vspace{0.2cm}
+    \begin{figure}
+    	\begin{adjustwidth}{0cm}{0cm}
+    		\centering
+    		\input{figures/topologies.tex}
+            \only<4->{\caption*{Network topologies from topology-zoo.org}}
+    	\end{adjustwidth}
+    \end{figure}
+\end{frame}
 
-% \begin{frame}
-%     \frametitle{\large Wavelength-Division Multiplexing (WDM) and Elastic Optical Networks (EONs)}
-%     \begin{textblock}{5}(0.4, 1.8)
-%         \input{figures/eons.tex}
-%     \end{textblock}
-% \end{frame}
+\begin{frame}
+    \frametitle{\large Wavelength-Division Multiplexing (WDM) and Elastic Optical Networks (EONs)}
+    \begin{textblock}{5}(0.4, 1.8)
+        \input{figures/eons.tex}
+    \end{textblock}
+\end{frame}
 
-% \begin{frame}{Optical Networks and the RSA Problem}
-% 	\begin{textblock}{5}(1, 1.4)
-%         \input{figures/rsa.tex}
-%     \end{textblock}
-% \end{frame}
+\begin{frame}{Optical Networks and the RSA Problem}
+	\begin{textblock}{5}(1, 1.4)
+        \input{figures/rsa.tex}
+    \end{textblock}
+\end{frame}
 
-% \begin{frame}{Heuristic Two-Step Approaches}
-% 	\begin{textblock}{5}(0.6, 1.5)
-%         \input{figures/heuristics.tex}
-%     \end{textblock}
-% \end{frame}
+\begin{frame}{Heuristic Two-Step Approaches}
+	\begin{textblock}{5}(0.6, 1.5)
+        \input{figures/heuristics.tex}
+    \end{textblock}
+\end{frame}
 
-% \subsection{Deep Learning}
+\subsection{Deep Learning}
 
-% \begin{frame}{Deep Learning}{}
-%     \begin{columns}
-%         \column{0.4\textwidth}
-%             \begin{adjustwidth}{3mm}{0cm}
-%                 \begin{itemize}
-%                     \setlength\itemsep{1.5em}
-%                     \visible<2->{\item subfield of ML that uses algorithms inspired by the human brain}
-%                     \visible<5->{\item supervised DL uses labeled datasets}
-%                     \visible<6->{\item model tries to learn context between given input data and labels and make it applicable to unseen data}
-%                     \visible<7->{\item datasets are used that are split into train and test set}
-%                     \visible<8->{\item learning happens by finding appropriate weights and biases with a method called training}
-%                 \end{itemize}
-%             \end{adjustwidth}
-%         \column{0.5\textwidth}
-%         \only<2-> {
-%             \begin{figure}[ht]
-%     	       \begin{adjustwidth}{0cm}{0cm}
-%         		\centering
-%         		\input{figures/perceptronrule}
-%     	       \end{adjustwidth}
-%             \end{figure}
-%         }
-%     \end{columns}
-% \end{frame}
+\begin{frame}{Deep Learning}{}
+    
+    \begin{textblock}{5}(0.4, 1.4)
+        \input{figures/dl.tex}
+    \end{textblock}
+    
+    % \begin{columns}
+    %     \column{0.4\textwidth}
+    %         \begin{adjustwidth}{3mm}{0cm}
+    %             \begin{itemize}
+    %                 \setlength\itemsep{1.5em}
+    %                 \visible<2->{\item subfield of ML that uses algorithms inspired by the human brain}
+    %                 \visible<5->{\item supervised DL uses labeled datasets}
+    %                 \visible<6->{\item model tries to learn context between given input data and labels and make it applicable to unseen data}
+    %                 \visible<7->{\item datasets are used that are split into train and test set}
+    %                 \visible<8->{\item learning happens by finding appropriate weights and biases with a method called training}
+    %             \end{itemize}
+    %         \end{adjustwidth}
+    %     \column{0.5\textwidth}
+    %     \only<2-> {
+    %         \begin{figure}[ht]
+    % 	       \begin{adjustwidth}{0cm}{0cm}
+    %     		\centering
+    %     		\input{figures/perceptronrule}
+    % 	       \end{adjustwidth}
+    %         \end{figure}
+    %     }
+    % \end{columns}
+\end{frame}
 
-% \subsection{Autoencoders}
+\subsection{Autoencoders}
 
-% \begin{frame}{Autoencoders}{}
-% 	\begin{textblock}{5}(1, 1.4)
-%         \input{figures/aes.tex}
-%     \end{textblock}
-% \end{frame}
-
-
-% \section{Environment Setting}
-
-% \subsection{The RSA Episode}
-
-% \begin{frame}{Environment Setting}{}
-% 	\begin{textblock}{5}(0.35, 1.4)
-%         \input{figures/episode.tex}
-%     \end{textblock}
-% \end{frame}
+\begin{frame}{Autoencoders}{}
+	\begin{textblock}{5}(0.4, 1.4)
+        \input{figures/aes.tex}
+    \end{textblock}
+\end{frame}
 
 
-% \subsection{Network State and Action Space}
+\section{Environment Setting}
 
-% \begin{frame}{Environment Setting}{}
-% 	\begin{textblock}{5}(0.35, 1.4)
-%         \input{figures/SU.tex}
-%     \end{textblock}
-% \end{frame}
+\subsection{The RSA Episode}
+
+\begin{frame}{Environment Setting}{}
+	\begin{textblock}{5}(0.35, 1.4)
+        \input{figures/episode.tex}
+    \end{textblock}
+\end{frame}
+
+
+\subsection{Network State and Action Space}
+
+\begin{frame}{Environment Setting}{}
+	\begin{textblock}{5}(0.35, 1.4)
+        \input{figures/SU.tex}
+    \end{textblock}
+\end{frame}
 
 
 \section{DL Policy for RSA Problem}
@@ -418,31 +405,31 @@ bg= IKRBlue!15}
 \end{frame}
 
 
-% \subsection{Policymix Approach}
+\subsection{Policymix Approach}
 
-% \begin{frame}{Policymix for RSA Problem}
-%     \begin{textblock}{7}(1.0, 1.75)
-%                 \begin{itemize}
-%                     \setlength\itemsep{1.1em}
-%                     \visible<2->{\item[]\hspace{-7mm} \textbf{A Novel Approach on Tackling the RSA Problem}}
-%                     \visible<2->{\item remap optimal decisions to decisions of other policies when possible}
-%                     \visible<2->{\item only heuristic policies considered in this thesis}
-%                     \visible<3->{\item[]\hspace{-7mm} \textbf{Analysis of Layer42 Data}}
-%                     \visible<3->{\item big share of KSP-FF}
-%                     \visible<3->{\item approx. 51\% can be remapped to heuristics}
-%                     \visible<3->{\item unmapped policy remains unknown}
-%                 \end{itemize}
-%     \end{textblock}
-% 	\begin{textblock}{5}(9.5, 1.25)
-%         \begin{figure}[ht]
-%             \centering
-%             \input{figures/policymixstats.tex}
-%             \vspace{-0.3cm}
-%             \captionsetup{justification=centering}
-%             \visible<3->{\caption*{share of heuristic policies on optimal decisions for Layer42}}
-%         \end{figure}
-%     \end{textblock}
-% \end{frame}
+\begin{frame}{Policymix for RSA Problem}
+    \begin{textblock}{7}(1.0, 1.75)
+                \begin{itemize}
+                    \setlength\itemsep{1.1em}
+                    \visible<2->{\item[]\hspace{-7mm} \textbf{A Novel Approach on Tackling the RSA Problem}}
+                    \visible<2->{\item remap optimal decisions to decisions of other policies when possible}
+                    \visible<2->{\item only heuristic policies considered in this thesis}
+                    \visible<3->{\item[]\hspace{-7mm} \textbf{Analysis of Layer42 Data}}
+                    \visible<3->{\item big share of KSP-FF}
+                    \visible<3->{\item approx. 51\% can be remapped to heuristics}
+                    \visible<3->{\item unmapped policy remains unknown}
+                \end{itemize}
+    \end{textblock}
+	\begin{textblock}{5}(9.5, 1.25)
+        \begin{figure}[ht]
+            \centering
+            \input{figures/policymixstats.tex}
+            \vspace{-0.3cm}
+            \captionsetup{justification=centering}
+            \visible<3->{\caption*{share of heuristic policies on optimal decisions for Layer42}}
+        \end{figure}
+    \end{textblock}
+\end{frame}
 
 \begin{frame}{Policymix for RSA Problem}
 	\begin{textblock}{5}(0.5, 1.4)
@@ -459,24 +446,37 @@ bg= IKRBlue!15}
     \end{textblock}
 \end{frame}
 
-% \section{Results}
+\section{Results}
 
-% \begin{frame}{Results}{}
-%     \begin{textblock}{5}(0.4, 1.4)
-%         \input{figures/scores.tex}
-%     \end{textblock}
-% \end{frame}
+\begin{frame}{Results}{}
+    \begin{textblock}{5}(0.4, 1.4)
+        \input{figures/scores.tex}
+    \end{textblock}
+\end{frame}
 
-% \begin{frame}{Aggregated Results}{}
-%     \only<2->{
-%     \begin{textblock}{5}(0.6, 1.5)
-%         \includegraphics[width = 9cm]{figures/boxplot}
-%     \end{textblock}
-%     }
-%     \begin{textblock}{5}(10.5, 1.4)
-%         \input{figures/meanscores.tex}
-%     \end{textblock}
-% \end{frame}
+\begin{frame}{Aggregated Results}{}
+    \only<2->{
+    \begin{textblock}{5}(0.6, 1.47) %1.67
+        \begin{tikzpicture}
+        % \node[bgrect, minimum width = 10cm, minimum height = 6cm, anchor = center] at (0,0) {};
+            \node[] at (0,0) {\includegraphics[width = 9cm]{figures/boxplot}};
+            \foreach \i/\labeltext in {1/$\pi_{\text{basic}}$,
+                                       2/$\pi_{\text{masked}}$,
+                                       3/$\pi_{\text{KSP-FF}}$,
+                                       4/$\pi_{\text{policymix}}$,
+                                       5/$\pi_{\text{AE}}$,
+                                       6/$\pi_{\text{opt}}$} {
+                \node[inner sep = 0mm, fill = white] at (1.45*\i-4.75,-2.98) {\labeltext};
+            }
+            \node[inner sep = 0mm, fill = white] at (-4.7,0) {\rotatebox{90}{score}};
+            \node[inner sep = 0mm, fill = white] at (0,-3.7) {Rainclouds for 642 test episodes for Layer42};
+        \end{tikzpicture}
+    \end{textblock}
+    }
+    \begin{textblock}{5}(10.5, 1.2)
+        \input{figures/meanscores.tex}
+    \end{textblock}
+\end{frame}
 
 \section{Conclusion and Outlook}
 
@@ -486,45 +486,18 @@ bg= IKRBlue!15}
     \end{textblock}
 \end{frame}
 
+\appendix
 
+\begin{frame}{Backup Slide - Simulation}
+    \begin{textblock}{5}(0.4, 1.4)
+        \input{figures/backupdata.tex}
+    \end{textblock}
+\end{frame}
 
-% \begin{frame}{Conclusion and Outlook}
-%     \vspace{0.5cm}
-%     \begin{adjustwidth}{6mm}{2cm}
-%                 \begin{itemize}
-%                     \setlength\itemsep{1em}
-%                     \visible<2->{\item introduced and evaluated supervised DL methods for tackling the RSA problem in EONs}
-%                     \visible<3->{\item introduced the new policymix concept}
-%                     \visible<4->{\item autoencoders can be used to unify data dimensions}
-%                     \visible<5->{\item enable training a single DNN on several topologies}
-%                 \end{itemize}
-%     \end{adjustwidth}
-
-%     \begin{center}
-%     \visible<6-> {
-%           \begin{minipage}{0.9\linewidth}
-%               \begin{exampleblock}{Achievement}
-%                 First working DNN policy for solving the RSA problem with a 1.9\% increase compared to KSP-FF
-%               \end{exampleblock}
-%           \end{minipage}
-%     }
-%    \end{center}
-% \end{frame}
-
-
-% \begin{frame}{Conclusion and Outlook}{Outlook}
-%     \vspace{0.5cm}
-%     \begin{adjustwidth}{6mm}{2cm}
-%                 \begin{itemize}
-%                     \setlength\itemsep{2.5em}
-%                     \visible<2->{\item incorporate in real hardware and measure performance in unstaged scenarios}
-%                     \visible<3->{\item policymix approach could be extended by further heuristic policies}
-%                     \visible<4->{\item policymix could be trained on multiple additional network topologies}
-%                     \visible<5->{\item further DL techniques and architectures, such as LSTMs or transformers, can also be examined, with transformers being especially promising candidates}
-%                 \end{itemize}
-%     \end{adjustwidth}
-
-% \end{frame}
-
+\begin{frame}{Backup Slide - One Hot Encoding}
+    \begin{textblock}{5}(1.5, 2.5)
+        \input{figures/backuponehot.tex}
+    \end{textblock}
+\end{frame}
 
 \end{document}

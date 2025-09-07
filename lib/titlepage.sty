@@ -30,9 +30,31 @@
 \setbeamertemplate{navigation symbols}{}
 			\setbeamertemplate{background}{%
 				\begin{minipage}[t][\paperheight]{\paperwidth}
-					\rule{0pt}{3.624cm}%
-					\textcolor{black}{\rule{9.161cm}{1.829pt}}
-					\vfill\hfill\includegraphics[width=4.125cm]{beamerthemeIKRv2_logo.pdf}%
+                    \begin{tikzpicture}
+                    
+                    \node[rectangle, fill=white, minimum width = \paperwidth, minimum height = \paperheight, anchor = center] at (0,0) {};
+
+                    % \draw[help lines] (-7,-4) grid (7,4);
+
+                    \node[anchor = center, opacity = 0.3] at (-0.2,-1.7) {\includegraphics[width=6cm]{figures/pictograms/layer42picto.pdf}};
+
+                    \node[anchor = center, opacity = 0.3] at (4.5,2) {\includegraphics[width=5cm]{figures/pictograms/aepicto.pdf}};
+
+                    % \node[anchor = center, opacity = 0.3] at (4,0) {\includegraphics[width=3cm]{figures/pictograms/aepolicy.pdf}};
+
+                    \node[anchor = center, opacity = 0.3] at (-3,3.15) {\includegraphics[width=6cm]{figures/pictograms/basic.pdf}};
+
+                    \node[rectangle, inner sep = 0mm, fill = black, minimum width = 9.161cm, minimum height = 1.829pt, anchor = west] at (-8,0.9) {};
+
+                    \node[anchor = east] at (8.06,-2.32) {\includegraphics[width=4.125cm]{beamerthemeIKRv2_logo.pdf}};
+
+                    \end{tikzpicture}
+
+                    % black rule 6 cm von oben und 1mm dick
+                    
+					%\rule{0pt}{3.624cm}%
+					%\textcolor{black}{\rule{9.161cm}{1.829pt}}
+					%\vfill\hfill\includegraphics[width=4.125cm]{beamerthemeIKRv2_logo.pdf}%
 				\end{minipage}%
 			}%
 			\frame[plain]{\titlepage}%
